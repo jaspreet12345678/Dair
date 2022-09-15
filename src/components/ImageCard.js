@@ -8,7 +8,7 @@ function ImageCard() {
         <Image
           width={390}
           style={{ position: "absolute" }}
-          src="http://3.95.161.176/assets/images/banner-01.jpg"
+          src="./images/banner-01.jpg"
         />
         <Text
           color={"white"}
@@ -32,7 +32,7 @@ function ImageCard() {
         <Image
           width={400}
           style={{ position: "absolute" }}
-          src="http://3.95.161.176/assets/images/banner-02.jpg"
+          src="./images/banner-02.jpg"
         />
         <Text
           color={"white"}
@@ -55,7 +55,7 @@ function ImageCard() {
         <Image
           width={400}
           style={{ position: "absolute" }}
-          src="http://3.95.161.176/assets/images/banner-03.jpg"
+          src="./images/banner-03.jpg"
         />
         <Text
           color={"white"}
