@@ -9,27 +9,27 @@ import cxs from "cxs/component";
 function Content() {
   const [value, setValue] = useState("2021");
 
-  const Example = cxs("div")({
-    fontSize: "24px",
-  });
+  // const Example = cxs("div")({
+  //   fontSize: "24px",
+  // });
 
-  const Title = cxs("div")({
-    marginBottom: "5px",
-    fontSize: "10px",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    color: "#aaa",
-  });
+  // const Title = cxs("div")({
+  //   marginBottom: "5px",
+  //   fontSize: "10px",
+  //   fontWeight: 600,
+  //   textTransform: "uppercase",
+  //   color: "#aaa",
+  // });
 
-  const Section = cxs("div")({
-    marginBottom: "50px",
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
-  });
+  // const Section = cxs("div")({
+  //   marginBottom: "50px",
+  //   fontFamily:
+  //     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+  // });
 
-  const StyledTextLoop = cxs(TextLoop)({
-    display: "block",
-  });
+  // const StyledTextLoop = cxs(TextLoop)({
+  //   display: "block",
+  // });
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Image, Text, Grid, GridItem } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function ImageCard() {
   return (
@@ -52,11 +53,13 @@ function ImageCard() {
       </GridItem>
       <GridItem w="100%" h="10">
         {" "}
-        <Image
-          width={400}
-          style={{ position: "absolute" }}
-          src="./images/banner-03.jpg"
-        />
+        <Link to="/map">
+          <Image
+            width={400}
+            style={{ position: "absolute" }}
+            src="./images/banner-03.jpg"
+          />
+        </Link>
         <Text
           color={"white"}
           fontSize={"2xl"}

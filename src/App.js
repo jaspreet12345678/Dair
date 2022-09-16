@@ -1,16 +1,16 @@
 import React from "react";
-import Content from "./components/Content";
-import Header from "./components/Header";
-import ImageCard from "./components/ImageCard";
-import Footer from "./components/Footer";
+import Map from "./components/Map";
+import { Switch, Route } from "react-router-dom";
+import Index from "./components";
+
 
 export default function App() {
   return (
     <>
-      <Header />
-      <Content />
-      <ImageCard />
-      <Footer />
+      <Switch>
+        <Route path="/" exact component={Index} />
+        <Route path="/map" component={Map} />
+      </Switch>
     </>
   );
 }
