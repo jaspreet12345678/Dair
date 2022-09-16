@@ -6,11 +6,13 @@ function ImageCard() {
   return (
     <Grid h={"300px"} ml={10} mt={15} templateColumns="repeat(3, 1fr)" gap={4}>
       <GridItem w="100%" h="10">
-        <Image
-          width={390}
-          style={{ position: "absolute" }}
-          src="./images/banner-01.jpg"
-        />
+        <Link to="/map">
+          <Image
+            width={391}
+            style={{ position: "absolute" }}
+            src="./images/banner-01.jpg"
+          />
+        </Link>
         <Text
           color={"white"}
           fontSize={"2xl"}
@@ -30,11 +32,13 @@ function ImageCard() {
       </GridItem>
       <GridItem w="100%" h="10">
         {" "}
-        <Image
-          width={400}
-          style={{ position: "absolute" }}
-          src="./images/banner-02.jpg"
-        />
+        <Link to="/map">
+          <Image
+            width={400}
+            style={{ position: "absolute" }}
+            src="./images/banner-02.jpg"
+          />
+        </Link>
         <Text
           color={"white"}
           fontSize={"2xl"}
