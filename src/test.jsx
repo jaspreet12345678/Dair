@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
+import React, { useState, useEffect } from "react";
+import "./style.css";
 
 export default function Test() {
   const [data, setdata] = useState([]);
+
   useEffect(() => {
     mydata();
   }, []);
   function mydata() {
-    var axios = require('axios');
+    var axios = require("axios");
 
     var config = {
-      method: 'get',
-      url: 'http://103.127.29.85:4000/ndhs-master/governance-stats/1/103/2021',
+      method: "get",
+      url: "http://103.127.29.85:4000/ndhs-master/country-list",
       headers: {},
     };
 
@@ -25,13 +26,7 @@ export default function Test() {
       });
   }
 
-  const result = "Present Development";
-  const res  = "Healthcare Governance";
-
-  result = JSON.parse(result);
-  console.log(typeof result)
-
-  console.log("data",result);
+  console.log(data);
 
   return (
     <div>
