@@ -22,30 +22,26 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-const Map = (props) => {
+const Mohit = (props) => {
   const [data, setData] = useState([]);
   const [item1, setItem] = useState([]);
   const [item2, setItem2] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [mydhdata, setdata] = useState([]);
 
-  var [checked21, setChecked21] = useState(false);
-  var [checked22, setChecked22] = useState(false);
+  const [checked21, setChecked21] = useState(true);
+  const [checked22, setChecked22] = useState(false);
   const [year21, setYear21] = useState("");
   const [year22, setYear22] = useState("");
 
   async function mappinng(item) {
-    console.log("first", item);
-    console.log("checked22", checked22);
-    console.log("checked21111", checked21);
-    console.log("checked", checked);
-
     am5.array.each(am5.registry.rootElements, function (root) {
       if (root && root.dom && root.dom.id == "chartdiv") {
         root.dispose();
       }
     });
-    let root = am5.Root.new("chartdiv");
+    const root = am5.Root.new("chartdiv");
 
+    // console.log("first",item)
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "none",
@@ -74,7 +70,6 @@ const Map = (props) => {
 
     item &&
       item.map((item, key) => {
-        console.log(item);
         // console.log("@@@@@@@", item);
         if (item.year === 2021) {
           // console.log("jjjjjaqnder", item);
@@ -126,79 +121,86 @@ const Map = (props) => {
         title: title,
       });
     }
-    root = root;
 
-    return () => {
-      root.dispose();
-    };
-    handleOnChange22(root);
     // root = root;
     // root.dispose();
   }
 
-  var yearCountry = []
-  const handleOnChange22 = async (root) => {
-
-    checked22 = !checked22;
-    if(checked22 == true) {
-      if(yearCountry[0] != '2022' || yearCountry[1] != '2022')
-      yearCountry.push('2022')
-    } else {
-      yearCountry.pop()
-    }
-    console.log(checked22);
-    console.log(yearCountry);
-
-    //yearCountry.push('2022');
-    
+  const handleOnChange22 = async (props) => {
     window.scroll(0, 0);
     const res = await axios.get(
       "http://103.127.29.85:4000/ndhs-master/country-list"
     );
     const data2 = res.data;
     setData({ data: data2 });
-    
-    // setChecked22(!checked22);
-    setChecked(true);
-
-    setChecked(true);
-    if (!checked === true) {
+    // console.log(!checked22);
+    setChecked22(!checked22);
+    if (!checked22 === true) {
       // const myData1 = data.data;
       data2.map((data) => (data.year === 2022 ? item2.push(data) : ""));
-     // console.log(item2);
       return mappinng(item2);
     } else {
-      setYear22("");
+      return mappinng();
     }
-  
   };
 
   const handleOnChange21 = async (e) => {
-    // console.log(!checked21);
-    setChecked(true);
+    console.log(!checked21);
     window.scroll(0, 0);
     const res = await axios.get(
       "http://103.127.29.85:4000/ndhs-master/country-list"
     );
     const data1 = res.data;
-
     setData({ data: data1 });
-    // setChecked21(!checked21);
-    setChecked(false);
-
-    if (checked === true) {
+    setChecked21(!checked21);
+    if (!checked21 === true) {
       // const myData = data.data;
-      let data2021 = data1.map((data) =>
-        data.year === 2021 ? item1.push(data) : ""
-      );
-      //  console.log(item1);
+      data1.map((data) => (data.year === 2021 ? item1.push(data) : ""));
+      // console.log(item1);
       return mappinng(item1);
     } else {
-      setYear21("");
+      return mappinng();
     }
   };
 
-  useEffect(() => {}, []);
+  function mydata() {
+    var axios = require("axios");
+
+    var config = {
+      method: "get",
+      url: "http://103.127.29.85:4000/ndhs-master/country-list",
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        //console.log(JSON.stringify(response.data));
+        setdata(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function data2021() {
+    console.log(mydata)
+    const data1 = mydhdata;
+    setData({ data: data1 });
+    setChecked21(!checked21);
+    if (checked21 === true) {
+      // const myData = data.data;
+      data1.map((data) => (data.year === 2021 ? item1.push(data) : ""));
+      // console.log(item1);
+      return mappinng(item1);
+    } else {
+      setYear21(false);
+    }
+  }
+
+  useEffect(() => {
+    mydata();
+    data2021();
+  }, []);
 
   return (
     <>
@@ -233,7 +235,7 @@ const Map = (props) => {
             type="checkbox"
             name="2021"
             value={year21}
-            //checked={checked}
+            checked={checked21}
             // onClick={handle2021}
             // checked={checked21}
             onClick={handleOnChange21}
@@ -246,26 +248,19 @@ const Map = (props) => {
             name="2022"
             value={year22}
             // onClick={handle2022}
-            checked={checked}
+            checked={checked22}
             onClick={handleOnChange22}
           />
           <label style={{ marginLeft: "5px" }}>2022</label>
         </div>
         <hr />
-        {checked === true ? (
-          <div
-            id="chartdiv"
-            style={{ width: "100%", height: "400px", marginTop: "20px" }}
-          ></div>
-        ) : (
-          <div
-            id="chartdiv"
-            style={{ width: "100%", height: "400px", marginTop: "20px" }}
-          ></div>
-        )}
+        <div
+          id="chartdiv"
+          style={{ width: "100%", height: "400px", marginTop: "20px" }}
+        ></div>
       </div>
     </>
   );
 };
 
-export default Map;
+export default Mohit;

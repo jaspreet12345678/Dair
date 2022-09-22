@@ -7,16 +7,20 @@ import Map from "./components/SIdeBar/Map222";
 import Donut from "./components/SIdeBar/donut";
 import MainMap from "./components/SIdeBar/MainMap";
 import Main from "./components/Main";
+import Practise from "./components/SIdeBar/Practice";
+import Mohit from "./components/SIdeBar/Mohit";
+import Test from "./test";
 
 export default function App() {
   return (
     <>
-      {/* <MainMap /> */}
-      {/* <Map /> */}
+      {/* <Practise /> */}
       {/* <Donut /> */}
+      {/* <Practise /> */}
       <Switch>
         <Route path="/" exact component={Index} />
-        <Route path="/map" component={Main} />
+        <Route path="/map" component={Mohit} />
+        <Route path="/text" component={Test} />
       </Switch>
     </>
   );
