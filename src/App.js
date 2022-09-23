@@ -16,13 +16,13 @@ export default function App() {
     <>
     {/* <Graph2 /> */}
       {/* <Practise /> */}
-      <Donut />
+      {/* <Donut /> */}
       {/* <Practise /> */}
-      {/* <Switch>
+      <Switch>
         <Route path="/" exact component={Index} />
         <Route path="/map" component={Main} />
         <Route path="/text" component={Test} />
-      </Switch> */}
+      </Switch>
     </>
   );
 }
