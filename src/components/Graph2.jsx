@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from "react";
+// import ".../style.css";
+// import * as am4 from "@amcharts/amcharts4";
+import * as am5core from "@amcharts/amcharts5";
+import * as am5map from "@amcharts/amcharts5/map";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
+import axios from "axios";
+import * as am5percent from "@amcharts/amcharts5/percent";
+import Sidebar from "./Sidebar";
+import Bar from "./Sidebar";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import { Box, Center, Text, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Text,
+  Stack,
+  List,
+  ListItem,
+  ListIcon,
+  Button,
+  useColorModeValue,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import Header from "./Header1";
 
-const Map3D = (props) => {
+const Map23D = (props) => {
   let [data, setData] = useState([]);
   let title = [];
   let axios = require("axios");
@@ -43,34 +64,35 @@ const Map3D = (props) => {
 
     for (const [key, val] of Object.entries(pieData)) {
       for (const [key1, val1] of Object.entries(val)) {
-        if (key == "Present Development") {
-          present.push(val1);
-        } else {
+        if (key == "Prospective Development") {
           prospective.push(val1);
+        } else {
+          present.push(val1);
         }
       }
     }
 
-    console.log("jdfhsdfhdsfh", present);
+    console.log("jdfhsdfhdsfh", prospective);
 
-    console.log("present", title["Present Development"]);
+    console.log("prospective", title["Prospective Development"]);
     looprun.map((data1, key) => {
       // present.map((item, key) => {
-      let chart = am4core.create("chartdivPresent" + data1, am4charts.PieChart3D);
+      let chart = am4core.create("chartdivPros" + data1, am4charts.PieChart3D);
       chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
       let noData =
         (300 -
-          (Number(present[data1][0].score) + Number(present[data1][1].score))) /
+          (Number(prospective[data1][0].score) +
+            Number(prospective[data1][1].score))) /
         3;
 
       chart.data = [
         {
           country: "Readiness",
-          litres: present[data1][0].score,
+          litres: prospective[data1][0].score,
         },
         {
           country: "Availabilty",
-          litres: present[data1][1].score,
+          litres: prospective[data1][1].score,
         },
         {
           litres: `${noData}`,
@@ -84,7 +106,9 @@ const Map3D = (props) => {
       chart.radius = 50;
 
       let total = Math.round(
-        (Number(present[data1][0].score) + Number(present[data1][1].score)) / 2
+        (Number(prospective[data1][0].score) +
+          Number(prospective[data1][1].score)) /
+          2
       );
       //(Number(present[data1][0].score) + Number(present[data1][1].score)) / 2
 
@@ -94,13 +118,13 @@ const Map3D = (props) => {
       // series.tooltip.disabled = true;
       series.slices.template.tooltipText = "{category}";
 
-      series.colors.list = ["#1181B2", "#05D5AA", "#E2E2E4"].map(function (
+      series.colors.list = ["#d3d000", "#ff0000", "#E2E2E4"].map(function (
         color
       ) {
         return new am4core.color(color);
       });
 
-      title = present[data1][0].taxonomy_name;
+      title = prospective[data1][0].taxonomy_name;
 
       let label = series.createChild(am4core.Label);
       label.text = `${total}%`;
@@ -138,10 +162,6 @@ const Map3D = (props) => {
 
   return (
     <>
-      <Header />
-      <Text display={"flex"} justifyContent={"end"} marginRight={10}>
-        {country_name}
-      </Text>
       <Center>
         <Box mt={10}>
           <SimpleGrid columns={[2, null, 3]} spacing="40px">
@@ -158,7 +178,7 @@ const Map3D = (props) => {
                 >
                   {" "}
                   <Text textAlign={"center"}>{title}</Text>
-                  <div id={`chartdivPresent` + key} style={{ margin: "20px" }}>
+                  <div id={`chartdivPros` + key} style={{ margin: "20px" }}>
                     {/* {data} */}
                   </div>
                 </Box>
@@ -171,4 +191,4 @@ const Map3D = (props) => {
   );
 };
 
-export default Map3D;
+export default Map23D;

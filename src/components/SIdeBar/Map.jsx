@@ -21,8 +21,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-const Graph = (props) => {
+function Graph(props) {
   const [data, setData] = useState([]);
   const [item1, setItem] = useState([]);
   const [item2, setItem2] = useState([]);
@@ -33,6 +34,7 @@ const Graph = (props) => {
   const [checked22, setChecked22] = useState(false);
   const [year21, setYear21] = useState("");
   const [year22, setYear22] = useState("");
+  let countries = [];
 
   async function mappinng(item) {
     am5.array.each(am5.registry.rootElements, function (root) {
@@ -71,17 +73,55 @@ const Graph = (props) => {
     item &&
       item.map((item, key) => {
         if (item.year === 2021 && l == 22) {
-
           return (
-            addCity(item.lng, item.lat, item.country_name),
+            addCity(item),
             pointSeries.bullets.push(function () {
               const circle = am5.Circle.new(root, {
                 radius: 5,
                 fill: am5.color(0x6794dc),
                 tooltipText: "{title}",
               });
-              circle.events.on("click", function (ev) {
-                window.location = "/";
+              circle.events.on("click", function (e) {
+                let country_id1 = e.target.dataItem.dataContext.country_id;
+                let country_flag1 = e.target.dataItem.dataContext.flag;
+                let country_iso_code1 = e.target.dataItem.dataContext.iso_code;
+                let year1 = e.target.dataItem.dataContext.year;
+                let country_name1 = e.target.dataItem.dataContext.title;
+                let country_id = [];
+                let country_name = [];
+                let year = [];
+                let country_iso_code = [];
+                let country_flag = [];
+                console.log("jasjdksad", country_name1);
+
+                // countries = [
+                //   country_id1,
+                //   country_flag1,
+                //   country_iso_code1,
+                //   year1,
+                //   country_name1,
+                // ];
+                console.log(countries);
+                country_id = localStorage.setItem("country_id", country_id1);
+                country_name = localStorage.setItem(
+                  "country_name",
+                  country_name1
+                );
+                country_iso_code = localStorage.setItem(
+                  "country_iso_code",
+                  country_iso_code1
+                );
+                country_flag = localStorage.setItem(
+                  "country_flag",
+                  country_flag1
+                );
+                year = localStorage.setItem("year", year1);
+                // console.log(country_id);
+                // console.log(year);
+                // console.log(country_name);
+                // console.log(country_iso_code);
+                // console.log(country_flag);
+                props.history.push(`/graph/${country_id1}`);
               });
               return am5.Bullet.new(root, {
                 sprite: circle,
@@ -89,17 +129,55 @@ const Graph = (props) => {
             })
           );
         } else if (item.year === 2022 && l == 26) {
-
           return (
-            addCity(item.lng, item.lat, item.country_name),
+            addCity(item),
             pointSeries.bullets.push(function () {
               const circle = am5.Circle.new(root, {
                 radius: 5,
                 fill: am5.color(0x68dc76),
                 tooltipText: "{title}",
               });
-              circle.events.on("click", function (ev) {
-                window.location = "/";
+              circle.events.on("click", (e) => {
+                let country_id1 = e.target.dataItem.dataContext.country_id;
+                let country_flag1 = e.target.dataItem.dataContext.flag;
+                let country_iso_code1 = e.target.dataItem.dataContext.iso_code;
+                let year1 = e.target.dataItem.dataContext.year;
+                let country_name1 = e.target.dataItem.dataContext.title;
+                let country_id = [];
+                let country_name = [];
+                let year = [];
+                let country_iso_code = [];
+                let country_flag = [];
+                console.log("jasjdksad", country_name1);
+
+                // countries = [
+                //   country_id1,
+                //   country_flag1,
+                //   country_iso_code1,
+                //   year1,
+                //   country_name1,
+                // ];
+                console.log(countries);
+                country_id = localStorage.setItem("country_id", country_id1);
+                country_name = localStorage.setItem(
+                  "country_name",
+                  country_name1
+                );
+                country_iso_code = localStorage.setItem(
+                  "country_iso_code",
+                  country_iso_code1
+                );
+                country_flag = localStorage.setItem(
+                  "country_flag",
+                  country_flag1
+                );
+                year = localStorage.setItem("year", year1);
+                // console.log(country_id);
+                // console.log(year);
+                // console.log(country_name);
+                // console.log(country_iso_code);
+                // console.log(country_flag);
+                props.history.push(`/graph/${country_id1}`);
               });
               return am5.Bullet.new(root, {
                 sprite: circle,
@@ -108,15 +186,54 @@ const Graph = (props) => {
           );
         } else {
           return (
-            addCity(item.lng, item.lat, item.country_name),
+            addCity(item),
             pointSeries.bullets.push(function () {
               const circle = am5.Circle.new(root, {
                 radius: 5,
                 fill: am5.color(0xff0000),
                 tooltipText: "{title}",
               });
-              circle.events.on("click", function (ev) {
-                window.location = "/";
+              circle.events.on("click", function (e) {
+                let country_id1 = e.target.dataItem.dataContext.country_id;
+                let country_flag1 = e.target.dataItem.dataContext.flag;
+                let country_iso_code1 = e.target.dataItem.dataContext.iso_code;
+                let year1 = e.target.dataItem.dataContext.year;
+                let country_name1 = e.target.dataItem.dataContext.title;
+                let country_id = [];
+                let country_name = [];
+                let year = [];
+                let country_iso_code = [];
+                let country_flag = [];
+                console.log("jasjdksad", country_name1);
+
+                // countries = [
+                //   country_id1,
+                //   country_flag1,
+                //   country_iso_code1,
+                //   year1,
+                //   country_name1,
+                // ];
+                console.log(countries);
+                country_id = localStorage.setItem("country_id", country_id1);
+                country_name = localStorage.setItem(
+                  "country_name",
+                  country_name1
+                );
+                country_iso_code = localStorage.setItem(
+                  "country_iso_code",
+                  country_iso_code1
+                );
+                country_flag = localStorage.setItem(
+                  "country_flag",
+                  country_flag1
+                );
+                year = localStorage.setItem("year", year1);
+                // console.log(country_id);
+                // console.log(year);
+                // console.log(country_name);
+                // console.log(country_iso_code);
+                // console.log(country_flag);
+                props.history.push(`/graph/${country_id1}`);
               });
               return am5.Bullet.new(root, {
                 sprite: circle,
@@ -126,10 +243,26 @@ const Graph = (props) => {
         }
       });
 
-    function addCity(longitude, latitude, title) {
+    function addCity(item) {
+      const longitude = item.lng;
+      const latitude = item.lat;
+      const title = item.country_name;
+      const id = item.country_id;
+      const iso_code = item.iso_code;
+      const year = item.year;
+      const flag = item.flag;
+      const name = item.name;
+      const country_id = item.country_id;
       pointSeries.data.push({
         geometry: { type: "Point", coordinates: [longitude, latitude] },
         title: title,
+        id: id,
+        iso_code: iso_code,
+        year: year,
+        flag: flag,
+        year: year,
+        name: name,
+        country_id: country_id,
       });
     }
   }
@@ -186,7 +319,7 @@ const Graph = (props) => {
     setChecked(!checked);
     if (!checked === true) {
       data2.map((data) => {
-        data = item3.push(data)
+        data = item3.push(data);
       });
       return mappinng(item3);
     } else {
@@ -295,6 +428,6 @@ const Graph = (props) => {
       </div>
     </>
   );
-};
+}
 
-export default Graph;
+export default withRouter(Graph);

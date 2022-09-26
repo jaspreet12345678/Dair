@@ -4,15 +4,16 @@ import Header from "./Header1";
 import { useEffect } from "react";
 import Graph from "./SIdeBar/Map";
 
-const Main = () => {
-    useEffect(() => {
-      window.scroll(0,0)
-    }, [])
-    
+const Main = (props) => {
+  const propss = props;
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <>
       <Header />
-      <Graph />
+      <Graph props={propss} />
     </>
   );
 };
