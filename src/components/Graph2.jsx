@@ -162,7 +162,8 @@ const Map23D = (props) => {
 
   return (
     <>
-      <Center>
+      <Center  style={{"box-shadow": "0 0 9px 0 grey",
+    width: "1000px", float: "right"}}>
         <Box mt={10}>
           <SimpleGrid columns={[2, null, 3]} spacing="40px">
             {looprun.map((data, key) => {

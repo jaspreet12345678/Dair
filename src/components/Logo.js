@@ -5,9 +5,6 @@ export default function Logo(props) {
   return (
     <Box {...props}>
       <Image src="./images/logo.png" />
-       {/* <Text fontSize="lg" fontWeight="bold">
-        Logo
-      </Text> */}
     </Box> 
   );
 }

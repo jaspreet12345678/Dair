@@ -56,7 +56,10 @@ const Map3D = (props) => {
     console.log("present", title["Present Development"]);
     looprun.map((data1, key) => {
       // present.map((item, key) => {
-      let chart = am4core.create("chartdivPresent" + data1, am4charts.PieChart3D);
+      let chart = am4core.create(
+        "chartdivPresent" + data1,
+        am4charts.PieChart3D
+      );
       chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
       let noData =
         (300 -
@@ -142,31 +145,36 @@ const Map3D = (props) => {
       <Text display={"flex"} justifyContent={"end"} marginRight={10}>
         {country_name}
       </Text>
-      <Center>
-        <Box mt={10}>
-          <SimpleGrid columns={[2, null, 3]} spacing="40px">
-            {looprun.map((data, key) => {
-              return (
-                <Box
-                  style={{
-                    border: "1px solid black",
-                    maxW: "100%",
-                    margin: "8px",
-                    maxH: "100vh",
-                  }}
-                  height="250px"
-                >
-                  {" "}
-                  <Text textAlign={"center"}>{title}</Text>
-                  <div id={`chartdivPresent` + key} style={{ margin: "20px" }}>
-                    {/* {data} */}
-                  </div>
-                </Box>
-              );
-            })}
-          </SimpleGrid>
-        </Box>
-      </Center>
+      <Box style={{ float: "right" }}>
+        <Center style={{ "box-shadow": "0 0 9px 0 grey", width: "1000px" }}>
+          <Box mt={10} mr={10}>
+            <SimpleGrid columns={[2, null, 3]} spacing="40px">
+              {looprun.map((data, key) => {
+                return (
+                  <Box
+                    style={{
+                      border: "1px solid black",
+                      maxW: "100%",
+                      margin: "8px",
+                      maxH: "100vh",
+                    }}
+                    height="250px"
+                  >
+                    {" "}
+                    <Text textAlign={"center"}>{title}</Text>
+                    <div
+                      id={`chartdivPresent` + key}
+                      style={{ margin: "20px" }}
+                    >
+                      {/* {data} */}
+                    </div>
+                  </Box>
+                );
+              })}
+            </SimpleGrid>
+          </Box>
+        </Center>
+      </Box>
     </>
   );
 };

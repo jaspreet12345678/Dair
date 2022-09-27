@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
+import { Link, Box, Flex, Text, Button, Stack, Image } from "@chakra-ui/react";
 
 import Logo from "./Logo";
 
@@ -10,10 +10,15 @@ const Header = (props) => {
 
   return (
     <NavBarContainer {...props}>
-      <Logo
+      <Image
         w="170px"
         color={["white", "white", "primary.500", "primary.500"]}
+        src="../images/logo.png"
       />
+      {/* <Logo
+        w="170px"
+        color={["white", "white", "primary.500", "primary.500"]}
+      /> */}
       <MenuData />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       {/* <MenuLinks isOpen={isOpen} /> */}
@@ -25,7 +30,7 @@ const CloseIcon = () => (
   <svg width="24" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
     <title>Close</title>
     <path
-       color="black"
+      color="black"
       d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z"
     />
   </svg>
@@ -53,18 +58,16 @@ const MenuToggle = ({ toggle, isOpen }) => {
 };
 
 const MenuData = () => {
-  return (
-    <Box display={{ base: "block", md: "block" }}>
-       {<Data />}
-    </Box>
-  );
+  return <Box display={{ base: "block", md: "block" }}>{<Data />}</Box>;
 };
 
-const Data = () =>{
+const Data = () => {
   return (
-     <Text mr={500} fontSize={"2xl"}>The National Digital Health Strategy Map </Text>
+    <Text mr={500} fontSize={"2xl"}>
+      The National Digital Health Strategy Map{" "}
+    </Text>
   );
-}
+};
 // const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
 //   return (
 //     <Link href={to}>
@@ -89,7 +92,7 @@ const Data = () =>{
 //         direction={["column", "row", "row", "row"]}
 //         pt={[4, 4, 0, 0]}
 //       >
-        
+
 //         <MenuItem to="/report">Health & IT</MenuItem>
 //         <MenuItem to="/contact us">Digital Health</MenuItem>
 //       </Stack>
@@ -107,7 +110,6 @@ const NavBarContainer = ({ children, ...props }) => {
       w="100%"
       mb={8}
       p={8}
-
       bg={["lightgray"]}
       color="black"
       {...props}
