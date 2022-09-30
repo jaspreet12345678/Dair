@@ -11,19 +11,9 @@ import Sidebar from "./Sidebar";
 import Bar from "./Sidebar";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import {
-  Box,
-  Center,
-  Text,
-  Stack,
-  List,
-  ListItem,
-  ListIcon,
-  Button,
-  useColorModeValue,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Box, HStack, Heading, Button, SimpleGrid } from "@chakra-ui/react";
 import Header from "./Header1";
+import { Link } from "react-router-dom";
 
 const Map23D = (props) => {
   let [data, setData] = useState([]);
@@ -87,11 +77,11 @@ const Map23D = (props) => {
 
       chart.data = [
         {
-          country: "Readiness",
+          country: "Capacity Building",
           litres: prospective[data1][0].score,
         },
         {
-          country: "Availabilty",
+          country: "Development Strategy",
           litres: prospective[data1][1].score,
         },
         {
@@ -102,7 +92,7 @@ const Map23D = (props) => {
       //console.log("timpeasss", present[data1[0]].taxonomy_name);
       //title = present[data1[0]].taxonomy_id;
       chart.innerRadius = 70;
-      chart.depth = 10;
+      chart.depth = 5;
       chart.radius = 50;
 
       let total = Math.round(
@@ -118,7 +108,7 @@ const Map23D = (props) => {
       // series.tooltip.disabled = true;
       series.slices.template.tooltipText = "{category}";
 
-      series.colors.list = ["#d3d000", "#ff0000", "#E2E2E4"].map(function (
+      series.colors.list = ["#282B30", "#033592", "#E2E2E4"].map(function (
         color
       ) {
         return new am4core.color(color);
@@ -133,7 +123,10 @@ const Map23D = (props) => {
       label.fontSize = 20;
       label.fontWeight = "normal";
 
+      series.alignLabels = false;
+      series.labels.template.radius = 30;
       series.labels.template.text = "{category}";
+      series.labels.template.fontSize = 12;
       series.ticks.template.events.on("ready", hideSmall);
       series.ticks.template.events.on("visibilitychanged", hideSmall);
       series.labels.template.events.on("ready", hideSmall);
@@ -162,24 +155,71 @@ const Map23D = (props) => {
 
   return (
     <>
-      <Center  style={{"box-shadow": "0 0 9px 0 grey",
-    width: "1000px", float: "right"}}>
-        <Box mt={10}>
-          <SimpleGrid columns={[2, null, 3]} spacing="40px">
+      <Box style={{ "margin-top": "30px" }}>
+        {/* <Center > */}
+        <Box
+          style={{
+            "box-shadow": "0 0 9px 0 grey",
+            width: "1000px",
+            "border-radius": "20px",
+          }}
+        >
+          <HStack justifyContent={"space-between"}>
+            <Heading mt={5} ml={5}>
+              Prospective Development
+            </Heading>
+            <Link to="/prospective">
+              <Button
+                style={{
+                  "margin-top": "20px",
+                  "margin-right": "10px",
+                  color: "lightblue",
+                  "background-color": "white",
+                  border: "1px solid lightblue",
+                }}
+              >
+                View Data
+              </Button>
+            </Link>
+          </HStack>
+          <SimpleGrid mt={8} columns={[2, null, 3]}>
             {looprun.map((data, key) => {
               return (
                 <Box
+                  mt={20}
                   style={{
                     border: "1px solid black",
-                    maxW: "100%",
+                    width: "320px",
+                    // maxW: "250px",
                     margin: "8px",
                     maxH: "100vh",
+                    "box-shadow": "0 0 10px black",
+                    "border-radius": "25px",
                   }}
-                  height="250px"
+                  height="300px"
                 >
-                  {" "}
-                  <Text textAlign={"center"}>{title}</Text>
-                  <div id={`chartdivPros` + key} style={{ margin: "20px" }}>
+                  <Box
+                    style={{
+                      "box-shadow": "0 0 5px 0 grey",
+                      "border-radius": "30px",
+                      width: "-webkit-fill-available",
+                      "background-color": "lightgrey",
+                      "margin-right": "30px",
+                      "margin-left": "30px",
+                      "margin-top": "10px",
+                    }}
+                    textAlign={"center"}
+                  >
+                    {country_name}
+                  </Box>
+                  <div
+                    id={`chartdivPros` + key}
+                    style={{
+                      width: "100%",
+                      height: "200px",
+                      marginTop: "20px",
+                    }}
+                  >
                     {/* {data} */}
                   </div>
                 </Box>
@@ -187,7 +227,8 @@ const Map23D = (props) => {
             })}
           </SimpleGrid>
         </Box>
-      </Center>
+        {/* </Center> */}
+      </Box>
     </>
   );
 };

@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import { Box, Center, Text, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Text,
+  SimpleGrid,
+  HStack,
+  Heading,
+  Button,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Spacer,
+} from "@chakra-ui/react";
 import Header from "./Header1";
+import { Link } from "react-router-dom";
 
 const Map3D = (props) => {
   let [data, setData] = useState([]);
@@ -83,7 +98,7 @@ const Map3D = (props) => {
       //console.log("timpeasss", present[data1[0]].taxonomy_name);
       //title = present[data1[0]].taxonomy_id;
       chart.innerRadius = 70;
-      chart.depth = 10;
+      chart.depth = 5;
       chart.radius = 50;
 
       let total = Math.round(
@@ -112,7 +127,16 @@ const Map3D = (props) => {
       label.fontSize = 20;
       label.fontWeight = "normal";
 
+      // series.labels.template.setAll({
+      //   fontSize: 20,
+      //   fill: am4.color(0x550000),
+      //   text: "{category}"
+      // });
+      series.alignLabels = false;
+      series.labels.template.radius = 35;
+      // series.ticks.template.disabled = true;
       series.labels.template.text = "{category}";
+      series.labels.template.fontSize = 12;
       series.ticks.template.events.on("ready", hideSmall);
       series.ticks.template.events.on("visibilitychanged", hideSmall);
       series.labels.template.events.on("ready", hideSmall);
@@ -142,38 +166,89 @@ const Map3D = (props) => {
   return (
     <>
       <Header />
-      <Text display={"flex"} justifyContent={"end"} marginRight={10}>
-        {country_name}
-      </Text>
-      <Box style={{ float: "right" }}>
-        <Center style={{ "box-shadow": "0 0 9px 0 grey", width: "1000px" }}>
-          <Box mt={10} mr={10}>
-            <SimpleGrid columns={[2, null, 3]} spacing="40px">
-              {looprun.map((data, key) => {
-                return (
+      <HStack width={1000} display={"flex"} justifyContent={"space-between"}>
+        <Tabs>
+          <TabList>
+            <Link to={"/present"}>
+              <Tab>Health & IT</Tab>
+            </Link>
+            <Link to={"/digital"}>
+              <Tab>Digital Health</Tab>
+            </Link>
+          </TabList>
+        </Tabs>
+        <Spacer />
+        <Text ml={50}>
+          {country_name}
+        </Text>
+      </HStack>
+      <Box>
+        <Box
+          style={{
+            "box-shadow": "0 0 9px 0 grey",
+            width: "1000px",
+            "border-radius": "20px",
+          }}
+        >
+          <HStack justifyContent={"space-between"}>
+            <Heading ml={5} mt={5}>
+              Present Development
+            </Heading>
+            <Link to={"/present"}>
+              <Button
+                style={{
+                  "margin-top": "20px",
+                  "margin-right": "10px",
+                  color: "lightblue",
+                  "background-color": "white",
+                  border: "1px solid lightblue",
+                }}
+              >
+                View Data
+              </Button>
+            </Link>
+          </HStack>
+          <SimpleGrid mt={8} columns={[2, null, 3]}>
+            {looprun.map((data, key) => {
+              return (
+                <Box
+                  mt={20}
+                  style={{
+                    border: "1px solid black",
+                    width: "320px",
+                    // maxW: "250px",
+                    margin: "8px",
+                    maxH: "100vh",
+                    "box-shadow": "0 0 10px black",
+                    "border-radius": "25px",
+                  }}
+                  height="300px"
+                >
                   <Box
                     style={{
-                      border: "1px solid black",
-                      maxW: "100%",
-                      margin: "8px",
-                      maxH: "100vh",
+                      "box-shadow": "0 0 5px 0 grey",
+                      "border-radius": "30px",
+                      width: "-webkit-fill-available",
+                      "background-color": "lightgrey",
+                      "margin-right": "30px",
+                      "margin-left": "30px",
+                      "margin-top": "10px",
                     }}
-                    height="250px"
+                    textAlign={"center"}
                   >
-                    {" "}
-                    <Text textAlign={"center"}>{title}</Text>
-                    <div
-                      id={`chartdivPresent` + key}
-                      style={{ margin: "20px" }}
-                    >
-                      {/* {data} */}
-                    </div>
+                    {country_name}
                   </Box>
-                );
-              })}
-            </SimpleGrid>
-          </Box>
-        </Center>
+                  <div
+                    id={`chartdivPresent` + key}
+                    style={{ height: "200px", margin: "10px" }}
+                  >
+                    {/* {data} */}
+                  </div>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </Box>
       </Box>
     </>
   );

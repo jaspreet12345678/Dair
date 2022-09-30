@@ -267,23 +267,33 @@ function Graph(props) {
     }
   }
 
-  const handleOnChange22 = async (props) => {
+  const handleOnChange22 = async (e) => {
     setItem2([]);
+    setChecked22(true);
     setChecked21(false);
     setChecked(false);
     window.scroll(0, 0);
-    const res = await axios.get(
-      "http://103.127.29.85:4000/ndhs-master/country-list"
-    );
-    const data2 = res.data;
-    setData({ data: data2 });
-    setChecked22(!checked22);
-    if (!checked22 === true) {
-      data2.map((data) => (data.year === 2022 ? item2.push(data) : ""));
-      return mappinng(item2);
-    } else {
-      return mappinng();
+    let res = e;
+    // const res = await axios.get(
+    //   "http://103.127.29.85:4000/ndhs-master/country-list"
+    // );
+    // const data2 = res.data;
+    // setData({ data: data2 });
+    // setChecked22(!checked22);
+    if (e.length != 48) {
+      res = await axios.get(
+        "http://103.127.29.85:4000/ndhs-master/country-list"
+      );
+      res = res.data;
     }
+    const data1 = res;
+    setData({ data: data1 });
+    data1.map((data) => (data.year === 2022 ? item2.push(data) : ""));
+    return mappinng(item2);
+    // if (!checked22 === true) {
+    //   data2.map((data) => (data.year === 2022 ? item2.push(data) : ""));
+    //   return mappinng(item2);
+    // }
   };
 
   const handleOnChange21 = async (e) => {
@@ -307,6 +317,7 @@ function Graph(props) {
 
   const handleOnChange = async (props) => {
     setItem3([]);
+    setChecked(true);
     setChecked21(false);
     setChecked22(false);
 
@@ -316,14 +327,12 @@ function Graph(props) {
     );
     const data2 = res.data;
     setData({ data: data2 });
-    setChecked(!checked);
+    //setChecked(!checked);
     if (!checked === true) {
       data2.map((data) => {
         data = item3.push(data);
       });
       return mappinng(item3);
-    } else {
-      return mappinng();
     }
   };
 
@@ -367,58 +376,65 @@ function Graph(props) {
     <>
       <Flex>
         <Link to="/">
-          <Text bg={"white"}>Home</Text>
+          <Text ml={10} bg={"white"}>
+            Home
+          </Text>
         </Link>
       </Flex>
 
-      <Menu>
-        <MenuButton as={Button} colorScheme="blue">
-          NDHS
-        </MenuButton>
-        <MenuList>
-          <MenuGroup title="NDHS">
-            <MenuButton>My Account</MenuButton>
-            <MenuItem>Payments </MenuItem>
-          </MenuGroup>
-          <MenuDivider />
-          <MenuGroup title="Help">
-            <MenuItem>Docs</MenuItem>
-            <MenuItem>FAQ</MenuItem>
-          </MenuGroup>
-        </MenuList>
-      </Menu>
-
-      <div style={{ width: "1000px", marginLeft: "275px" }}>
+      <div
+        style={{
+          "box-shadow": "0 0 9px 0 grey",
+          width: "1000px",
+          marginLeft: "260px",
+          height: "580px",
+        }}
+      >
         <div>
-          <h2>Countries List</h2>
-          <input
-            style={{ marginTop: "10px" }}
-            type="checkbox"
-            name="2021"
-            value={year21}
-            checked={checked21}
-            onClick={handleOnChange21}
-            // onChange={(e) => setChecked21(e.target.checked)}
-          />
-          <label style={{ marginLeft: "5px" }}>2021</label>
-          <input
-            style={{ marginLeft: "5px" }}
-            type="checkbox"
-            name="2022"
-            value={year22}
-            checked={checked22}
-            onClick={handleOnChange22}
-          />
-          <label style={{ marginLeft: "5px" }}>2022</label>
-          <input
-            style={{ marginLeft: "5px" }}
-            type="checkbox"
-            name="2022"
-            //value={year22}
-            checked={checked}
-            onClick={handleOnChange}
-          />
-          <label style={{ marginLeft: "5px" }}>All Data</label>
+          <h2
+            style={{
+              "margin-left": "10px",
+              "margin-top": "10px",
+              padding: "18px",
+            }}
+          >
+            Countries List
+          </h2>
+          <div
+            style={{
+              "margin-left": "10px",
+              "margin-top": "10px",
+              padding: "18px",
+            }}
+          >
+            <input
+              type="checkbox"
+              name="2021"
+              value={year21}
+              checked={checked21}
+              onClick={handleOnChange21}
+              // onChange={(e) => setChecked21(e.target.checked)}
+            />
+            <label style={{ marginLeft: "5px" }}>2021</label>
+            <input
+              style={{ marginLeft: "5px" }}
+              type="checkbox"
+              name="2022"
+              value={year22}
+              checked={checked22}
+              onClick={handleOnChange22}
+            />
+            <label style={{ marginLeft: "5px" }}>2022</label>
+            <input
+              style={{ marginLeft: "5px" }}
+              type="checkbox"
+              name="2022"
+              //value={year22}
+              checked={checked}
+              onClick={handleOnChange}
+            />
+            <label style={{ marginLeft: "5px" }}>All Data</label>
+          </div>
         </div>
         <hr />
         <div

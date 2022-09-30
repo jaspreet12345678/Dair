@@ -6,7 +6,7 @@ import { Column } from "primereact/column";
 import { Heading } from "@chakra-ui/react";
 import { uniqueSort } from "jquery";
 
-function PresentDev(props) {
+function ProspectiveDev(props) {
   let country_flag = localStorage.getItem("country_flag");
   let country_name = localStorage.getItem("country_name");
   let country_id = localStorage.getItem("country_id");
@@ -18,6 +18,8 @@ function PresentDev(props) {
   const [indicator_name1, setindicator_name1] = useState([]);
   const [ultimate_name1, setultimate_name1] = useState([]);
   const [realData1, setrealData1] = useState([]);
+  const [data, setData] = useState();
+  var finalData = [];
   let development_name1 = [];
   let axios = require("axios");
   let looprun = [
@@ -29,7 +31,7 @@ function PresentDev(props) {
   ];
 
   const [mydata, setmydata] = useState([]);
-
+  let temindicator = [];
   useEffect(() => {
     myData();
     //  mapping(data);
@@ -73,12 +75,12 @@ function PresentDev(props) {
       development_name1.push(key);
       for (const [key1, val1] of Object.entries(val)) {
         taxnomy_name1.push(key1);
-        if (key1 === "Availability") {
+        if (key1 === "Readiness") {
           //console.log("first", val1);
           for (const [key2, val2] of Object.entries(val1)) {
             ultimate_name1.push(key2);
             for (const [key3, val3] of Object.entries(val2)) {
-              indicator_name1.push(val3);
+              indicator_name1.push(key3);
               for (const [key4, val4] of Object.entries(val3)) {
                 realData1.push(val4);
               }
@@ -92,27 +94,31 @@ function PresentDev(props) {
     setultimate_name1(ultimate_name1);
     setindicator_name1(indicator_name1);
     setrealData1(realData1);
-    // console.log("ultimate", ultimate_name1);
-    // console.log("taxonomy", taxnomy_name1);
-    // console.log("development_name1", development_name1);
-    // const propertyNames = Object.keys(mydata);
-    // console.log("data1", mydata);
 
-    // console.log("tax", taxnomy_name1);
-    // console.log("ulti", ultimate_name1);
-    // console.log("indi", indicator_name1);
-    // console.log("real", realData1);
-    // console.log("realdaatata".realData1.taxonomy_name);
+    for (var i = 0; i < indicator_name1.length; i++) {
+      const inValue = realData1.filter((e) => {
+        if (e.indicator_name === indicator_name1[i]) {
+          return e;
+        }
+      });
+
+      finalData.push({
+        indecatorName: indicator_name1[i],
+        indecatorValue: inValue,
+      });
+    }
+
+    setData(finalData);
+    console.log("indi", finalData);
   }
 
-  console.log("mydat", mydata);
-  console.log("getData$$$$$$$$$$$", getData);
   return (
     <>
-      {looprun.map((item1) => {
+      {data?.map((item1) => {
+        //15
         return (
           <>
-            <Heading>{item1}</Heading>
+            {/* <Heading>{item1.indecatorName}</Heading> */}
 
             <table>
               <>
@@ -121,24 +127,22 @@ function PresentDev(props) {
                   <th>Questions</th>
                   <th>{country_name}</th>
                 </tr>
-
-                {realData1.map((data) => {
-                  if (item1 === data.taxonomy_name) {
-                    //console.log("maindata", data.indicator_name.filter(item));
-                    return (
-                      <>
+            <tr>
+                <td>{item1.indecatorName}</td>
+                {item1.indecatorValue.map((data) => {
+                  return (
+                    <>
+                      <tr>
+                        <td>
                         <tr>
-                          {" "}
-                          <td>{data.indicator_name}</td>
-                          <tr>
-                            <td>{data.question}</td>
-                          </tr>
-                          <td>{data.status}</td>
-                        </tr>
-                      </>
-                    );
-                  }
+                        {data.question}
+                        </tr></td>
+                        <td>{data.status}</td>
+                      </tr>
+                    </>
+                  );
                 })}
+              </tr>
               </>
             </table>
           </>
@@ -148,4 +152,4 @@ function PresentDev(props) {
   );
 }
 
-export default PresentDev;
+export default ProspectiveDev;

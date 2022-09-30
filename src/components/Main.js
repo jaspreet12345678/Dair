@@ -3,6 +3,7 @@ import Header from "./Header1";
 //import Map from "./SIdeBar/Map222";
 import { useEffect } from "react";
 import Graph from "./SIdeBar/Map";
+import Footer from "./Footer";
 
 const Main = (props) => {
   const propss = props;
@@ -14,6 +15,7 @@ const Main = (props) => {
     <>
       <Header />
       <Graph props={propss} />
+      <Footer />
     </>
   );
 };

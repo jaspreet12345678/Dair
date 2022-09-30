@@ -13,10 +13,14 @@ import Graph2 from "./components/Graph";
 import Map3D from "./components/Graph";
 import PieMain from "./components/PieMain";
 import PresentDev from "./components/SIdeBar/PresentDev";
+import Questions from "./components/SIdeBar/Question";
+import Ques from './components/QuestionMain';
+import ProspectiveDev from "./components/SIdeBar/ProspectiveDev";
 
 export default function App(props) {
   return (
     <>
+      {/* <Questions /> */}
       {/* <Graph2 /> */}
       {/* <Practise /> */}
       {/* <Donut /> */}
@@ -27,6 +31,7 @@ export default function App(props) {
         <Route path="/map" component={Main} />
         <Route path="/graph/:country_id" component={PieMain} />
         <Route path="/present" component={PresentDev} />
+        <Route path="/prospective" component={ProspectiveDev} />
       </Switch>
     </>
   );

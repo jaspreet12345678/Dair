@@ -12,7 +12,7 @@ function Footer(props) {
     <Box mt={10} ml={10} display={"flex"}>
         <Text style={{"alignItems": "center", "display": "flex"}}>All right reserved. Copyright 2022 I- DAIR</Text>
         <Spacer />
-        <Image mr={10} src="./images/logo.png"/>
+        <Image mr={10} src="../images/logo.png"/>
     </Box>
   );
 }
