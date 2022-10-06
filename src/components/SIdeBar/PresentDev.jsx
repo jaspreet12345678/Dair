@@ -37,7 +37,7 @@ function PresentDev(props) {
 
   let data1 = [];
   function myData() {
-    console.log("####################");
+    //console.log("####################");
 
     let data = JSON.stringify({
       countries: `${country_id}`,
@@ -55,7 +55,7 @@ function PresentDev(props) {
 
     axios(config)
       .then((response) => {
-        console.log("data1@@@@@@@@@@@", response);
+       // console.log("data1@@@@@@@@@@@", response);
         mapping(response.data);
         data1 = response.data;
         //setmydata(response.data);
@@ -92,21 +92,10 @@ function PresentDev(props) {
     setultimate_name1(ultimate_name1);
     setindicator_name1(indicator_name1);
     setrealData1(realData1);
-    // console.log("ultimate", ultimate_name1);
-    // console.log("taxonomy", taxnomy_name1);
-    // console.log("development_name1", development_name1);
-    // const propertyNames = Object.keys(mydata);
-    // console.log("data1", mydata);
-
-    // console.log("tax", taxnomy_name1);
-    // console.log("ulti", ultimate_name1);
-    // console.log("indi", indicator_name1);
-    // console.log("real", realData1);
-    // console.log("realdaatata".realData1.taxonomy_name);
   }
 
-  console.log("mydat", mydata);
-  console.log("getData$$$$$$$$$$$", getData);
+  //console.log("mydat", mydata);
+ // console.log("getData$$$$$$$$$$$", getData);
   return (
     <>
       {looprun.map((item1) => {
