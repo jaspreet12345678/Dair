@@ -14,22 +14,28 @@ import Map3D from "./components/Graph";
 import PieMain from "./components/PieMain";
 import PresentDev from "./components/SIdeBar/PresentDev";
 import Questions from "./components/SIdeBar/Question";
-import Ques from './components/QuestionMain';
+import Ques from "./components/QuestionMain";
 import ProspectiveDev from "./components/SIdeBar/ProspectiveDev";
-import ComparativeMap from './components/Comparative result/map2';
+import ComparativeMap from "./components/Comparative result/map2";
 
 import NetworkChart from "./components/SIdeBar/NetworkChart";
 import Tree from "./components/Comparative result/Network";
 import Radar from "./components/Comparative result/Radar";
 import Bubble from "./components/Comparative result/BubbleChart";
+import BarChart from "./components/Comparative result/BarChart";
+import Rose from "./components/Comparative result/Rose";
 
 export default function App(props) {
   return (
     <>
-    {/* <Bubble /> */}
-    {/* <Radar /> */}
-    <Tree />
-    {/* <NetworkChart /> */}
+      {/* <BarChart /> */}
+      {/* <Bubble /> */}
+      {/* <Rose /> */}
+      {/* <Radar /> */}
+
+      <Tree />
+
+      {/* <NetworkChart /> */}
       {/* <ComparativeMap /> */}
       {/* <Switch>
         <Route path="/" exact component={Index} />

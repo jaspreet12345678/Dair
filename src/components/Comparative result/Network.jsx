@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4plugins_forceDirected from "@amcharts/amcharts4/plugins/forceDirected";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import large_tree_data from "./NetworkData";
 import { data } from "jquery";
+import * as echarts from "echarts";
+import BarChart from "./BarChart";
+import Bubble from "./BubbleChart";
+import { Box, VStack } from "@chakra-ui/react";
 var axios = require("axios");
 
 const Tree = () => {
@@ -957,12 +961,27 @@ const Tree = () => {
       console.log("governance", governanceId);
       console.log("ultimateId", ultimateId);
       console.log("developmentId", developmentId);
+      Radar({
+        countries: "109,108",
+        developmentId,
+        governanceId,
+        ultimateId,
+        taxonomyId,
+      });
+
       Bubble({
         taxonomyId,
         governanceId,
         ultimateId,
         developmentId,
         year,
+      });
+      Rose({
+        countries: "36,103",
+        taxonomyId: 5,
+        governanceId: 2,
+        ultimateId: 1,
+        developmentId: 1,
       });
       // taxonomyTableDetails();
       // overviewRadarChart();
@@ -977,6 +996,8 @@ const Tree = () => {
   useEffect(() => {
     myData();
     Bubble();
+    Rose();
+    Radar();
   }, []);
 
   function BubbleChart(data) {
@@ -1003,7 +1024,6 @@ const Tree = () => {
       }
     });
 
-    
     data2.push(result);
 
     console.log("datataaaa", data);
@@ -1191,69 +1211,495 @@ const Tree = () => {
     }
   }
 
-  data2?.map((item) => {
-    console.log("data", item);
+  // data2?.map((item) => {
+  //   console.log("data", item);
 
-  })
-  console.log("$$$$$$$$$$$$$$$$$$$$", data2[0]);
- // console.log("type", typeof data2);
+  // })
+  // console.log("$$$$$$$$$$$$$$$$$$$$", data2[0]);
+  // console.log("type", typeof data2);
+
+  function Rose(data) {
+    console.log("rose", data);
+    if (data) {
+      let title = [];
+      var data = data;
+
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          //console.log(JSON.stringify(response.data));
+          title = response.data;
+          //console.log("title", title);
+          BubbleChart(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      let title = [];
+      var data = {
+        countries: "106,108",
+        developmentId: 1,
+        governanceId: 2,
+        ultimateId: 1,
+        taxonomyId: 9,
+      };
+
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          //console.log(JSON.stringify(response.data));
+          title = response.data;
+          //console.log("title", title);
+          Chart(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
+
+  function Chart(data1) {
+    console.log("first", data1);
+    let country1 = data1[0];
+    let country2 = data1[1];
+
+    console.log("country1111", country1);
+    console.log("country2222", country2);
+
+    var dom = document.getElementById("chart-container");
+    var myChart = echarts.init(dom, null, {
+      renderer: "canvas",
+      useDirtyRect: false,
+    });
+    var app = {};
+
+    var dom = document.getElementById("chart-container");
+    var myChart = echarts.init(dom, null, {
+      renderer: "canvas",
+      useDirtyRect: false,
+    });
+    var app = {};
+    let data = [
+      {
+        name: "81%-100%",
+        lname: "81%-100%",
+        tooltipName: "",
+        value: 100,
+        labelLine: { show: false },
+        label: { show: false },
+        emphasis: { label: { show: false } },
+        tooltip: { show: false },
+        itemStyle: {
+          borderRadius: 5,
+          color: "#220055",
+        },
+      },
+      {
+        name: "61%-80%",
+        lname: "61%-80%",
+        tooltipName: "",
+        value: 80,
+        labelLine: { show: false },
+        label: { show: false },
+        emphasis: { label: { show: false } },
+        tooltip: { show: false },
+        itemStyle: {
+          borderRadius: 5,
+          color: "#3678B5",
+        },
+      },
+      {
+        name: "31%-60%",
+        lname: "31%-60%",
+        tooltipName: "",
+        value: 60,
+        labelLine: { show: false },
+        label: { show: false },
+        emphasis: { label: { show: false } },
+        tooltip: { show: false },
+        itemStyle: {
+          borderRadius: 5,
+          color: "#5FE7B1",
+        },
+      },
+      {
+        name: "0%-30%",
+        lname: "0%-30%",
+        value: 30,
+        labelLine: { show: false },
+        label: { show: false },
+        emphasis: {
+          label: { show: false },
+        },
+        tooltip: { show: false },
+        itemStyle: {
+          borderRadius: 5,
+          color: "#fa8e15",
+        },
+      },
+    ];
+
+    var option;
+
+    option = {
+      legend: {
+        bottom: -5,
+        left: "center",
+        icon: "circle",
+        show: data ? true : false,
+        formatter: data
+          ? (name) => {
+              let itemValue = data.filter((item) => item.name === name);
+              return `${itemValue[0].lname}`;
+            }
+          : "{lname}",
+      },
+      // tooltip: {
+      //     trigger: 'item',
+      //     formatter: data ? (name: any) => {
+      //         let itemValue = data.filter((item: any) => item.name === name)
+      //         if (name.data.tooltipName) {
+      //             return `${name.data.tooltipName}`;
+      //         }
+      //         return false;
+      //     } : "{name}",
+      // },
+      series: [
+        {
+          name: "",
+          type: "pie",
+          radius: [20, 110],
+          center: ["50%", "50%"],
+          roseType: "area",
+          avoidLabelOverlap: true,
+          itemStyle: {
+            normal: {
+              label: {
+                show: true,
+                position: "outer",
+                alignTo: "labelLine",
+                overflow: "break",
+                margin: 0,
+                padding: 2,
+              },
+              labelLine: {
+                show: true,
+              },
+            },
+          },
+          data: data.reverse(),
+        },
+      ],
+    };
+
+    if (option && typeof option === "object") {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener("resize", myChart.resize);
+  }
+
+  function Radar(data2) {
+    let title = [];
+    // countries: this.countries,
+    // developmentId: this.developmentId,
+    // governanceId: this.governance,
+    // ultimateId: this.ultimateId,
+    // taxonomyId: this.taxonomy_id
+    var axios = require("axios");
+    if (data2) {
+      let title = [];
+      var data = data2;
+
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          //console.log(JSON.stringify(response.data));
+          title = response.data;
+          //console.log("title", title);
+          BubbleChart(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      let title = [];
+      var data = {
+        countries: "103,108",
+        developmentId: 2,
+        governanceId: 2,
+        ultimateId: 4,
+        taxonomyId: 6,
+      };
+
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          //console.log(JSON.stringify(response.data));
+          title = response.data;
+          //console.log("title", title);
+          Chart1(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
+
+  function Chart1(data) {
+    console.log("first", data);
+    let country1 = data[0];
+    let country2 = data[1];
+
+    console.log("country1111", country1);
+    console.log("country2222", country2);
+
+    var dom = document.getElementById("chart-container1");
+    var myChart = echarts.init(dom, null, {
+      renderer: "canvas",
+      useDirtyRect: false,
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+      color: ["#338A14", "rgba(92,221,189,1)", "#56A3F1", "#FF917C"],
+      // title: {
+      //   text: "",
+      // },
+      legend: {},
+      radar: [
+        {
+          indicator: [
+            { text: "Availability", max: 100 },
+            { text: "Capacity Building", max: 100 },
+            { text: "Development Strategy", max: 100 },
+            { text: "Readiness", max: 100 },
+          ],
+          center: ["55%", "50%"],
+          radius: 120,
+          startAngle: 90,
+          splitNumber: 4,
+          shape: "circle",
+          axisName: {
+            color: "#707070",
+            fontSize: "10",
+          },
+          splitArea: {
+            areaStyle: {
+              color: ["#DADADA", "#DADADA", "#CED5D3", "#B9BDBC"],
+              shadowColor: "rgba(0, 0, 0, 0.2)",
+              shadowBlur: 10,
+            },
+          },
+          axisLine: {
+            lineStyle: {
+              color: "rgba(154,165,162,1)",
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(154,165,162,1)",
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          type: "radar",
+          emphasis: {
+            lineStyle: {
+              width: 4,
+            },
+          },
+          data: [
+            {
+              value: [
+                // country1.actual_score,
+                // // country1.c_score,
+                // // country1.d_score,
+                // // country1.r_score,
+                85, 0, 65, 95,
+              ],
+              name: country1.country_name,
+              areaStyle: {
+                color: "rgba(51, 138, 20, 0.6)",
+              },
+            },
+            {
+              value: [
+                // country2.actual_score,
+                55, 100, 100, 70,
+              ],
+              name: country2.country_name,
+              areaStyle: {
+                color: "rgba(92,221,189,0.6)",
+              },
+            },
+          ],
+        },
+      ],
+    };
+
+    if (option && typeof option === "object") {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener("resize", myChart.resize);
+  }
 
   return (
     <>
-      <div
-        style={{
-          width: "43.33333333%",
-          height: "85vh",
-          "margin-top": "20px",
-          "margin-left": "20px",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <div id="Tree0" style={{ width: "100%", height: "100%" }}></div>
-
-        <div
-          style={{
-            background: "#000",
-            "margin-top": "20px",
-            "margin-left": "100px",
-            width: "70px",
-            color: "#fff",
-            height: "280px",
-            padding: "10px",
-            "text-align": "center",
-            "border-radius": "15px 0px 0 15px",
-          }}
-        >
+       <div style={{ maxWidth: "1260px", margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div
             style={{
-              transform: "rotate(-90deg)",
-              position: "absolute",
-              left: "435px",
-              top: "20%",
+              width: "48.33333333%",
+              height: "88vh",
+              "margin-top": "20px",
+              "margin-left": "20px",
+              // display: "flex",
+              // justifyContent: "space-between",
+              boxShadow: "0 0 9px 0 black",
             }}
           >
-            <label
+            <div
+              style={{ width: "100%", textAlign: "center", marginTop: "5px" }}
+            >
+              <h1 style={{ width: "inherit" }}>Network Chart</h1>
+            </div>
+            <div id="Tree0" style={{ width: "100%", height: "95%" }}></div>
+          </div>
+        </div> 
+        <Box>
+          <VStack>
+            <div
               style={{
-                "font-size": "12px",
-                width: "200px",
-                position: "relative",
-
-                height: "100%",
+                width: "500px",
+                "margin-top": "20px",
+                height: "350px",
+                float: "right",
+                "box-shadow": "0 0 9px 0 #070707",
+                "margin-right": "13px",
               }}
             >
-              {console.log("5555555555555", data)}
-            </label>
-            <br />
-            <span style={{ "font-size": "12px" }}>
-              <b> </b>
-            </span>
-          </div>
+              <h1 style={{ float: "right", marginTop: "5px" }}>Bubble Chart</h1>
+              <div
+                style={{
+                  background: "#000",
+                  "margin-top": "28px",
+                  "margin-left": "100px",
+                  width: "70px",
+                  color: "#fff",
+                  height: "280px",
+                  padding: "10px",
+                  "text-align": "center",
+                  "border-radius": "15px 0px 0 15px",
+                }}
+              >
+                <div
+                  style={{
+                    transform: "rotate(-90deg)",
+                    position: "absolute",
+                    left: "435px",
+                    top: "20%",
+                  }}
+                >
+                  <label
+                    style={{
+                      "font-size": "12px",
+                      width: "200px",
+                      position: "relative",
 
+                      height: "100%",
+                    }}
+                  >
+                    {console.log("5555555555555", data)}
+                  </label>
+                  <br />
+                  <span style={{ "font-size": "12px" }}>
+                    <b> </b>
+                  </span>
+                </div>
+                <div
+                  id="chartdiv1"
+                  style={{ width: "400px", height: "280px", margin: "0 auto" }}
+                ></div>
+                <div>
+                  <div
+                    style={{
+                      width: "500px",
+                      marginTop: "100px",
+                      boxShadow: "0 0 9px 0 black",
+                      display: "flex",
+                      "justify-content": "center",
+                    }}
+                  >
+                    <div
+                      id="chart-container1"
+                      style={{
+                        width: "100%",
+                        height: "350px",
+                        marginTop:"10px",
+                        marginLeft:"80px"
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </VStack>
+        </Box>
+
+        <div>
           <div
-            id="chartdiv1"
-            style={{ width: "400px", height: "280px", margin: "0 auto" }}
-          ></div>
+            style={{
+              width: "400px",
+              "box-shadow": "0 0 9px 0 black",
+              marginLeft: "70px",
+              marginTop: "10px",
+            }}
+          >
+            <h1 style={{ marginTop: "10px", float: "right" }}>Bar Chart</h1>
+            <div
+              id="chart-container"
+              style={{ width: "100%", height: "420px", top: "-8px" }}
+            ></div>
+          </div>
         </div>
       </div>
     </>
