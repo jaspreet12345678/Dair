@@ -57,12 +57,12 @@ function Rose(e) {
     console.log("country1111", country1);
     console.log("country2222", country2);
 
-    var dom = document.getElementById("chart-container");
-    var myChart = echarts.init(dom, null, {
-      renderer: "canvas",
-      useDirtyRect: false,
-    });
-    var app = {};
+    // var dom = document.getElementById("chart-container");
+    // var myChart = echarts.init(dom, null, {
+    //   renderer: "canvas",
+    //   useDirtyRect: false,
+    // });
+    // var app = {};
 
     var dom = document.getElementById("chart-container");
     var myChart = echarts.init(dom, null, {
