@@ -950,22 +950,21 @@ const Tree = () => {
     series.nodes.template.events.on("hit", (e) => {
       let test = JSON.stringify(e.target.dataItem.dataContext);
       let d_info = JSON.parse(test);
-      console.log("d_info", d_info);
+      // console.log("d_info", d_info);
       let developmentId = d_info.d_id;
       let governanceId = d_info.g_id;
       let ultimateId = d_info.u_id;
       let taxonomyId = d_info.t_id;
       let year = "2021,2022";
       let loading = false;
-      console.log("taxonomy_id", taxonomyId);
-      console.log("governance", governanceId);
-      console.log("ultimateId", ultimateId);
-      console.log("developmentId", developmentId);
+      // console.log("taxonomy_id", taxonomyId);
+      // console.log("governance", governanceId);
+      // console.log("ultimateId", ultimateId);
+      // console.log("developmentId", developmentId);
       Radar({
-        countries: "109,108",
+        countries: "106,108",
         developmentId,
         governanceId,
-        ultimateId,
         taxonomyId,
       });
 
@@ -977,11 +976,17 @@ const Tree = () => {
         year,
       });
       Rose({
-        countries: "36,103",
-        taxonomyId: 5,
-        governanceId: 2,
-        ultimateId: 1,
-        developmentId: 1,
+        // countries: "36,103",
+        // taxonomyId: taxonomyId,
+        // governanceId: governanceId,
+        // ultimateId: ultimateId,
+        // developmentId: developmentId,
+
+        countries: "106,108",
+        developmentId,
+        governanceId,
+        ultimateId,
+        taxonomyId,
       });
       // taxonomyTableDetails();
       // overviewRadarChart();
@@ -1008,7 +1013,7 @@ const Tree = () => {
     let result = data;
 
     result.forEach((element) => {
-      console.log("element", element.percentage);
+      // console.log("element", element.percentage);
       let b_chart = {
         name: element.country_name,
         value: 2,
@@ -1026,11 +1031,11 @@ const Tree = () => {
 
     data2.push(result);
 
-    console.log("datataaaa", data);
-    console.log("range25", range25);
-    console.log("range60", range60);
-    console.log("range80", range80);
-    console.log("range100", range100);
+    // console.log("datataaaa", data);
+    // console.log("range25", range25);
+    // console.log("range60", range60);
+    // console.log("range80", range80);
+    // console.log("range100", range100);
 
     am4core.useTheme(am4themes_animated);
 
@@ -1219,7 +1224,7 @@ const Tree = () => {
   // console.log("type", typeof data2);
 
   function Rose(data) {
-    console.log("rose", data);
+    // console.log("rose", data);
     if (data) {
       let title = [];
       var data = data;
@@ -1238,7 +1243,7 @@ const Tree = () => {
           //console.log(JSON.stringify(response.data));
           title = response.data;
           //console.log("title", title);
-          BubbleChart(response.data);
+          Chart(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -1250,7 +1255,7 @@ const Tree = () => {
         developmentId: 1,
         governanceId: 2,
         ultimateId: 1,
-        taxonomyId: 9,
+        taxonomyId: 10,
       };
 
       var config = {
@@ -1276,12 +1281,12 @@ const Tree = () => {
   }
 
   function Chart(data1) {
-    console.log("first", data1);
-    let country1 = data1[0];
-    let country2 = data1[1];
+    // console.log("first", data1);
+    // let country1 = data1[0];
+    // let country2 = data1[1];
 
-    console.log("country1111", country1);
-    console.log("country2222", country2);
+    // console.log("country1111", country1);
+    // console.log("country2222", country2);
 
     var dom = document.getElementById("chart-container");
     var myChart = echarts.init(dom, null, {
@@ -1358,6 +1363,63 @@ const Tree = () => {
 
     var option;
 
+    if (data1.length == 1) {
+      data1.forEach((element) => {
+        let bar_data_same = {
+          name: element.text + " " + element.comIncome,
+          tooltipName: element.text + " " + element.comIncome,
+          labelLine: { show: true },
+          label: { show: true },
+          tooltip: { show: true },
+          emphasis: { label: { show: true } },
+        };
+        if (element.percentage <= 30) {
+          data[3] = { ...data[3], ...bar_data_same };
+        } else if (element.per >= 31 && element.per <= 60) {
+          data[2] = { ...data[2], ...bar_data_same };
+        } else if (element.per >= 61 && element.per <= 80) {
+          data[1] = { ...data[1], ...bar_data_same };
+        } else if (element.per >= 81 && element.per <= 100) {
+          data[0] = { ...data[0], ...bar_data_same };
+        }
+      });
+    } else {
+      data1.forEach((element) => {
+        let bar_data = {
+          name:
+            (element.country_name.length > 11
+              ? element.iso_code
+              : element.country_name) +
+            " - " +
+            Math.round(element.percentage) +
+            "%",
+          tooltipName:
+            element.country_name + " - " + Math.round(element.percentage) + "%",
+          labelLine: { show: true },
+          label: {
+            show: true,
+          },
+          emphasis: {
+            label: {
+              show: true,
+            },
+          },
+          tooltip: {
+            show: true,
+          },
+        };
+        if (element.percentage <= 30) {
+          data[3] = { ...data[3], ...bar_data };
+        } else if (element.percentage >= 31 && element.percentage <= 60) {
+          data[2] = { ...data[2], ...bar_data };
+        } else if (element.percentage >= 61 && element.percentage <= 80) {
+          data[1] = { ...data[1], ...bar_data };
+        } else if (element.percentage >= 81 && element.percentage <= 100) {
+          data[0] = { ...data[0], ...bar_data };
+        }
+      });
+    }
+
     option = {
       legend: {
         bottom: -5,
@@ -1417,12 +1479,13 @@ const Tree = () => {
   }
 
   function Radar(data2) {
-    let title = [];
-    // countries: this.countries,
-    // developmentId: this.developmentId,
-    // governanceId: this.governance,
-    // ultimateId: this.ultimateId,
-    // taxonomyId: this.taxonomy_id
+    // let title = [];
+    // console.log("data2222", data2);
+    // countries: countries,
+    // developmentId: developmentId,
+    // governanceId: governance,
+    // ultimateId: ultimateId,
+    // taxonomyId: taxonomy_id
     var axios = require("axios");
     if (data2) {
       let title = [];
@@ -1442,7 +1505,7 @@ const Tree = () => {
           //console.log(JSON.stringify(response.data));
           title = response.data;
           //console.log("title", title);
-          BubbleChart(response.data);
+          Chart1(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -1450,11 +1513,11 @@ const Tree = () => {
     } else {
       let title = [];
       var data = {
-        countries: "103,108",
-        developmentId: 2,
-        governanceId: 2,
-        ultimateId: 4,
-        taxonomyId: 6,
+        countries: "106,108",
+        developmentId: "1,2",
+        governanceId: "2",
+        // ultimateId: "1,2,3,4",
+        taxonomyId: 7,
       };
 
       var config = {
@@ -1479,12 +1542,107 @@ const Tree = () => {
     }
   }
 
-  function Chart1(data) {
-    console.log("first", data);
-    let country1 = data[0];
-    let country2 = data[1];
+  function groupBy(conversions, property) {
+    return conversions.reduce((acc, obj) => {
+      let key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
 
-    console.log("country1111", country1);
+  function nestGroupsBy(arr, properties) {
+    properties = Array.from(properties);
+    if (properties.length === 1) {
+      return groupBy(arr, properties[0]);
+    }
+    const property = properties.shift();
+    var grouped = groupBy(arr, property);
+    for (let key in grouped) {
+      grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
+    }
+    return grouped;
+  }
+
+  function getCountryDetails(data) {
+    let availability_score;
+    let radiness_score;
+    let capacity_score;
+    let development_score;
+    let country;
+    data.forEach((element) => {
+      country = element.country_name;
+      if (element.ultimate_field == "Readiness") {
+        radiness_score = element.percentage;
+      } else if (element.ultimate_field == "Availability") {
+        availability_score = element.percentage;
+      } else if (element.ultimate_field == "Capacity Building") {
+        capacity_score = element.percentage;
+      } else if (element.ultimate_field == "Development Strategy") {
+        development_score = element.percentage;
+      }
+    });
+    let result = {
+      r_score: radiness_score,
+      a_score: availability_score,
+      c_score: capacity_score,
+      d_score: development_score,
+      country: country,
+    };
+    return result;
+  }
+
+  function Chart1(data) {
+    // let radar_chart;
+    // radar_chart = data;
+    // const results = nestGroupsBy(data, ["country_name"]);
+    // let resultDetails = Object.values(data);
+    // let country1 = getCountryDetails(resultDetails[0]);
+    // let country2 = getCountryDetails(resultDetails[1]);
+
+    console.log("dataaaaaaaaaaaaaaaaaaaaa", data);
+    // let country = [];
+    // let array = [];
+    // for (var i = 0; i <= data.length - 1; i++) {
+    //   if (!country.includes(data[i].country_name)) {
+
+    //     country.push(data[i])
+    //     // country.push(data.country);
+    //     console.log(country)
+    //   }
+    // }
+    // for (var j = 0; j < country.length; j++) {
+    //   var a = {};
+    //   const my = data.filter((item) => {
+    //     if (item.country_name === country[j][0]) {
+    //       return item;
+    //     }
+    //   });
+    //   a["title"] = country[j];
+    //   a["data"] = my;
+    //   array.push(a);
+    // }
+
+    let country1 = [];
+    let country2 = [];
+     data.slice(1, 4).map((item1) => {
+      console.log("1111111", item1.actual_score);
+      // item.map((data)=>{
+      //   console.log(data)
+      // })
+      country1.push(item1.actual_score);
+      return country1;
+    });
+    // data.slice(4, 8).map((item) => {
+    //   console.log("1111111", item.actual_score);
+    //   // item.map((data)=>{
+    //   //   console.log(data)
+    //   // })
+    //   country2.push(item.actual_score);
+    // });
+    // console.log("country1111", country1);
     console.log("country2222", country2);
 
     var dom = document.getElementById("chart-container1");
@@ -1549,11 +1707,23 @@ const Tree = () => {
           data: [
             {
               value: [
+                country2[0],
+                country1[1],
+                country1[2],
+                country1[3],
+                // data1[0],
+                // data1[1],
+                // data1[2],
+                // data1[3],
                 // country1.actual_score,
-                // // country1.c_score,
-                // // country1.d_score,
-                // // country1.r_score,
-                85, 0, 65, 95,
+                // country1.a_score,
+                // country1.r_score,
+                // country2.c_score,
+                // country1.d_score,
+                // 85,
+                // 0,
+                // 65,
+                // 95,
               ],
               name: country1.country_name,
               areaStyle: {
@@ -1562,8 +1732,17 @@ const Tree = () => {
             },
             {
               value: [
-                // country2.actual_score,
-                55, 100, 100, 70,
+                country2[0],
+                country2[1],
+                country2[2],
+                country2[3],
+                // country2.r_score,
+                // country2.c_score,
+                // country2.d_score,
+                // 55,
+                // 100,
+                // 100,
+                // 70,
               ],
               name: country2.country_name,
               areaStyle: {
@@ -1584,7 +1763,7 @@ const Tree = () => {
 
   return (
     <>
-       <div style={{ maxWidth: "1260px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1260px", margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div
             style={{
@@ -1604,7 +1783,7 @@ const Tree = () => {
             </div>
             <div id="Tree0" style={{ width: "100%", height: "95%" }}></div>
           </div>
-        </div> 
+        </div>
         <Box>
           <VStack>
             <div
@@ -1648,7 +1827,7 @@ const Tree = () => {
                       height: "100%",
                     }}
                   >
-                    {console.log("5555555555555", data)}
+                    {/* / {console.log("5555555555555", data)} */}
                   </label>
                   <br />
                   <span style={{ "font-size": "12px" }}>
@@ -1674,8 +1853,8 @@ const Tree = () => {
                       style={{
                         width: "100%",
                         height: "350px",
-                        marginTop:"10px",
-                        marginLeft:"80px"
+                        marginTop: "10px",
+                        marginLeft: "80px",
                       }}
                     ></div>
                   </div>

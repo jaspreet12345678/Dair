@@ -24,16 +24,23 @@ import Radar from "./components/Comparative result/Radar";
 import Bubble from "./components/Comparative result/BubbleChart";
 import BarChart from "./components/Comparative result/BarChart";
 import Rose from "./components/Comparative result/Rose";
+import Example from "./components/Comparative result/MultiDrop";
+import ProgressBar from "./components/Comparative result/ProgressBar";
+import Bar from "./components/Comparative result/Bar";
+import ComparativeTab from "./components/Comparative result/ComparativeTab";
 
 export default function App(props) {
   return (
     <>
+    <ComparativeTab />
+    {/* <Bar /> */}
+      {/* <ProgressBar /> */}
       {/* <BarChart /> */}
       {/* <Bubble /> */}
       {/* <Rose /> */}
       {/* <Radar /> */}
 
-      <Tree />
+      {/* <Tree /> */}
 
       {/* <NetworkChart /> */}
       {/* <ComparativeMap /> */}
