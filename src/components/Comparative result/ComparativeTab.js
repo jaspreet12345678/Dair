@@ -1,5 +1,7 @@
 import { width } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { Divider, Flex, Text, VStack } from "@chakra-ui/react";
+import ComparativeMap from "./map2";
 
 const ComparativeTab = () => {
   const [countryData, setcountryData] = useState();
@@ -103,88 +105,136 @@ const ComparativeTab = () => {
 
     console.log("finalData", finalData);
     setcountryData(finalData);
-
-    //   for (var i = 0; i <= result.length - 1; i++) {
-    //       if (!uni.includes(result[i].country)) {
-    //         uni.push(result[i].country);
-    //       }
-    //     }
-
-    //     for (var j = 0; j < uni.length; j++) {
-    //       var a = {};
-    //       const my = result.filter((item) => {
-    //         if (item.country === uni[j]) {
-    //           console.log(item)
-    //           return item;
-    //         }
-    //       });
-    //       a["title"] = uni[j];
-    //       a["data"] = my;
-    //       array.push(a);
-    //     }
-    //     console.log("uni",uni);
-    //     console.log("array",array);
   }
 
   return (
     <>
       <div
         style={{
-          width: "400px",
+          width: "440px",
           boxShadow: "0 0 9px 0 black",
           marginLeft: "20px",
           marginTop: "20px",
           padding: "15px",
+          borderRadius: "25px",
         }}
       >
-        {countryData?.map((item) => {
-          console.log("item", item.development_type);
-          return (
-            <>
-              <h1 style={{ textAlign: "initial" }}>{item.development_type}</h1>
-              <br />
-              <p>
-                {item.subData?.map((e) => {
-                  return (
-                    <>
-                      <div style={{ display: "flex" }}>
-                        <h5 style={{ width: "200px" }}>{e.ultimate_field}</h5>
-                        <span style={{ display: "flex", marginLeft: "30px", width:"50px" }}>
-                          {e.data?.map((score) => {
-                            console.log(score.governance_name);
-                            if (score.governance_name === "General Health") {
-                              const col =
-                                score.country === "Canada" ? "green" : "red";
-                              return (
-                                <p style={{ color: col, marginLeft: "5px" }}>
-                                  {Math.round(score.percentage) + "%"}
-                                </p>
-                              );
-                            }
-                          })}
-                        </span>
-                        <span style={{ display: "flex", marginLeft: "40px" }}>
-                          {e.data?.map((score) => {
-                            console.log(score.governance_name);
-                            if (score.governance_name === "Digital Health") {
-                              const col =
-                                score.country === "Canada" ? "green" : "red";
-                              return (
-                                <p style={{ color: col, marginLeft: "5px" }}>
-                                  {Math.round(score.percentage) + "%"}
-                                </p>
-                              );
-                            }
-                          })}
-                        </span>
-                      </div>
-                    </>
-                  );
-                })}
-              </p>
-            </>
-          );
-        })}
+        <div>
+          <button
+            style={{
+              float: "right",
+              color: "lightskyblue",
+              border: "1px solid lightskyblue",
+              padding: "1px",
+            }}
+          >
+            More Details
+          </button>
+          <br />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "10px",
+            }}
+          >
+            <h1 style={{ textAlign: "left", marginTop: "5px" }}>
+              Comparative Table
+            </h1>
+            <div>
+              <h1>Country 1</h1>
+              <h1>Country 2</h1>
+            </div>
+          </div>
+          {/* <br /> */}
+          <Flex
+            style={{
+              display: "flex",
+              width: "-webkit-fill-available",
+              justifyContent: "flex-end",
+              marginTop: "5px",
+            }}
+          >
+            <Text>Health & IT</Text>
+            <Text style={{ marginLeft: "13px" }}>Digital Health</Text>
+          </Flex>
+          <Divider />
+          {countryData?.map((item) => {
+            console.log("item", item.development_type);
+            return (
+              <>
+                <h1
+                  style={{
+                    textAlign: "initial",
+                    color: "black",
+                    marginTop: "12px",
+                  }}
+                >
+                  {item.development_type}
+                </h1>
+                <br />
+                <br />
+                <Divider />
+                <p>
+                  {item.subData?.map((e) => {
+                    return (
+                      <>
+                        <div style={{ display: "flex", marginTop: "10px" }}>
+                          <h5 style={{ width: "200px" }}>{e.ultimate_field}</h5>
+                          <span
+                            style={{
+                              display: "flex",
+                              marginLeft: "30px",
+                              width: "50px",
+                            }}
+                          >
+                            {e.data?.map((score) => {
+                              console.log(score.governance_name);
+                              if (score.governance_name === "General Health") {
+                                const col =
+                                  score.country === "Canada" ? "green" : "red";
+                                return (
+                                  <p
+                                    style={{
+                                      color: col,
+                                      marginLeft: "5px",
+                                    }}
+                                  >
+                                    {Math.round(score.percentage) + "%"}
+                                  </p>
+                                );
+                              }
+                            })}
+                          </span>
+                          <span style={{ display: "flex", marginLeft: "40px" }}>
+                            {e.data?.map((score) => {
+                              console.log(score.governance_name);
+                              if (score.governance_name === "Digital Health") {
+                                const col =
+                                  score.country === "Canada" ? "green" : "red";
+                                return (
+                                  <p
+                                    style={{
+                                      color: col,
+                                      marginLeft: "5px",
+                                    }}
+                                  >
+                                    {Math.round(score.percentage) + "%"}
+                                  </p>
+                                );
+                              }
+                            })}
+                          </span>
+                        </div>
+                      </>
+                    );
+                  })}
+                </p>
+                <Divider />
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

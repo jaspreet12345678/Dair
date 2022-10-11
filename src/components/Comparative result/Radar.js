@@ -80,8 +80,8 @@ function Radar(e) {
             { text: "Development Strategy", max: 100 },
             { text: "Readiness", max: 100 },
           ],
-          center: ["25%", "50%"],
-          radius: 120,
+          center: ["45%", "55%"],
+          radius: 110,
           startAngle: 90,
           splitNumber: 4,
           shape: "circle",
@@ -226,10 +226,10 @@ function Radar(e) {
   }
 
   return (
-    <div style={{}}>
+    <div style={{width:"500px"}}>
       <div
         id="chart-container"
-        style={{ width: "100%", height: "300px" }}
+        style={{marginLeft:"40px", width: "100%", height: "300px" }}
       ></div>
     </div>
   );

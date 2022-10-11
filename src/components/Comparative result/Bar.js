@@ -11,7 +11,7 @@ const Bar = () => {
     var data = {
       developmentId: 1,
       governanceId: 1,
-      ultimateId: "1",
+      ultimateId: "2",
       taxonomyId: "1",
       year: "2021,2022",
     };
@@ -69,6 +69,7 @@ const Bar = () => {
     var dom = document.getElementById("chart-container111");
     var myChart = echarts.init(dom, null, {
       renderer: "canvas",
+      top: 50,
       useDirtyRect: false,
     });
     var app = {};
@@ -77,6 +78,8 @@ const Bar = () => {
     console.log(chartValue);
     option = option = {
       title: {
+        top: 25,
+        left: 10,
         text: taxonomy_name,
         textStyle: {
           fontSize: 12,
@@ -84,8 +87,8 @@ const Bar = () => {
       },
       legend: {
         orient: "vertical",
-        right: 0,
-        top: 0,
+        right: 10,
+        top: 25,
         textStyle: {
           fontSize: 11,
         },
@@ -99,6 +102,7 @@ const Bar = () => {
         },
         {
           transform: {
+            top: 50,
             type: "sort",
             config: { dimension: "score", order: "desc" },
           },
@@ -136,11 +140,22 @@ const Bar = () => {
   }
   return (
     <>
-    
       <div
-        id="chart-container111"
-        style={{ width: "100%", height: "600px" }}
-      ></div>
+        style={{
+          width: "400px",
+          height: "400px",
+          boxShadow: "0 0 9px 0 black",
+          borderRadius: "10px",
+          marginTop: "10px",
+          marginLeft: "10px",
+        }}
+      >
+      <h1 style={{textAlign:"left",marginLeft:"5px"}}>Top Countries</h1>
+        <div
+          id="chart-container111"
+          style={{ width: "100%", height: "100%", marginTop: "20px" }}
+        ></div>
+      </div>
     </>
   );
 };

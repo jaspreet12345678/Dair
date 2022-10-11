@@ -1542,58 +1542,6 @@ const Tree = () => {
     }
   }
 
-  function groupBy(conversions, property) {
-    return conversions.reduce((acc, obj) => {
-      let key = obj[property];
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(obj);
-      return acc;
-    }, {});
-  }
-
-  function nestGroupsBy(arr, properties) {
-    properties = Array.from(properties);
-    if (properties.length === 1) {
-      return groupBy(arr, properties[0]);
-    }
-    const property = properties.shift();
-    var grouped = groupBy(arr, property);
-    for (let key in grouped) {
-      grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
-    }
-    return grouped;
-  }
-
-  function getCountryDetails(data) {
-    let availability_score;
-    let radiness_score;
-    let capacity_score;
-    let development_score;
-    let country;
-    data.forEach((element) => {
-      country = element.country_name;
-      if (element.ultimate_field == "Readiness") {
-        radiness_score = element.percentage;
-      } else if (element.ultimate_field == "Availability") {
-        availability_score = element.percentage;
-      } else if (element.ultimate_field == "Capacity Building") {
-        capacity_score = element.percentage;
-      } else if (element.ultimate_field == "Development Strategy") {
-        development_score = element.percentage;
-      }
-    });
-    let result = {
-      r_score: radiness_score,
-      a_score: availability_score,
-      c_score: capacity_score,
-      d_score: development_score,
-      country: country,
-    };
-    return result;
-  }
-
   function Chart1(data) {
     // let radar_chart;
     // radar_chart = data;
@@ -1602,7 +1550,7 @@ const Tree = () => {
     // let country1 = getCountryDetails(resultDetails[0]);
     // let country2 = getCountryDetails(resultDetails[1]);
 
-    console.log("dataaaaaaaaaaaaaaaaaaaaa", data);
+    console.log("dataaradar", data);
     // let country = [];
     // let array = [];
     // for (var i = 0; i <= data.length - 1; i++) {
@@ -1627,22 +1575,22 @@ const Tree = () => {
 
     let country1 = [];
     let country2 = [];
-     data.slice(1, 4).map((item1) => {
-      console.log("1111111", item1.actual_score);
+    data.slice(0, 4).map((item1) => {
+      console.log("1111111", item1);
       // item.map((data)=>{
       //   console.log(data)
       // })
-      country1.push(item1.actual_score);
+      country1.push(item1);
       return country1;
     });
-    // data.slice(4, 8).map((item) => {
-    //   console.log("1111111", item.actual_score);
-    //   // item.map((data)=>{
-    //   //   console.log(data)
-    //   // })
-    //   country2.push(item.actual_score);
-    // });
-    // console.log("country1111", country1);
+    data.slice(4, 8).map((item) => {
+      console.log("1111111", item);
+      // item.map((data)=>{
+      //   console.log(data)
+      // })
+      country2.push(item);
+    });
+    console.log("country1111", country1);
     console.log("country2222", country2);
 
     var dom = document.getElementById("chart-container1");
@@ -1655,7 +1603,7 @@ const Tree = () => {
     var option;
 
     option = {
-      color: ["#338A14", "rgba(92,221,189,1)", "#56A3F1", "#FF917C"],
+      color: ["#338A14", "#6610f2", "#56A3F1", "#6610f2"],
       // title: {
       //   text: "",
       // },
@@ -1668,8 +1616,8 @@ const Tree = () => {
             { text: "Development Strategy", max: 100 },
             { text: "Readiness", max: 100 },
           ],
-          center: ["55%", "50%"],
-          radius: 120,
+          center: ["55%", "55%"],
+          radius: 110,
           startAngle: 90,
           splitNumber: 4,
           shape: "circle",
@@ -1707,46 +1655,31 @@ const Tree = () => {
           data: [
             {
               value: [
-                country2[0],
-                country1[1],
-                country1[2],
-                country1[3],
-                // data1[0],
-                // data1[1],
-                // data1[2],
-                // data1[3],
-                // country1.actual_score,
-                // country1.a_score,
-                // country1.r_score,
-                // country2.c_score,
-                // country1.d_score,
-                // 85,
-                // 0,
-                // 65,
-                // 95,
+                country1[1].actual_score,
+                country1[2].actual_score,
+                country1[3].actual_score,
+                country1[0].actual_score,
+                // 40, 50, 60, 30,
               ],
-              name: country1.country_name,
+              name: "India",
               areaStyle: {
                 color: "rgba(51, 138, 20, 0.6)",
               },
             },
             {
               value: [
-                country2[0],
-                country2[1],
-                country2[2],
-                country2[3],
-                // country2.r_score,
-                // country2.c_score,
-                // country2.d_score,
-                // 55,
-                // 100,
-                // 100,
-                // 70,
+                country2[0].actual_score,
+                country2[1].actual_score,
+                country2[2].actual_score,
+                country2[3].actual_score,
+                // country2[1],
+                // country2[2],
+                // country2[3],
+                // 80, 50, 45, 20,
               ],
-              name: country2.country_name,
+              name: "Canada",
               areaStyle: {
-                color: "rgba(92,221,189,0.6)",
+                color: "#6610f2",
               },
             },
           ],
@@ -1763,12 +1696,12 @@ const Tree = () => {
 
   return (
     <>
-      <div style={{ maxWidth: "1260px", margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <Box style={{ display: "flex", float: "right" }}>
+        <Box style={{ width: "500px", height: "550px" }}>
           <div
             style={{
-              width: "48.33333333%",
-              height: "88vh",
+              width: "100%",
+              height: "100%",
               "margin-top": "20px",
               "margin-left": "20px",
               // display: "flex",
@@ -1777,14 +1710,147 @@ const Tree = () => {
             }}
           >
             <div
-              style={{ width: "100%", textAlign: "center", marginTop: "5px" }}
+              style={{
+                width: "100%",
+                textAlign: "center",
+                marginTop: "5px",
+              }}
             >
               <h1 style={{ width: "inherit" }}>Network Chart</h1>
             </div>
             <div id="Tree0" style={{ width: "100%", height: "95%" }}></div>
           </div>
-        </div>
-        <Box>
+        </Box>
+        <Box
+          style={{
+            width: "500px",
+            float: "right",
+            marginLeft: "30px",
+            "margin-top": "10px",
+          }}
+        >
+          <Box>
+            <VStack>
+              <div>
+                <div
+                  style={{
+                    width: "400px",
+                    "box-shadow": "0 0 9px 0 black",
+                    // marginLeft: "70px",
+                    marginTop: "10px",
+                    height: "372px",
+                    marginRight: "13px",
+                  }}
+                >
+                  <h1 style={{ marginTop: "10px", float: "right" }}>
+                    Bar Chart
+                  </h1>
+                  <div
+                    id="chart-container"
+                    style={{
+                      width: "100%",
+                      height: "330px",
+                      top: "-8px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <div
+                style={{
+                  width: "400px",
+                  "margin-top": "20px",
+                  height: "335px",
+                  float: "right",
+                  "box-shadow": "0 0 9px 0 #070707",
+                  "margin-right": "13px",
+                }}
+              >
+                <h1 style={{ float: "right", marginTop: "5px" }}>
+                  Bubble Chart
+                </h1>
+                <div
+                  style={{
+                    background: "#000",
+                    "margin-top": "28px",
+                    "margin-left": "20px",
+                    width: "70px",
+                    color: "#fff",
+                    height: "280px",
+                    padding: "10px",
+                    "text-align": "center",
+                    "border-radius": "15px 0px 0 15px",
+                  }}
+                >
+                  <div
+                    style={{
+                      transform: "rotate(-90deg)",
+                      position: "absolute",
+                      left: "435px",
+                      top: "20%",
+                    }}
+                  >
+                    <label
+                      style={{
+                        "font-size": "12px",
+                        width: "200px",
+                        position: "relative",
+
+                        height: "100%",
+                      }}
+                    ></label>
+                    <br />
+                    <span style={{ "font-size": "12px" }}>
+                      <b> </b>
+                    </span>
+                  </div>
+                  <div
+                    id="chartdiv1"
+                    style={{
+                      width: "400px",
+                      height: "280px",
+                      margin: "0 auto",
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style={{
+                    width: "400px",
+                    marginTop: "30px",
+                    boxShadow: "0 0 9px 0 black",
+                    float: "right",
+                    marginRight: "13px",
+                  }}
+                >
+                  <div
+                    id="chart-container1"
+                    style={{
+                      width: "100%",
+                      height: "350px",
+                      marginTop: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginRight: "5px",
+                      // marginLeft: "80px",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </VStack>
+          </Box>
+        </Box>
+      </Box>
+    </>
+  );
+};
+
+export default Tree;
+
+{
+  /* <Box>
           <VStack>
             <div
               style={{
@@ -1827,7 +1893,6 @@ const Tree = () => {
                       height: "100%",
                     }}
                   >
-                    {/* / {console.log("5555555555555", data)} */}
                   </label>
                   <br />
                   <span style={{ "font-size": "12px" }}>
@@ -1838,51 +1903,8 @@ const Tree = () => {
                   id="chartdiv1"
                   style={{ width: "400px", height: "280px", margin: "0 auto" }}
                 ></div>
-                <div>
-                  <div
-                    style={{
-                      width: "500px",
-                      marginTop: "100px",
-                      boxShadow: "0 0 9px 0 black",
-                      display: "flex",
-                      "justify-content": "center",
-                    }}
-                  >
-                    <div
-                      id="chart-container1"
-                      style={{
-                        width: "100%",
-                        height: "350px",
-                        marginTop: "10px",
-                        marginLeft: "80px",
-                      }}
-                    ></div>
-                  </div>
-                </div>
               </div>
             </div>
           </VStack>
-        </Box>
-
-        <div>
-          <div
-            style={{
-              width: "400px",
-              "box-shadow": "0 0 9px 0 black",
-              marginLeft: "70px",
-              marginTop: "10px",
-            }}
-          >
-            <h1 style={{ marginTop: "10px", float: "right" }}>Bar Chart</h1>
-            <div
-              id="chart-container"
-              style={{ width: "100%", height: "420px", top: "-8px" }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default Tree;
+        </Box> */
+}

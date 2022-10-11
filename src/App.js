@@ -28,12 +28,14 @@ import Example from "./components/Comparative result/MultiDrop";
 import ProgressBar from "./components/Comparative result/ProgressBar";
 import Bar from "./components/Comparative result/Bar";
 import ComparativeTab from "./components/Comparative result/ComparativeTab";
+import Accordin from "./components/Comparative result/Accordin";
 
 export default function App(props) {
   return (
     <>
-    <ComparativeTab />
-    {/* <Bar /> */}
+      <Accordin />
+      {/* <ComparativeTab /> */}
+      {/* <Bar /> */}
       {/* <ProgressBar /> */}
       {/* <BarChart /> */}
       {/* <Bubble /> */}
