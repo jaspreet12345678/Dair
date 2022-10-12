@@ -206,16 +206,19 @@ const ProgressBar = () => {
 
   return (
     <>
-      <Box>
+    <Box>
+      <Box style={{float:"right"}}>
         <VStack>
           <div style={{}}>
             <Box
               style={{
-                width: "30.33333333%",
+                width: "400px",
                 padding: "10px",
-                marginLeft: "10px",
+                marginRight: "10px",
                 marginTop: "10px",
-                border: "1px solid black",
+                borderRadius:"10px",
+                border: "1px solid white",
+                boxShadow:"0 0 6px 0 lightgrey"
               }}
             >
               <HStack>
@@ -269,13 +272,14 @@ const ProgressBar = () => {
             style={{
               width: "400px",
               height: "400px",
-              boxShadow: "0 0 9px 0 black",
+              boxShadow: "0 0 6px 0 lightgrey",
+              // border:"1px solid white",
               borderRadius: "10px",
               marginTop: "10px",
-              marginLeft: "10px",
+              marginRight: "10px",
             }}
           >
-            <h1 style={{ textAlign: "left", marginLeft: "5px" }}>
+            <h1 style={{ textAlign: "left", marginLeft: "5px", marginTop:"5px" }}>
               Top Countries
             </h1>
             <div
@@ -285,6 +289,7 @@ const ProgressBar = () => {
           </div>
         </VStack>
       </Box>
+    </Box>
     </>
   );
 };
