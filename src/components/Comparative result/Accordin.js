@@ -6,9 +6,14 @@ import {
   AccordionPanel,
   Box,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import Questions from '../SIdeBar/Question';
+import React, { useEffect, useState } from "react";
+import Questions from "../SIdeBar/Question";
 const Accordin = () => {
+  const [availableData, setAvailableData] = useState();
+  useEffect(() => {
+    data();
+  }, []);
+
   let scoreFinal = [];
   let isLoading = true;
   let development_name = [];
@@ -24,9 +29,7 @@ const Accordin = () => {
   let taxonomy_id;
   let country1 = [];
   let indicator_score = [];
-  useEffect(() => {
-    data();
-  }, []);
+  let valop = [];
 
   function data() {
     var axios = require("axios");
@@ -47,28 +50,29 @@ const Accordin = () => {
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        comaprativeResultMain(response.data);
+        comaprativeResultMain(response.data, 0);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  function comaprativeResultMain(data1) {
+  function comaprativeResultMain(info, data1) {
+    console.log(data1);
+
     let data = [];
     // apiDataService.getComparativeOverview(data).subscribe((result) => {
 
     var v = [];
-    for (const [key, val] of Object.entries(data1)) {
+    for (const [key, val] of Object.entries(info)) {
       development_type.push(key);
       //   console.log("development_type", development_type);
       v.push(val);
     }
     for (const [key1, val1] of Object.entries(v[0])) {
       ulitimate1.push(key1);
-      //   console.log("ulitimate1", ulitimate1);
+      console.log("ulitimate1", ulitimate1);
       taxonomy.push(val1);
-        // console.log("taxonomy", taxonomy);
     }
     for (const [key1, val1] of Object.entries(v[1])) {
       ulitimate2.push(key1);
@@ -76,18 +80,80 @@ const Accordin = () => {
       taxonomy1.push(val1);
       //  console.log("taxonomy", taxonomy1);
     }
-    myScore(taxonomy);
+    // myScore(taxonomy);
+    // function myScore(taxonomy) {
+    //   let jas = taxonomy
+    //   console.log("TAXONOMY", jas);
+    //   indicator_score = [];
+    //   let av = [];
+    //   for (const [key1, val1] of Object.entries(taxonomy)) {
+    //     let y = val1;
+    //     // console.log(y);
+    //     // console.log("val1", y);
+    //     for (const [key, val] of Object.entries(y)) {
+    //       let t = val;
+    //       // console.log("val1", t);
+    //       for (const [key4, val4] of Object.entries(t)) {
+    //         let actual_score1 = 0;
+    //         let actual_score2 = 0;
+    //         let indicator_score1 = 0;
+    //         let indicator_score2 = 0;
+    //         let country_percantag1 = 0;
+    //         let country_percantag2 = 0;
+
+    //         Object.entries(t).forEach((el) => {
+    //           country1 = [];
+    //           // console.log(el)
+    //           var e = el[1];
+
+    //           Object.entries(el[1]).forEach((elmnt, index) => {
+    //             elmnt[1].map((item) => {
+    //               // console.log(item.c_name);
+    //               taxonomy_id = item.taxonomy_id;
+    //               country1.push(item.c_name);
+    //               console.log("@@@@@@@@@@@@`", taxonomy_id);
+    //               if (index == 0) {
+    //                 actual_score1 += item.actual_score;
+    //                 indicator_score1 = item.indicator_score;
+    //               } else {
+    //                 actual_score2 += item.actual_score;
+    //                 indicator_score2 = item.indicator_score;
+    //               }
+    //             });
+    //           });
+    //         });
+    //         country_percantag1 = Math.round(
+    //           Math.round((actual_score1 / indicator_score1) * 100) / 20
+    //         );
+    //         country_percantag2 = Math.round(
+    //           Math.round((actual_score2 / indicator_score2) * 100) / 20
+    //         );
+
+    //         let score = {
+    //           country_1: country1[0],
+    //           country_2: country1[1],
+    //           indicator_score1: indicator_score1,
+    //           actual_score1: actual_score1,
+    //           indicator_score2: indicator_score2,
+    //           actual_score2: actual_score2,
+    //           country_percantag1: country_percantag1,
+    //           country_percantag2: country_percantag2,
+    //           [key4]: val4,
+    //           question: key4,
+    //         };
+    //         indicator_score.push(score);
+    //         // console.log("indicator_score", indicator_score);
+    //       }
+    //     }
+    //   }
+    // }
     function myScore(taxonomy) {
-      //console.log("TAXONOMY", taxonomy);
       indicator_score = [];
       let av = [];
       for (const [key1, val1] of Object.entries(taxonomy)) {
         let y = val1;
-        console.log(y)
-        // console.log("val1", y);
         for (const [key, val] of Object.entries(y)) {
           let t = val;
-            // console.log("val1", t);
           for (const [key4, val4] of Object.entries(t)) {
             let actual_score1 = 0;
             let actual_score2 = 0;
@@ -98,23 +164,17 @@ const Accordin = () => {
 
             Object.entries(t).forEach((el) => {
               country1 = [];
-              // console.log(el)
               var e = el[1];
-
-              Object.entries(el[1]).forEach((elmnt, index) => {
-                elmnt[1].map((item) => {
-                  // console.log(item.c_name);
-                  taxonomy_id = item.taxonomy_id;
-                  country1.push(item.c_name);
-                  console.log("@@@@@@@@@@@@`", taxonomy_id);
-                  if (index == 0) {
-                    actual_score1 += item.actual_score;
-                    indicator_score1 = item.indicator_score;
-                  } else {
-                    actual_score2 += item.actual_score;
-                    indicator_score2 = item.indicator_score;
-                  }
-                });
+              e.forEach((elmnt, index) => {
+                taxonomy_id = elmnt.taxonomy_id;
+                country1.push(elmnt.c_name);
+                if (index == 0) {
+                  actual_score1 += elmnt.actual_score;
+                  indicator_score1 = elmnt.indicator_score;
+                } else {
+                  actual_score2 += elmnt.actual_score;
+                  indicator_score2 = elmnt.indicator_score;
+                }
               });
             });
             country_percantag1 = Math.round(
@@ -137,29 +197,36 @@ const Accordin = () => {
               question: key4,
             };
             indicator_score.push(score);
-            console.log("indicator_score", indicator_score);
           }
         }
       }
     }
 
-    console.log(development_type[0]);
+    valop = viewDataAvalability;
+    viewDataAvalability = [];
+    // console.log(development_type[0]);
     // myScore(10);
-    if (data1 == 1) {
+    if (data1 == 0) {
       development_name = development_type[0];
       console.log(development_name);
       ultimate_name = ulitimate1[0];
-      viewDataAvalability = taxonomy[0];
+      // viewDataAvalability = taxonomy[0];
+      // const jaspreetData = viewDataAvalability.push(taxonomy[0]);
+      setAvailableData(taxonomy[0]);
       myScore(taxonomy[0]);
       scoreFinal = indicator_score;
     }
-    if (data1 == 2) {
+
+    if (data1 == 1) {
       ultimate_name = ulitimate1[1];
-      viewDataAvalability = taxonomy[1];
+      development_name = development_type[1];
+      // viewDataAvalability = taxonomy[1];
+      viewDataAvalability.push(taxonomy[1]);
       development_name = development_type[0];
       myScore(taxonomy[1]);
       scoreFinal = indicator_score;
     }
+
     if (data1 == 3) {
       development_name = development_type[1];
       ultimate_name = ulitimate2[0];
@@ -167,6 +234,7 @@ const Accordin = () => {
       myScore(taxonomy1[0]);
       scoreFinal = indicator_score;
     }
+
     if (data1 == 4) {
       development_name = development_type[1];
       ultimate_name = ulitimate2[1];
@@ -177,205 +245,152 @@ const Accordin = () => {
 
     //   informationReport()
     // })
+    // console.log(taxonomy);
   }
-// console.log(taxonomy)
+  console.log("oo------------------)))))))))", availableData);
 
-  return (
-    <>
-   
-      {/* <Accordion allowToggle>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-            <Box flex="1" textAlign="left">
-                      Section 1 title
-                    </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <Accordion allowToggle>
-              <AccordionItem style={{ border: "none" }}>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Section 1 title
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </AccordionPanel>
-              </AccordionItem>
+  if (availableData) {
+    return (
+      <>
+        {/* {
+      console.log("oaaya-----------------@@@",availableData)
+    } */}
+        {/* {
+      availableData.map((data) => {
+        console.log(data);
+        return <h3 className="student_name">{data}</h3>;
+      })} */}
+        {/* {Object.entries(availableData)
+          .slice(4, 5)
+          .map((data) => {
+            console.log("=================>>>>", data[1]);
+            return (
+              <>
+                <h1>{data[0]}</h1>
+                <div>
+                  {Object.entries(data[1])
+                    .slice(4, 5)
+                    .map((item) => {
+                      console.log("=================>>>>", item);
+                      return (
+                        <>
+                          <h1>{item[0]}</h1>
+                          <div>
+                            {Object.entries(item[1]).map((item1) => {
+                              console.log(item1[1]);
+                              return (
+                                <>
+                                  <h1>{item1[0]}</h1>
+                                  <div>
+                                    {item1[1].map((e) => {
+                                      {
 
-              <AccordionItem style={{ border: "none" }}>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Section 1 title
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </AccordionPanel>
-              </AccordionItem>
-
-              <AccordionItem style={{ border: "none" }}>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Section 1 title
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </AccordionPanel>
-              </AccordionItem>
-
-              <AccordionItem style={{ border: "none" }}>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Section 1 title
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion> */}
-
-      {/* <div id="container">
-            <div class="list" id="one">
-                <div class="data-vertical-label">
-                    <h3>Indicators</h3>
-                    <h3>Comparison</h3>
+                                      }
+                                      return <h1>{e.status}</h1>;
+                                    })}
+                                  </div>
+                                </>
+                              );
+                            })}
+                          </div>
+                        </>
+                      );
+                    })}
                 </div>
-                <div class="loading" >
-                    <div class="spinner"></div>
-                </div>
-                <mat-accordion>
-                    <ng-container *ngFor="let taxonomy_key of objectKeys(viewDataAvalability)">
-                        <mat-expansion-panel hideToggle>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    {{taxonomy_key}}
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    <mat-icon>arrow_drop_down</mat-icon>
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div class="accordion-content">
-                                <div class="content-row"
-                                    *ngFor="let indicator_key of objectKeys(viewDataAvalability[taxonomy_key])">
-                                    <mat-accordion>
-                                        <div class="content-inner">
-                                            <mat-expansion-panel hideToggle>
-                                                <mat-expansion-panel-header>
-                                                    <div class="left-content col-md-7">
-                                                        <mat-panel-title>
-                                                            {{indicator_key}}
-                                                        </mat-panel-title>
-                                                    </div>
-                                                    <div class="right-content col-md-5" 
-                                                        *ngFor="let question of objectKeys(viewDataAvalability[taxonomy_key][indicator_key]); let i = index">
+              </>
+            );
+          })} */}
 
-                                                        <div
-                                                            *ngFor="let country of scoreFinal">
-                                                            <div class="country-1"
-                                                                *ngIf="mapCountryData.length == 2">
-                                                                <Span *ngIf="question == country.question" >
-                                                                    {{country.country_1}}
-                                                                    <mat-icon>arrow_drop_up
-                                                                    </mat-icon>
-                                                                </Span>
-                                                                <div class="rating"
-                                                                    *ngIf="question == country.question">
-                                                                    <ng-container
-                                                                        *ngFor="let dash of dash_array;">
-                                                                        <span class="green"
-                                                                            *ngIf="dash <= country.country_percantag1; else val">
-                                                                        </span>
-                                                                        <ng-template #val>
-                                                                            <span
-                                                                                class="gray"></span>
-                                                                        </ng-template>
-                                                                    </ng-container>
-                                                                </div>
-                                                                <Span *ngIf="question == country.question">
-                                                                    {{country.country_2}}
-                                                                    <mat-icon>arrow_drop_up
-                                                                    </mat-icon>
-                                                                </Span>
-                                                                <div class="rating" style="padding-right: 160px;"
-                                                                    *ngIf="question == country.question">
-                                                                    <ng-container
-                                                                        *ngFor="let dash of dash_array;">
-                                                                        <span class="blue"
-                                                                            *ngIf="dash <= country.country_percantag2; else val ">
-                                                                        </span>
-                                                                        <ng-template #val>
-                                                                            <span
-                                                                                class="gray"></span>
-                                                                        </ng-template>
-                                                                    </ng-container>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <mat-panel-description>
-                                                        <mat-icon>arrow_drop_down</mat-icon>
-                                                    </mat-panel-description>
-                                                </mat-expansion-panel-header>
-                                                <div class="content-row"
-                                                    *ngFor="let question of objectKeys(viewDataAvalability[taxonomy_key][indicator_key])">
-                                                    <div class="query-right-content col-md-12">
-                                                        <div class="query-name col-md-6">
+        {/* <Accordion allowToggle>
+          {Object.entries(availableData).map((data) => {
+            return (
+              <>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        <h1>{data[0]}</h1>
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    <Accordin allowToggle>
+                      {Object.entries(data[1]).map((item) => {
+                        return (
+                          <>
+                            <AccordionItem>
+                              <h2>
+                                <AccordionButton>
+                                  <Box flex="1" textAlign="left">
+                                    jaspreet
+                                  </Box>
+                                  <AccordionIcon />
+                                </AccordionButton>
+                              </h2>
+                            </AccordionItem>
+                          </>
+                        );
+                      })}
+                    </Accordin>
+                  </AccordionPanel>
+                </AccordionItem>
+              </>
+            );
+          })}
+        </Accordion> */}
 
-                                                            {{question}}
-                                                        </div>
-                                                        <div
-                                                            *ngFor="let status of viewDataAvalability[taxonomy_key][indicator_key][question]">
+        <Accordion defaultIndex={[0]} allowToggle>
+          {Object.entries(availableData).map((data) => {
+            return (
+              <>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        {data[0]}
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    <Accordion defaultIndex={[0]} allowToggle>
+                      {Object.entries(data[1]).map((item) => {
+                        return (
+                          <>
+                            <AccordionItem>
+                              <h2>
+                                <AccordionButton>
+                                  <Box flex="1" textAlign="left">
+                                    {item[0]}
+                                  </Box>
+                                  <AccordionIcon />
+                                </AccordionButton>
+                              </h2>
+                              <AccordionPanel pb={4}>
+                                {Object.entries(item[1]).map((item1) => {
+                                  console.log(item1[1]);
+                                  return <>
+                                    <h1>{item[0]}</h1>
+                                    <br />
+                                  </>;
+                                })}
 
-                                                            <div class="country-1 col-md-3">
-                                                                <div class="rating">
-                                                                    <span
-                                                                        *ngIf="status.status == 'Yes'"
-                                                                        class="green success"></span>
-                                                                    <span
-                                                                        *ngIf="status.status == 'No'"
-                                                                        class="alert-red danger"></span>
-                                                                    <span
-                                                                        *ngIf="status.status == 'Data not available'"
-                                                                        class="gray disable-status"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </mat-expansion-panel>
-                                        </div>
-                                    </mat-accordion>
-                                </div>
-                            </div>
-                        </mat-expansion-panel>
-                    </ng-container>
-                </mat-accordion>
-            </div>
-        </div>
-    </div> */}
-    </>
-  );
+                              </AccordionPanel>
+                            </AccordionItem>
+                          </>
+                        );
+                      })}
+                    </Accordion>
+                  </AccordionPanel>
+                </AccordionItem>
+              </>
+            );
+          })}
+        </Accordion>
+      </>
+    );
+  }
 };
 
 export default Accordin;

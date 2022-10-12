@@ -33,7 +33,7 @@ import Accordin from "./components/Comparative result/Accordin";
 export default function App(props) {
   return (
     <>
-      <Accordin />
+      {/* <Accordin /> */}
       {/* <ComparativeTab /> */}
       {/* <Bar /> */}
       {/* <ProgressBar /> */}
@@ -42,10 +42,14 @@ export default function App(props) {
       {/* <Rose /> */}
       {/* <Radar /> */}
 
-      {/* <Tree /> */}
+      {/* <Tree/> */}
 
       {/* <NetworkChart /> */}
-      {/* <ComparativeMap /> */}
+      <Switch>
+        {/* <ComparativeMap /> */}
+        <Route path="/" exact component={ComparativeMap} />
+        <Route path="/network" exact component={Tree} />
+      </Switch>
       {/* <Switch>
         <Route path="/" exact component={Index} />
         <Route path="/map" component={Main} />

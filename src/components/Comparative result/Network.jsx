@@ -963,9 +963,9 @@ const Tree = () => {
       // console.log("developmentId", developmentId);
       Radar({
         countries: "106,108",
-        developmentId,
-        governanceId,
-        taxonomyId,
+        developmentId: "1,2",
+        governanceId: governanceId,
+        taxonomyId: taxonomyId,
       });
 
       Bubble({
@@ -1480,7 +1480,7 @@ const Tree = () => {
 
   function Radar(data2) {
     // let title = [];
-    // console.log("data2222", data2);
+    console.log("data2222", data2);
     // countries: countries,
     // developmentId: developmentId,
     // governanceId: governance,
@@ -1591,7 +1591,7 @@ const Tree = () => {
       country2.push(item);
     });
     console.log("country1111", country1);
-    console.log("country2222", country2);
+    console.log("country2222", country2[1]);
 
     var dom = document.getElementById("chart-container1");
     var myChart = echarts.init(dom, null, {
@@ -1603,7 +1603,7 @@ const Tree = () => {
     var option;
 
     option = {
-      color: ["#338A14", "#6610f2", "#56A3F1", "#6610f2"],
+      color: [ "#6610f2", "#338A14", "#56A3F1", "#338A14"],
       // title: {
       //   text: "",
       // },
@@ -1656,20 +1656,20 @@ const Tree = () => {
             {
               value: [
                 country1[1].actual_score,
+                country1[0].actual_score,
                 country1[2].actual_score,
                 country1[3].actual_score,
-                country1[0].actual_score,
                 // 40, 50, 60, 30,
               ],
               name: "India",
               areaStyle: {
-                color: "rgba(51, 138, 20, 0.6)",
+                color: "#6610f2",
               },
             },
             {
               value: [
-                country2[0].actual_score,
                 country2[1].actual_score,
+                country2[0].actual_score,
                 country2[2].actual_score,
                 country2[3].actual_score,
                 // country2[1],
@@ -1679,7 +1679,7 @@ const Tree = () => {
               ],
               name: "Canada",
               areaStyle: {
-                color: "#6610f2",
+                color: "rgba(51, 138, 20, 0.6)",
               },
             },
           ],
@@ -1848,63 +1848,3 @@ const Tree = () => {
 };
 
 export default Tree;
-
-{
-  /* <Box>
-          <VStack>
-            <div
-              style={{
-                width: "500px",
-                "margin-top": "20px",
-                height: "350px",
-                float: "right",
-                "box-shadow": "0 0 9px 0 #070707",
-                "margin-right": "13px",
-              }}
-            >
-              <h1 style={{ float: "right", marginTop: "5px" }}>Bubble Chart</h1>
-              <div
-                style={{
-                  background: "#000",
-                  "margin-top": "28px",
-                  "margin-left": "100px",
-                  width: "70px",
-                  color: "#fff",
-                  height: "280px",
-                  padding: "10px",
-                  "text-align": "center",
-                  "border-radius": "15px 0px 0 15px",
-                }}
-              >
-                <div
-                  style={{
-                    transform: "rotate(-90deg)",
-                    position: "absolute",
-                    left: "435px",
-                    top: "20%",
-                  }}
-                >
-                  <label
-                    style={{
-                      "font-size": "12px",
-                      width: "200px",
-                      position: "relative",
-
-                      height: "100%",
-                    }}
-                  >
-                  </label>
-                  <br />
-                  <span style={{ "font-size": "12px" }}>
-                    <b> </b>
-                  </span>
-                </div>
-                <div
-                  id="chartdiv1"
-                  style={{ width: "400px", height: "280px", margin: "0 auto" }}
-                ></div>
-              </div>
-            </div>
-          </VStack>
-        </Box> */
-}
