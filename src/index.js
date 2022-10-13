@@ -8,11 +8,11 @@ import { BrowserRouter } from "react-router-dom";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <BrowserRouter>
+  // <BrowserRouter>
     <ChakraProvider theme={customTheme}>
       <App />
-    </ChakraProvider>
-  </BrowserRouter>,
+    </ChakraProvider>,
+  //  </BrowserRouter>,
 
   rootElement
 );

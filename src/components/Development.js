@@ -135,7 +135,7 @@ function PresentDev(props) {
                   <Text ml={5}>Data Not Available</Text>
                 </Flex>
               </HStack>
-              <Text ml={5}>Readiness</Text>
+              <Text ml={5}>Development</Text>
               <table style={{marginLeft:"20px"}}>
                 <tr
                   style={

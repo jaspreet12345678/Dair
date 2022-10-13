@@ -1,0 +1,33 @@
+[
+  {
+    "label": "VP Accounting",
+    "tagClassName": "special",
+    "children": [
+      {
+        "label": "iWay",
+        "children": [
+          {
+            "label": "Universidad de Especialidades del Espíritu Santo"
+          },
+          {
+            "label": "Marmara University"
+          },
+          {
+            "label": "Baghdad College of Pharmacy"
+          }
+        ]
+      },
+      {
+        "label": "KDB",
+        "children": [
+          {
+            "label": "Latvian University of Agriculture"
+          },
+          {
+            "label": "Dublin Institute of Technology"
+          }
+        ]
+      }
+    ]
+  }
+]

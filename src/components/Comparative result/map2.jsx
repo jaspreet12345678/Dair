@@ -1167,6 +1167,11 @@ function ComparativeMap(props) {
     ];
 
     chart.legend = new am4charts.Legend();
+    let marker = chart.legend.markers.template.children.getIndex(0);
+    // marker.cornerRadius(12, 12, 12, 12);
+    chart.legend.height = 50;
+    // chart.legend.strokeOpacity = 1;
+    // chart.legend.stroke = am4core.color("#ccc");
 
     series.dataFields.linkWith = "linkWith";
     series.dataFields.name = "name";
@@ -1204,53 +1209,6 @@ function ComparativeMap(props) {
       }
       event.target.fontSize = fontSize;
     });
-
-    // series.maxRadius = 35;
-    // series.nodes.template.events.on("hit", (e) => {
-    //   let test = JSON.stringify(e.target.dataItem.dataContext);
-    //   let d_info = JSON.parse(test);
-    //   // console.log("d_info", d_info);
-    //   let developmentId = d_info.d_id;
-    //   let governanceId = d_info.g_id;
-    //   let ultimateId = d_info.u_id;
-    //   let taxonomyId = d_info.t_id;
-    //   let year = "2021,2022";
-    //   let loading = false;
-    //   // console.log("taxonomy_id", taxonomyId);
-    //   // console.log("governance", governanceId);
-    //   // console.log("ultimateId", ultimateId);
-    //   // console.log("developmentId", developmentId);
-    //   Radar({
-    //     countries: "106,108",
-    //     developmentId: "1,2",
-    //     governanceId: governanceId,
-    //     taxonomyId: taxonomyId,
-    //   });
-
-    //   Bubble({
-    //     taxonomyId,
-    //     governanceId,
-    //     ultimateId,
-    //     developmentId,
-    //     year,
-    //   });
-    //   Rose({
-    //     // countries: "36,103",
-    //     // taxonomyId: taxonomyId,
-    //     // governanceId: governanceId,
-    //     // ultimateId: ultimateId,
-    //     // developmentId: developmentId,
-
-    //     countries: "106,108",
-    //     developmentId,
-    //     governanceId,
-    //     ultimateId,
-    //     taxonomyId,
-    //   });
-    //   // taxonomyTableDetails();
-    //   // overviewRadarChart();
-    //   // overviewBarChart();
-    // });
   }
 
   function mydata1() {
@@ -1490,7 +1448,7 @@ function ComparativeMap(props) {
                       style={{
                         width: "inherit",
                         textAlign: "end",
-                        marginRight: "30px",
+                        marginLeft: "20px",
                       }}
                     >
                       Over View

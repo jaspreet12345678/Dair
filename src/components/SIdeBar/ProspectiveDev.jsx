@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 // import "bootstrap/dist/css"
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { uniqueSort } from "jquery";
+//import "./table.css";
 
 function ProspectiveDev(props) {
   let country_flag = localStorage.getItem("country_flag");
@@ -39,12 +40,12 @@ function ProspectiveDev(props) {
 
   let data1 = [];
   function myData() {
-    console.log("####################");
+    //console.log("####################");
 
-    let data = JSON.stringify({
+    let data = {
       countries: `${country_id}`,
       governanceId: `${governanceId}`,
-    });
+    };
 
     let config = {
       method: "post",
@@ -69,13 +70,13 @@ function ProspectiveDev(props) {
 
   function mapping(data) {
     console.log("*************", data);
-
     for (const [key, val] of Object.entries(data)) {
+      console.log(val)
       //development_name.push(key);
       development_name1.push(key);
       for (const [key1, val1] of Object.entries(val)) {
         taxnomy_name1.push(key1);
-        if (key1 === "Readiness") {
+        if (key1 === "Availability") {
           //console.log("first", val1);
           for (const [key2, val2] of Object.entries(val1)) {
             ultimate_name1.push(key2);
@@ -109,46 +110,93 @@ function ProspectiveDev(props) {
     }
 
     setData(finalData);
-    console.log("indi", finalData);
+    //console.log("indi", finalData);
   }
 
   return (
     <>
-    
-      {data?.map((item1) => {
-        //15
-        return (
-          <>
-            {/* <Heading>{item1.indecatorName}</Heading> */}
-
-            <table>
-              <>
-                <tr>
-                  <th>Indicators Name</th>
-                  <th>Questions</th>
-                  <th>{country_name}</th>
+      <Box>
+        {looprun.map((item, key) => {
+          return (
+            <>
+              <HStack key={key} ml={5} display={"flex"} justifyContent={"space-between"}>
+                <Heading>{item}</Heading>
+                <Flex  style={{marginRight:"20px"}}>
+                  <Text>Yes</Text>
+                  <Text ml={5}>No</Text>
+                  <Text ml={5}>Data Not Available</Text>
+                </Flex>
+              </HStack>
+              <Text ml={5}>Availability</Text>
+              <table style={{marginLeft:"20px"}}>
+                <tr
+                  style={
+                    {
+                      //border: "1px solid white",
+                    }
+                  }
+                >
+                  <th
+                    style={{
+                      border: "1px solid white",
+                      width: "400px",
+                    }}
+                  >
+                    Indicators Name
+                  </th>
+                  <th
+                    style={{
+                      border: "1px solid white",
+                      width: "600px",
+                    }}
+                  >
+                    Questions
+                  </th>
+                  <th
+                    style={{
+                      border: "1px solid white",
+                      width: "200px",
+                    }}
+                  >
+                    {country_name}
+                  </th>
                 </tr>
-            <tr>
-                <td>{item1.indecatorName}</td>
-                {item1.indecatorValue.map((data) => {
-                  return (
-                    <>
-                      <tr>
-                        <td>
-                        <tr>
-                        {data.question}
-                        </tr></td>
-                        <td>{data.status}</td>
-                      </tr>
-                    </>
-                  );
+                {/* <th width="100px">{country_name}</th> */}
+                {data?.map((item1, key) => {
+                  if (item === item1.indecatorValue[0].taxonomy_name) {
+                    return (
+                      <>
+                        <tr key={key} style={{ border: "1px solid white" }}>
+                          <td style={{ border: "1px solid white" }}>
+                            {item1.indecatorName}
+                          </td>
+                          {item1.indecatorValue.slice(0, 1).map((data, key) => {
+                            //console.log("5555", item1.indecatorValue);
+                            return (
+                              // <tr>
+                              <>
+                                <tr key={key} style={{ border: "1px solid white" }}>
+                                  <td style={{ border: "1px solid white" }}>
+                                    {data.question}
+                                  </td>
+                                </tr>
+                                <td style={{ border: "1px solid white" }}>
+                                  {data.status}
+                                </td>
+                              </>
+                              //</tr>
+                            );
+                          })}
+                        </tr>
+                      </>
+                    );
+                  }
                 })}
-              </tr>
-              </>
-            </table>
-          </>
-        );
-      })}
+              </table>
+            </>
+          );
+        })}
+      </Box>
     </>
   );
 }

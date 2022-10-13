@@ -9,11 +9,15 @@ import * as echarts from "echarts";
 import BarChart from "./BarChart";
 import Bubble from "./BubbleChart";
 import { Box, VStack } from "@chakra-ui/react";
+import Multiselect from "multiselect-react-dropdown";
 var axios = require("axios");
 
 const Tree = () => {
+  const [totalCountry, settotalCountry] = useState();
+  const [myCountries, setmyCountries] = useState();
   var data2 = [];
-  function chart() {
+
+  function chart(data) {
     // Themes begin
     am4core.useTheme(am4themes_animated);
 
@@ -962,7 +966,7 @@ const Tree = () => {
       // console.log("ultimateId", ultimateId);
       // console.log("developmentId", developmentId);
       Radar({
-        countries: "106,108",
+        countries: "74,228",
         developmentId: "1,2",
         governanceId: governanceId,
         taxonomyId: taxonomyId,
@@ -982,7 +986,7 @@ const Tree = () => {
         // ultimateId: ultimateId,
         // developmentId: developmentId,
 
-        countries: "106,108",
+        countries: "74,228",
         developmentId,
         governanceId,
         ultimateId,
@@ -1251,7 +1255,7 @@ const Tree = () => {
     } else {
       let title = [];
       var data = {
-        countries: "106,108",
+        countries: "74,228",
         developmentId: 1,
         governanceId: 2,
         ultimateId: 1,
@@ -1513,7 +1517,7 @@ const Tree = () => {
     } else {
       let title = [];
       var data = {
-        countries: "106,108",
+        countries: "74,228",
         developmentId: "1,2",
         governanceId: "2",
         // ultimateId: "1,2,3,4",
@@ -1603,7 +1607,7 @@ const Tree = () => {
     var option;
 
     option = {
-      color: [ "#6610f2", "#338A14", "#56A3F1", "#338A14"],
+      color: ["#6610f2", "#338A14", "#56A3F1", "#338A14"],
       // title: {
       //   text: "",
       // },

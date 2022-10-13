@@ -1,8 +1,7 @@
 import React from "react";
 // import Map from "./components/Map";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Index from "./components";
-import Sidebar from "./components/SIdeBar/Sidebar";
 import Map from "./components/SIdeBar/Map222";
 import Donut from "./components/SIdeBar/donut";
 import MainMap from "./components/SIdeBar/MainMap";
@@ -30,9 +29,12 @@ import Bar from "./components/Comparative result/Bar";
 import ComparativeTab from "./components/Comparative result/ComparativeTab";
 import Accordin from "./components/Comparative result/Accordin";
 
+import ResultDetail from "./components/Comparative result/resultDetail";
+
 export default function App(props) {
   return (
     <>
+      <ResultDetail />
       {/* <Accordin /> */}
       {/* <ComparativeTab /> */}
       {/* <Bar /> */}
@@ -45,18 +47,22 @@ export default function App(props) {
       {/* <Tree/> */}
 
       {/* <NetworkChart /> */}
-      <Switch>
-        {/* <ComparativeMap /> */}
-        <Route path="/" exact component={ComparativeMap} />
-        <Route path="/network" exact component={Tree} />
-      </Switch>
-      {/* <Switch>
-        <Route path="/" exact component={Index} />
-        <Route path="/map" component={Main} />
-        <Route path="/graph/:country_id" component={PieMain} />
-        <Route path="/present" component={PresentDev} />
-        <Route path="/prospective" component={ProspectiveDev} />
-      </Switch> */}
+      {/* <ComparativeMap /> */}
+      {/* <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={ComparativeMap} />
+          <Route path="/network"  exact component={Tree} />
+        </Switch>
+      </BrowserRouter> */}
+      {/* <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={Index} />
+          <Route path="/map" component={Main} />
+          <Route path="/graph/:country_id" component={PieMain} />
+          <Route path="/present" component={PresentDev} />
+          <Route path="/prospective" component={ProspectiveDev} />
+        </Switch>
+      </BrowserRouter> */}
     </>
   );
 }

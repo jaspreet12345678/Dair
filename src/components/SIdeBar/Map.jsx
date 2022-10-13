@@ -5,6 +5,8 @@ import * as am5map from "@amcharts/amcharts5/map";
 // import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import axios from "axios";
+import DropdownTreeSelect from "react-dropdown-tree-select";
+import data from './demo-data.json'
 // import Sidebar from "./Sidebar";
 // import Bar from "./Sidebar";
 // import { map } from "@amcharts/amcharts5/.internal/core/util/Array";
@@ -381,6 +383,7 @@ function Graph(props) {
           </Text>
         </Link>
       </Flex>
+      <DropdownTreeSelect data={data} keepTreeOnSearch />
 
       <div
         style={{
@@ -446,4 +449,4 @@ function Graph(props) {
   );
 }
 
-export default withRouter(Graph);
+export default withRouter(Graph)
