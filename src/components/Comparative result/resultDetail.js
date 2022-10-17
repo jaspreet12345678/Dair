@@ -67,9 +67,6 @@ const ResultDetail = () => {
         governanceId: 1,
       };
     }
-
-
-
     var config = {
       method: "post",
       url: "http://103.127.29.85:4000/ndhs-master/overview",
@@ -224,7 +221,8 @@ const ResultDetail = () => {
     // console.log(taxonomy);
   }
 
-  async function myData() {
+  async function myData(data) {
+    console.log("datatatattattaa",data)
     var axios = require("axios");
     var data = {
       countries: "106,108",
