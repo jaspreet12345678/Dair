@@ -7,7 +7,7 @@ import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { uniqueSort } from "jquery";
 //import "./table.css";
 
-function PresentDev(props) {
+function DigitalAvailability(props) {
   let country_flag = localStorage.getItem("country_flag");
   let country_name = localStorage.getItem("country_name");
   let country_id = localStorage.getItem("country_id");
@@ -24,11 +24,14 @@ function PresentDev(props) {
   let development_name1 = [];
   let axios = require("axios");
   let looprun = [
-    "IT Workforce & Infrastructure",
-    "IT Governance",
-    "Healthcare workforce and Infrastructure",
-    "Healthcare Governance",
-    "AI Workforce/Infrastructure",
+   
+    "Digital Health (DH) Governance",
+    "Funding and resources",
+    "Legal rules",
+    "Literacy (patient+ workforce)",
+    "Research Program and funding",
+    "Workforce (Technical and Health care)", 
+    "DH Infrastructure",
   ];
 
   const [mydata, setmydata] = useState([]);
@@ -44,7 +47,7 @@ function PresentDev(props) {
 
     let data = {
       countries: `${country_id}`,
-      governanceId: `${governanceId}`,
+      governanceId: "2",
     };
 
     let config = {
@@ -76,7 +79,7 @@ function PresentDev(props) {
       development_name1.push(key);
       for (const [key1, val1] of Object.entries(val)) {
         taxnomy_name1.push(key1);
-        if (key1 === "Readiness") {
+        if (key1 === "Availability") {
           //console.log("first", val1);
           for (const [key2, val2] of Object.entries(val1)) {
             ultimate_name1.push(key2);
@@ -110,16 +113,8 @@ function PresentDev(props) {
     }
 
     setData(finalData);
-    console.log("indi", finalData);
+    //console.log("indi", finalData);
   }
-  looprun.map((item, key) => {
-  data?.map((item1, key) => {
-    if (item === item1.indecatorValue[0].taxonomy_name) {
-      item1.indecatorValue.slice(0, 1).map((data, key) => {
-        console.log(data.c_name);
-        
-      })
-    }})})
 
   return (
     <>
@@ -135,7 +130,7 @@ function PresentDev(props) {
                   <Text ml={5}>Data Not Available</Text>
                 </Flex>
               </HStack>
-              <Text ml={5}>Readiness</Text>
+              <Text ml={5}>Availability</Text>
               <table style={{marginLeft:"20px"}}>
                 <tr
                   style={
@@ -209,4 +204,4 @@ function PresentDev(props) {
   );
 }
 
-export default PresentDev;
+export default DigitalAvailability;

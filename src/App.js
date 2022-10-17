@@ -5,16 +5,14 @@ import Index from "./components";
 import Map from "./components/SIdeBar/Map222";
 import Donut from "./components/SIdeBar/donut";
 import MainMap from "./components/SIdeBar/MainMap";
-import Main from "./components/Main";
+
 import Practise from "./components/SIdeBar/Practice";
 import Test from "./test";
-import Graph2 from "./components/Graph";
-import Map3D from "./components/Graph";
-import PieMain from "./components/PieMain";
-import PresentDev from "./components/SIdeBar/PresentDev";
-import Questions from "./components/SIdeBar/Question";
+
+import PresentDev from "./components/SIdeBar/Questions/PresentDevelopment/HealthReadiness";
+import Questions from "./components/SIdeBar/Questions/ProspectiveDevelopment/PresentMain";
 import Ques from "./components/QuestionMain";
-import ProspectiveDev from "./components/SIdeBar/ProspectiveDev";
+import ProspectiveDev from "./components/SIdeBar/Questions/PresentDevelopment/HealthAvailability";
 import ComparativeMap from "./components/Comparative result/map2";
 
 import NetworkChart from "./components/SIdeBar/NetworkChart";
@@ -30,20 +28,18 @@ import ComparativeTab from "./components/Comparative result/ComparativeTab";
 import Accordin from "./components/Comparative result/Accordin";
 
 import ResultDetail from "./components/Comparative result/resultDetail";
+import SideBar from "./components/SIdeBar/SideBar";
+import PresentMain from "./components/SIdeBar/Questions/ProspectiveDevelopment/PresentMain";
+import Question from "./components/SIdeBar/Questions/Question";
+import PieMain from "./components/SIdeBar/PieChart/PieMain";
+import Main from "./components/Main";
+import Question2 from './components/SIdeBar/Questions/Question2';
 
 export default function App(props) {
   return (
     <>
-      <ResultDetail />
-      {/* <Accordin /> */}
-      {/* <ComparativeTab /> */}
-      {/* <Bar /> */}
-      {/* <ProgressBar /> */}
-      {/* <BarChart /> */}
-      {/* <Bubble /> */}
-      {/* <Rose /> */}
-      {/* <Radar /> */}
-
+      {/* <ResultDetail /> */}
+      {/* <Question2 /> */}
       {/* <Tree/> */}
 
       {/* <NetworkChart /> */}
@@ -51,18 +47,22 @@ export default function App(props) {
       {/* <BrowserRouter>
         <Switch>
           <Route path="/" exact component={ComparativeMap} />
-          <Route path="/network"  exact component={Tree} />
+          <Route path="/result-details" exact component={ResultDetail} />
+          <Route path="/network" exact component={Tree} />
         </Switch>
       </BrowserRouter> */}
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Index} />
           <Route path="/map" component={Main} />
           <Route path="/graph/:country_id" component={PieMain} />
           <Route path="/present" component={PresentDev} />
           <Route path="/prospective" component={ProspectiveDev} />
+          <Route path="/comparative-map" exact component={ComparativeMap} />
+          <Route path="/result-details" exact component={ResultDetail} />
+          <Route path="/network" exact component={Tree} />
         </Switch>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }

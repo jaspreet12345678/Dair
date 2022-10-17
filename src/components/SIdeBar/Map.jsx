@@ -5,8 +5,6 @@ import * as am5map from "@amcharts/amcharts5/map";
 // import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import axios from "axios";
-import DropdownTreeSelect from "react-dropdown-tree-select";
-import data from './demo-data.json'
 // import Sidebar from "./Sidebar";
 // import Bar from "./Sidebar";
 // import { map } from "@amcharts/amcharts5/.internal/core/util/Array";
@@ -377,76 +375,73 @@ function Graph(props) {
   return (
     <>
       <Flex>
-        <Link to="/">
-          <Text ml={10} bg={"white"}>
-            Home
-          </Text>
-        </Link>
-      </Flex>
-      <DropdownTreeSelect data={data} keepTreeOnSearch />
-
-      <div
-        style={{
-          "box-shadow": "0 0 9px 0 grey",
-          width: "1000px",
-          marginLeft: "260px",
-          height: "580px",
-        }}
-      >
-        <div>
-          <h2
-            style={{
-              "margin-left": "10px",
-              "margin-top": "10px",
-              padding: "18px",
-            }}
-          >
-            Countries List
-          </h2>
-          <div
-            style={{
-              "margin-left": "10px",
-              "margin-top": "10px",
-              padding: "18px",
-            }}
-          >
-            <input
-              type="checkbox"
-              name="2021"
-              value={year21}
-              checked={checked21}
-              onClick={handleOnChange21}
-              // onChange={(e) => setChecked21(e.target.checked)}
-            />
-            <label style={{ marginLeft: "5px" }}>2021</label>
-            <input
-              style={{ marginLeft: "5px" }}
-              type="checkbox"
-              name="2022"
-              value={year22}
-              checked={checked22}
-              onClick={handleOnChange22}
-            />
-            <label style={{ marginLeft: "5px" }}>2022</label>
-            <input
-              style={{ marginLeft: "5px" }}
-              type="checkbox"
-              name="2022"
-              //value={year22}
-              checked={checked}
-              onClick={handleOnChange}
-            />
-            <label style={{ marginLeft: "5px" }}>All Data</label>
-          </div>
-        </div>
-        <hr />
         <div
-          id="chartdiv"
-          style={{ width: "100%", height: "400px", marginTop: "20px" }}
-        ></div>
-      </div>
+          style={{
+            "box-shadow": "0 0 9px 0 grey",
+            width: "1000px",
+            // marginLeft: "260px",
+            height: "580px",
+          }}
+        >
+          <div>
+            <h2
+              style={{
+                "margin-left": "10px",
+                "margin-top": "10px",
+                padding: "18px",
+              }}
+            >
+              Countries List
+            </h2>
+            <div
+              style={{
+                "margin-left": "10px",
+                "margin-top": "10px",
+                padding: "18px",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="2021"
+                value={year21}
+                checked={checked21}
+                onClick={handleOnChange21}
+                // onChange={(e) => setChecked21(e.target.checked)}
+              />
+              <label style={{ marginLeft: "5px" }}>2021</label>
+              <input
+                style={{ marginLeft: "5px" }}
+                type="checkbox"
+                name="2022"
+                value={year22}
+                checked={checked22}
+                onClick={handleOnChange22}
+              />
+              <label style={{ marginLeft: "5px" }}>2022</label>
+              <input
+                style={{ marginLeft: "5px" }}
+                type="checkbox"
+                name="2022"
+                //value={year22}
+                checked={checked}
+                onClick={handleOnChange}
+              />
+              <label style={{ marginLeft: "5px" }}>All Data</label>
+            </div>
+          </div>
+          <hr />
+          <div
+            id="chartdiv"
+            style={{
+              width: "100%",
+              height: "400px",
+              marginTop: "20px",
+            }}
+          ></div>
+        </div>
+      </Flex>
     </>
   );
 }
 
-export default withRouter(Graph)
+export default withRouter(Graph);

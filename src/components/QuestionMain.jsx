@@ -1,8 +1,8 @@
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header1";
-import PresentDev from "./SIdeBar/PresentDev";
-import ProspectiveDev from "./SIdeBar/ProspectiveDev";
+import PresentDev from "./SIdeBar/Questions/PresentDevelopment/HealthReadiness";
+import ProspectiveDev from "./SIdeBar/Questions/PresentDevelopment/HealthAvailability";
 
 const Ques = () => {
   return (

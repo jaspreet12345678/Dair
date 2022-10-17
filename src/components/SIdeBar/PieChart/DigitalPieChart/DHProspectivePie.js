@@ -7,15 +7,13 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import axios from "axios";
 import * as am5percent from "@amcharts/amcharts5/percent";
-import Sidebar from "./Sidebar";
-import Bar from "./Sidebar";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import { Box, HStack, Heading, Button, SimpleGrid } from "@chakra-ui/react";
-import Header from "./Header1";
+
 import { Link } from "react-router-dom";
 
-const Map23D = (props) => {
+const DHProspectivePie = (props) => {
   let [data, setData] = useState([]);
   let title = [];
   let axios = require("axios");
@@ -27,24 +25,45 @@ const Map23D = (props) => {
   console.log("country_id", country_id);
   console.log("country_id", year);
 
-  let config = {
-    method: "get",
-    url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/${country_id}/${year}`,
-    headers: {},
-  };
+  if(!country_name === "" || !country_id === ""){
+    let config = {
+        method: "get",
+        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/2/${country_id}/${year}`,
+        headers: {},
+      };
+    
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          title = response.data;
+          console.log(response.data);
+          mappinng(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+  else {
+    let config = {
+        method: "get",
+        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/2/103/2021`,
+        headers: {},
+      };
+    
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          title = response.data;
+          console.log(response.data);
+          mappinng(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+  
 
-  axios(config)
-    .then(function (response) {
-      // console.log(JSON.stringify(response.data));
-      title = response.data;
-      console.log(response.data);
-      mappinng(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  const looprun = [0, 1, 2, 3, 4];
+  const looprun = [0, 1, 2, 3, 4, 5, 6];
   const present = [];
   const prospective = [];
 
@@ -67,7 +86,7 @@ const Map23D = (props) => {
     console.log("prospective", title["Prospective Development"]);
     looprun.map((data1, key) => {
       // present.map((item, key) => {
-      let chart = am4core.create("chartdivPros" + data1, am4charts.PieChart3D);
+      let chart = am4core.create("chartdiv2Pros" + data1, am4charts.PieChart3D);
       chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
       let noData =
         (300 -
@@ -213,7 +232,7 @@ const Map23D = (props) => {
                     {country_name}
                   </Box>
                   <div
-                    id={`chartdivPros` + key}
+                    id={`chartdiv2Pros` + key}
                     style={{
                       width: "100%",
                       height: "200px",
@@ -233,4 +252,4 @@ const Map23D = (props) => {
   );
 };
 
-export default Map23D;
+export default DHProspectivePie;

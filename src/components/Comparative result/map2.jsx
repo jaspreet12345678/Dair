@@ -16,6 +16,10 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { Link } from "react-router-dom";
 
 function ComparativeMap(props) {
+  const [country1_name, setCountry1_name] = useState();
+  const [country2_name, setCountry2_name] = useState();
+  const [country1_iso_code, setCountry1_iso_code] = useState();
+  const [country2_iso_code, setCountry2_iso_code] = useState();
   let state = {
     options: [
       { name: "Option 1", id: 1 },
@@ -31,6 +35,7 @@ function ComparativeMap(props) {
   var show = true;
   const [countryData, setcountryData] = useState();
   useEffect(() => {
+    localStorage.clear();
     data();
     mydata1();
   }, []);
@@ -178,12 +183,16 @@ function ComparativeMap(props) {
         console.log(response.data);
         setmyCountries(response.data);
         let data = response.data;
+        data.map((item) => {
+          console.log(item.country);
+        });
         let totalCountry1 = [];
         for (let r = 0; r < data.length; r++) {
           totalCountry1.push({
             cat: data[r].country_id,
             key: data[r].country_name,
           });
+          // localStorage.setItem("token",totalCountry)
         }
         console.log(totalCountry1);
         settotalCountry(totalCountry1);
@@ -211,13 +220,20 @@ function ComparativeMap(props) {
       data.push(obj1);
     }
     console.log(data);
+    setCountry1_iso_code(data[0].country_name);
+    setCountry2_iso_code(data[1].country_name);
+    setCountry1_name(data[0].iso_code);
+    setCountry2_name(data[1].iso_code);
+
+    console.log(country1_name);
+    console.log(country2_name);
 
     am5.array.each(am5.registry.rootElements, function (root) {
-      if (root && root.dom && root.dom.id == "chartdiv") {
+      if (root && root.dom && root.dom.id == "chartdiv2") {
         root.dispose();
       }
     });
-    let root = am5.Root.new("chartdiv");
+    let root = am5.Root.new("chartdiv2");
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "none",
@@ -239,7 +255,7 @@ function ComparativeMap(props) {
         geoJSON: data,
       })
     );
-    console.log(data.length);
+    console.log(data);
 
     data.map((item) => {
       return (
@@ -1222,11 +1238,11 @@ function ComparativeMap(props) {
         style={{
           display: "flex",
           marginTop: "10px",
-          float: "right",
-          marginRight: "10px",
+          // float: "right",
+          marginRight: "100px",
         }}
       >
-        <Box style={{ width: "700px", marginLeft: "20px" }}>
+        <Box style={{ width: "580px", marginLeft: "20px" }}>
           <Box style={{ display: "flex", justifyContent: "space-between" }}>
             <Text>**Select Two Countries for comparison**</Text>
             <Box style={{ width: "300px", fontSize: "12px" }}>
@@ -1259,9 +1275,9 @@ function ComparativeMap(props) {
             }}
           >
             <div
-              id="chartdiv"
+              id="chartdiv2"
               style={{
-                width: "650px",
+                width: "550px",
                 marginLeft: "20px",
                 height: "500px",
                 display: "flex",
@@ -1286,16 +1302,18 @@ function ComparativeMap(props) {
                 }}
               >
                 <div>
-                  <button
-                    style={{
-                      float: "right",
-                      color: "lightskyblue",
-                      border: "1px solid lightskyblue",
-                      padding: "1px",
-                    }}
-                  >
-                    More Details
-                  </button>
+                  <Link to={"./result-details"}>
+                    <button
+                      style={{
+                        float: "right",
+                        color: "lightskyblue",
+                        border: "1px solid lightskyblue",
+                        padding: "1px",
+                      }}
+                    >
+                      More Details
+                    </button>
+                  </Link>
                   <br />
                   <div
                     style={{
@@ -1307,9 +1325,9 @@ function ComparativeMap(props) {
                     <h1 style={{ textAlign: "left", marginTop: "5px" }}>
                       Comparative Table
                     </h1>
-                    <div>
-                      <h1>Country 1</h1>
-                      <h1>Country 2</h1>
+                    <div style={{ width: "185px" }}>
+                      <h1 style={{ color: "green" }}>{country1_iso_code}</h1>
+                      <h1 style={{ color: "red" }}>{country2_iso_code}</h1>
                     </div>
                   </div>
                   <Flex
@@ -1363,8 +1381,12 @@ function ComparativeMap(props) {
                                         score.governance_name ===
                                         "General Health"
                                       ) {
+                                        console.log(
+                                          "phhhhhhhhhhhhhhhhhhhhh",
+                                          country1_iso_code
+                                        );
                                         const col =
-                                          score.country === "UK"
+                                          score.country === country1_iso_code
                                             ? "green"
                                             : "red";
                                         return (
@@ -1393,7 +1415,7 @@ function ComparativeMap(props) {
                                         "Digital Health"
                                       ) {
                                         const col =
-                                          score.country === "USA"
+                                          score.country === country1_iso_code
                                             ? "green"
                                             : "red";
                                         return (

@@ -12,6 +12,8 @@ import { Progress } from "@chakra-ui/react";
 import * as echarts from "echarts";
 
 const ProgressBar = () => {
+  let country1 = localStorage.getItem("country1");
+  let country2 = localStorage.getItem("country2");
   const [finaldata, setfinaldata] = useState();
   const [data, setmyData] = useState([]);
 
@@ -21,6 +23,8 @@ const ProgressBar = () => {
   }, []);
 
   async function myData() {
+    
+    console.log(country1);
     var axios = require("axios");
     var data = {
       countries: "106,108",

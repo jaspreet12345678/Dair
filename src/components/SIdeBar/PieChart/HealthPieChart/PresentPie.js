@@ -16,10 +16,9 @@ import {
   TabPanel,
   Spacer,
 } from "@chakra-ui/react";
-import Header from "./Header1";
 import { Link } from "react-router-dom";
 
-const Map3D = (props) => {
+const PresentPie = (props) => {
   let [data, setData] = useState([]);
   let title = [];
   let axios = require("axios");
@@ -31,22 +30,42 @@ const Map3D = (props) => {
   console.log("country_id", country_id);
   console.log("country_id", year);
 
-  let config = {
-    method: "get",
-    url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/${country_id}/${year}`,
-    headers: {},
-  };
-
-  axios(config)
-    .then(function (response) {
-      // console.log(JSON.stringify(response.data));
-      title = response.data;
-      console.log(response.data);
-      mappinng(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  if(!country_name === "" || !country_id === ""){
+    let config = {
+        method: "get",
+        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/${country_id}/${year}`,
+        headers: {},
+      };
+    
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          title = response.data;
+          console.log(response.data);
+          mappinng(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+  else {
+    let config = {
+        method: "get",
+        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/103/2021`,
+        headers: {},
+      };
+    
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          title = response.data;
+          console.log(response.data);
+          mappinng(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
 
   const looprun = [0, 1, 2, 3, 4];
   const present = [];
@@ -165,23 +184,7 @@ const Map3D = (props) => {
 
   return (
     <>
-      <Header />
-      <HStack width={1000} display={"flex"} justifyContent={"space-between"}>
-        <Tabs>
-          <TabList>
-            <Link to={"/present"}>
-              <Tab>Health & IT</Tab>
-            </Link>
-            <Link to={"/digital"}>
-              <Tab>Digital Health</Tab>
-            </Link>
-          </TabList>
-        </Tabs>
-        <Spacer />
-        <Text ml={50}>
-          {country_name}
-        </Text>
-      </HStack>
+    
       <Box>
         <Box
           style={{
@@ -254,4 +257,4 @@ const Map3D = (props) => {
   );
 };
 
-export default Map3D;
+export default PresentPie;
