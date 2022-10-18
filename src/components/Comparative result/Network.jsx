@@ -968,12 +968,21 @@ const Tree = () => {
       // console.log("governance", governanceId);
       // console.log("ultimateId", ultimateId);
       // console.log("developmentId", developmentId);
-      Radar({
-        countries: "74,228",
-        developmentId: "1,2",
-        governanceId: governanceId,
-        taxonomyId: taxonomyId,
-      });
+      if(b){
+        Radar({
+          countries: b[0].cat + "," + b[1].cat,
+          developmentId: "1,2",
+          governanceId: governanceId,
+          taxonomyId: taxonomyId,
+        });
+      }else{
+        Radar({
+          countries: "74,228",
+          developmentId: "1,2",
+          governanceId: governanceId,
+          taxonomyId: taxonomyId,
+        });
+      }
 
       Bubble({
         taxonomyId,
@@ -982,22 +991,26 @@ const Tree = () => {
         developmentId,
         year,
       });
-      Rose({
-        // countries: "36,103",
-        // taxonomyId: taxonomyId,
-        // governanceId: governanceId,
-        // ultimateId: ultimateId,
-        // developmentId: developmentId,
 
-        countries: "74,228",
-        developmentId,
-        governanceId,
-        ultimateId,
-        taxonomyId,
-      });
-      // taxonomyTableDetails();
-      // overviewRadarChart();
-      // overviewBarChart();
+      if(b){
+        Rose({
+          countries: b[0].cat + "," + b[1].cat,
+          developmentId,
+          governanceId,
+          ultimateId,
+          taxonomyId,
+        });
+      }else{
+        Rose({
+          countries: "74,228",
+          developmentId,
+          governanceId,
+          ultimateId,
+          taxonomyId,
+        });
+      }
+     
+      
     });
   }
 
@@ -1256,34 +1269,65 @@ const Tree = () => {
           console.log(error);
         });
     } else {
-      let title = [];
-      var data = {
-        countries: "74,228",
-        developmentId: 1,
-        governanceId: 2,
-        ultimateId: 1,
-        taxonomyId: 10,
-      };
+      if (b) {
+        let title = [];
+        var data = {
+          countries: b[0].cat + "," + b[1].cat,
+          developmentId: 1,
+          governanceId: 2,
+          ultimateId: 1,
+          taxonomyId: 10,
+        };
 
-      var config = {
-        method: "post",
-        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
+        var config = {
+          method: "post",
+          url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
 
-      axios(config)
-        .then(function (response) {
-          //console.log(JSON.stringify(response.data));
-          title = response.data;
-          //console.log("title", title);
-          Chart(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        axios(config)
+          .then(function (response) {
+            //console.log(JSON.stringify(response.data));
+            title = response.data;
+            //console.log("title", title);
+            Chart(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        let title = [];
+        var data = {
+          countries: "74,228",
+          developmentId: 1,
+          governanceId: 2,
+          ultimateId: 1,
+          taxonomyId: 10,
+        };
+
+        var config = {
+          method: "post",
+          url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+
+        axios(config)
+          .then(function (response) {
+            //console.log(JSON.stringify(response.data));
+            title = response.data;
+            //console.log("title", title);
+            Chart(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -1518,34 +1562,65 @@ const Tree = () => {
           console.log(error);
         });
     } else {
-      let title = [];
-      var data = {
-        countries: "74,228",
-        developmentId: "1,2",
-        governanceId: "2",
-        // ultimateId: "1,2,3,4",
-        taxonomyId: 7,
-      };
+      if (b) {
+        let title = [];
+        var data = {
+          countries: b[0].cat + "," + b[1].cat,
+          developmentId: "1,2",
+          governanceId: "2",
+          // ultimateId: "1,2,3,4",
+          taxonomyId: 7,
+        };
 
-      var config = {
-        method: "post",
-        url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
+        var config = {
+          method: "post",
+          url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
 
-      axios(config)
-        .then(function (response) {
-          //console.log(JSON.stringify(response.data));
-          title = response.data;
-          //console.log("title", title);
-          Chart1(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        axios(config)
+          .then(function (response) {
+            //console.log(JSON.stringify(response.data));
+            title = response.data;
+            //console.log("title", title);
+            Chart1(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        let title = [];
+        var data = {
+          countries: "74,228",
+          developmentId: "1,2",
+          governanceId: "2",
+          // ultimateId: "1,2,3,4",
+          taxonomyId: 7,
+        };
+
+        var config = {
+          method: "post",
+          url: "http://103.127.29.85:4000/ndhs-master/stats-graph",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+
+        axios(config)
+          .then(function (response) {
+            //console.log(JSON.stringify(response.data));
+            title = response.data;
+            //console.log("title", title);
+            Chart1(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -1703,9 +1778,9 @@ const Tree = () => {
 
   return (
     <>
-    <Link to={"./map"}>
-      <Button>Back</Button>
-    </Link>
+      <Link to={"./map"}>
+        <Button>Back</Button>
+      </Link>
       <Box style={{ display: "flex", float: "right" }}>
         <Box style={{ width: "500px", height: "550px" }}>
           <div

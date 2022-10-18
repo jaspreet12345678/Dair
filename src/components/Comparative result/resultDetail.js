@@ -26,6 +26,8 @@ import "./active.css";
 import { Link } from "react-router-dom";
 
 const ResultDetail = () => {
+  let name1 = "UK";
+  let name2 = "USA";
   const [availableData, setAvailableData] = useState();
   const [redinessData, setredinessData] = useState();
   const [capacityData, setCapacityData] = useState();
@@ -35,7 +37,7 @@ const ResultDetail = () => {
   let country_id1 = localStorage.getItem("countries");
   let d = JSON.parse(country_id1);
 
-  console.log(d)
+  console.log(d);
   useEffect(() => {
     dataa();
     myData();
@@ -61,20 +63,19 @@ const ResultDetail = () => {
 
   // console.log(d[0].cat)
   function dataa() {
-    let localStoreData = []
+    let localStoreData = [];
     var axios = require("axios");
-    if(d) {
+    if (d) {
       var data = {
         countries: d[0].cat + "," + d[1].cat,
-         governanceId: 1,
-      }
-    } 
-    else {
+        governanceId: 1,
+      };
+    } else {
       var data = {
         countries: "74,228",
         governanceId: 1,
       };
-     }
+    }
     var config = {
       method: "post",
       url: "http://103.127.29.85:4000/ndhs-master/overview",
@@ -175,7 +176,7 @@ const ResultDetail = () => {
 
     valop = viewDataAvalability;
     viewDataAvalability = [];
-    // console.log(development_type[0]);
+    console.log(development_type[0]);
     // myScore(10);
     if (data1 == 0) {
       development_name = development_type[0];
@@ -221,34 +222,48 @@ const ResultDetail = () => {
     // console.log(development_name);
     // console.log(ulitimate2[0]);
     // console.log(development_name);
-
+    adata();
     //   informationReport()
-    myData({
-
-    })
-    adata()
     // })
     // console.log(taxonomy);
   }
 
   async function myData(data) {
-    console.log("datatatattattaa",data)
+    console.log("datatatattattaa", data);
     var axios = require("axios");
-    var data = {
-      countries: "74,228",
-      developmentId: 1,
-      governanceId: 2,
-      // taxonomyId: 10,
-      ultimateId: 1,
-    };
-    var config = {
-      method: "post",
-      url: "http://103.127.29.85:4000/ndhs-master/comparative-information",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
+    if (d) {
+      var data = {
+        countries: d[0].cat + "," + d[1].cat,
+        developmentId: 1,
+        governanceId: 2,
+        // taxonomyId: 10,
+        ultimateId: 1,
+      };
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/comparative-information",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+    } else {
+      var data = {
+        countries: "74,228",
+        developmentId: 1,
+        governanceId: 2,
+        // taxonomyId: 10,
+        ultimateId: 1,
+      };
+      var config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/comparative-information",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+    }
 
     await axios(config)
       .then(function (response) {
@@ -281,15 +296,25 @@ const ResultDetail = () => {
   }
   console.log("aa", array);
 
-  function adata(data) {
+  function adata(data1) {
     var axios = require("axios");
-    var data = {
-      developmentId: 1,
-      governanceId: 1,
-      ultimateId: "2",
-      taxonomyId: "1",
-      year: "2021,2022",
-    };
+    if (data1) {
+      var data = {
+        developmentId: 1,
+        governanceId: 1,
+        ultimateId: data1,
+        taxonomyId: "1",
+        year: "2021,2022",
+      };
+    } else {
+      var data = {
+        developmentId: 1,
+        governanceId: 1,
+        ultimateId: "2",
+        taxonomyId: "1",
+        year: "2021,2022",
+      };
+    }
 
     var config = {
       method: "post",
@@ -416,16 +441,15 @@ const ResultDetail = () => {
 
   return (
     <>
-     <Link to={"./map"}>
-      <Button>Back</Button>
-    </Link>
+      <Link to={"./map"}>
+        <Button>Back</Button>
+      </Link>
       <Box
         style={{
           display: "flex",
           float: "right",
           marginTop: "20px",
           justifyContent: "space-around",
-          
         }}
       >
         <Box>
@@ -434,7 +458,7 @@ const ResultDetail = () => {
               boxShadow: "0 0 6px 0 lightgrey",
               width: "560px",
               marginRight: "10px",
-              borderRadius: "10px"
+              borderRadius: "10px",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
@@ -1034,7 +1058,7 @@ const ResultDetail = () => {
                     }}
                   >
                     <Flex>
-                      <Text style={{color:"green"}}>Information Report</Text>
+                      <Text style={{ color: "green" }}>Information Report</Text>
                     </Flex>
                     <Spacer />
                     <Flex>
@@ -1049,8 +1073,10 @@ const ResultDetail = () => {
                     justifyContent: "end",
                   }}
                 >
-                  <Text>Iran</Text>
-                  <Text style={{ marginLeft: "10px" }}>Italy</Text>
+                  <Text>{name1 ? name1 : d[0].key}</Text>
+                  <Text style={{ marginLeft: "10px" }}>
+                    {name2 ? name2 : d[1].key}
+                  </Text>
                 </Flex>
                 {array?.map((e, key) => {
                   return (

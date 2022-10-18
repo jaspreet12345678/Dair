@@ -56,8 +56,8 @@ export default function App(props) {
           <Route path="/" exact component={Index} />
           <Route path="/map" component={Main} />
           <Route path="/graph/:country_id" component={PieMain} />
-          <Route path="/present" component={PresentDev} />
-          <Route path="/prospective" component={ProspectiveDev} />
+          <Route path="/present" component={Question} />
+          <Route path="/prospective" component={Question2} />
           <Route path="/comparative-map" exact component={ComparativeMap} />
           <Route path="/result-details" exact component={ResultDetail} />
           <Route path="/network" exact component={Tree} />
