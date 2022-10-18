@@ -26,6 +26,7 @@ import "./active.css";
 import { Link } from "react-router-dom";
 
 const ResultDetail = () => {
+ 
   let name1 = "UK";
   let name2 = "USA";
   const [availableData, setAvailableData] = useState();
@@ -39,6 +40,7 @@ const ResultDetail = () => {
 
   console.log(d);
   useEffect(() => {
+    // localStorage.removeItem("countries")
     dataa();
     myData();
     adata();
@@ -1073,9 +1075,9 @@ const ResultDetail = () => {
                     justifyContent: "end",
                   }}
                 >
-                  <Text>{name1 ? name1 : d[0].key}</Text>
+                  <Text>{d[0].key ? d[0].key : name1}</Text>
                   <Text style={{ marginLeft: "10px" }}>
-                    {name2 ? name2 : d[1].key}
+                    {d[1].key ? d[1].key : name2}
                   </Text>
                 </Flex>
                 {array?.map((e, key) => {

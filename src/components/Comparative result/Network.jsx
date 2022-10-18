@@ -968,14 +968,14 @@ const Tree = () => {
       // console.log("governance", governanceId);
       // console.log("ultimateId", ultimateId);
       // console.log("developmentId", developmentId);
-      if(b){
+      if (b) {
         Radar({
           countries: b[0].cat + "," + b[1].cat,
           developmentId: "1,2",
           governanceId: governanceId,
           taxonomyId: taxonomyId,
         });
-      }else{
+      } else {
         Radar({
           countries: "74,228",
           developmentId: "1,2",
@@ -992,7 +992,7 @@ const Tree = () => {
         year,
       });
 
-      if(b){
+      if (b) {
         Rose({
           countries: b[0].cat + "," + b[1].cat,
           developmentId,
@@ -1000,7 +1000,7 @@ const Tree = () => {
           ultimateId,
           taxonomyId,
         });
-      }else{
+      } else {
         Rose({
           countries: "74,228",
           developmentId,
@@ -1009,8 +1009,6 @@ const Tree = () => {
           taxonomyId,
         });
       }
-     
-      
     });
   }
 
@@ -1019,6 +1017,7 @@ const Tree = () => {
   }
 
   useEffect(() => {
+    localStorage.removeItem("countries")
     myData();
     Bubble();
     Rose();
@@ -1332,6 +1331,7 @@ const Tree = () => {
   }
 
   function Chart(data1) {
+    console.log(data1);
     // console.log("first", data1);
     // let country1 = data1[0];
     // let country2 = data1[1];
@@ -1436,6 +1436,7 @@ const Tree = () => {
       });
     } else {
       data1.forEach((element) => {
+        console.log(element.percentage)
         let bar_data = {
           name:
             (element.country_name.length > 11
@@ -1472,6 +1473,10 @@ const Tree = () => {
     }
 
     option = {
+      title: {
+        text: data1[0].taxonomy_name,
+        down: 10,
+      },
       legend: {
         bottom: -5,
         left: "center",
@@ -1484,16 +1489,6 @@ const Tree = () => {
             }
           : "{lname}",
       },
-      // tooltip: {
-      //     trigger: 'item',
-      //     formatter: data ? (name: any) => {
-      //         let itemValue = data.filter((item: any) => item.name === name)
-      //         if (name.data.tooltipName) {
-      //             return `${name.data.tooltipName}`;
-      //         }
-      //         return false;
-      //     } : "{name}",
-      // },
       series: [
         {
           name: "",
@@ -1569,7 +1564,7 @@ const Tree = () => {
           developmentId: "1,2",
           governanceId: "2",
           // ultimateId: "1,2,3,4",
-          taxonomyId: 7,
+          taxonomyId: 10,
         };
 
         var config = {
@@ -1625,35 +1620,7 @@ const Tree = () => {
   }
 
   function Chart1(data) {
-    // let radar_chart;
-    // radar_chart = data;
-    // const results = nestGroupsBy(data, ["country_name"]);
-    // let resultDetails = Object.values(data);
-    // let country1 = getCountryDetails(resultDetails[0]);
-    // let country2 = getCountryDetails(resultDetails[1]);
-
     console.log("dataaradar", data);
-    // let country = [];
-    // let array = [];
-    // for (var i = 0; i <= data.length - 1; i++) {
-    //   if (!country.includes(data[i].country_name)) {
-
-    //     country.push(data[i])
-    //     // country.push(data.country);
-    //     console.log(country)
-    //   }
-    // }
-    // for (var j = 0; j < country.length; j++) {
-    //   var a = {};
-    //   const my = data.filter((item) => {
-    //     if (item.country_name === country[j][0]) {
-    //       return item;
-    //     }
-    //   });
-    //   a["title"] = country[j];
-    //   a["data"] = my;
-    //   array.push(a);
-    // }
 
     let country1 = [];
     let country2 = [];
@@ -1672,8 +1639,8 @@ const Tree = () => {
       // })
       country2.push(item);
     });
-    console.log("country1111", country1[0].country_name);
-    console.log("country2222", country2[0].country_name);
+    console.log("country1111", country1[0]);
+    console.log("country2222", country2[0]);
 
     var dom = document.getElementById("chart-container1");
     var myChart = echarts.init(dom, null, {
@@ -1686,10 +1653,14 @@ const Tree = () => {
 
     option = {
       color: ["#6610f2", "#338A14", "#56A3F1", "#338A14"],
-      // title: {
-      //   text: "",
-      // },
-      legend: {},
+      title: {
+        text: country1[0].taxonomy_name,
+        down: 5,
+      },
+      legend: {
+        top: 20,
+        right: 10,
+      },
       radar: [
         {
           indicator: [
@@ -1827,7 +1798,13 @@ const Tree = () => {
                     marginRight: "13px",
                   }}
                 >
-                  <h1 style={{ marginTop: "10px", float: "right" }}>
+                  <h1
+                    style={{
+                      marginTop: "10px",
+                      float: "right",
+                      marginRight: "15px",
+                    }}
+                  >
                     Bar Chart
                   </h1>
                   <div
@@ -1852,7 +1829,13 @@ const Tree = () => {
                   "margin-right": "13px",
                 }}
               >
-                <h1 style={{ float: "right", marginTop: "5px" }}>
+                <h1
+                  style={{
+                    float: "right",
+                    marginTop: "5px",
+                    marginRight: "15px",
+                  }}
+                >
                   Bubble Chart
                 </h1>
                 <div

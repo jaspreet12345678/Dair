@@ -35,6 +35,7 @@ function ComparativeMap(props) {
   var show = true;
   const [countryData, setcountryData] = useState();
   useEffect(() => {
+    localStorage.removeItem("countries")
     data();
     mydata1();
   }, []);
@@ -1334,7 +1335,7 @@ function ComparativeMap(props) {
                     <h1 style={{ textAlign: "left", marginTop: "5px" }}>
                       Comparative Table
                     </h1>
-                    <div style={{ width: "185px" }}>
+                    <div style={{ width: "185px",display:"flex",justifyContent:"space-around" }}>
                       <h1 style={{ color: "green" }}>{country1_iso_code}</h1>
                       <h1 style={{ color: "red" }}>{country2_iso_code}</h1>
                     </div>
@@ -1365,14 +1366,13 @@ function ComparativeMap(props) {
                           {item.development_type}
                         </h1>
                         <br />
-                        <br />
                         <Divider />
                         <p>
                           {item.subData?.map((e) => {
                             return (
                               <>
                                 <div
-                                  style={{ display: "flex", marginTop: "10px" }}
+                                  style={{ display: "flex", marginTop: "5px" }}
                                 >
                                   <h5 style={{ width: "200px" }}>
                                     {e.ultimate_field}
