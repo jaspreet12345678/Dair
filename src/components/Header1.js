@@ -68,37 +68,6 @@ const Data = () => {
     </Text>
   );
 };
-// const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
-//   return (
-//     <Link href={to}>
-//       <Text display="block" {...rest}>
-//         {children}
-//       </Text>
-//     </Link>
-//   );
-// };
-
-// const MenuLinks = ({ isOpen }) => {
-//   return (
-//     <Box
-//       display={{ base: isOpen ? "block" : "none", md: "block" }}
-//       flexBasis={{ base: "100%", md: "auto" }}
-//       color="black"
-//     >
-//       <Stack
-//         spacing={8}
-//         align="center"
-//         justify={["center", "space-between", "flex-end", "flex-end"]}
-//         direction={["column", "row", "row", "row"]}
-//         pt={[4, 4, 0, 0]}
-//       >
-
-//         <MenuItem to="/report">Health & IT</MenuItem>
-//         <MenuItem to="/contact us">Digital Health</MenuItem>
-//       </Stack>
-//     </Box>
-//   );
-// };
 
 const NavBarContainer = ({ children, ...props }) => {
   return (
