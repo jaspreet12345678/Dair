@@ -24,13 +24,12 @@ function DigitalAvailability(props) {
   let development_name1 = [];
   let axios = require("axios");
   let looprun = [
-   
     "Digital Health (DH) Governance",
     "Funding and resources",
     "Legal rules",
     "Literacy (patient+ workforce)",
     "Research Program and funding",
-    "Workforce (Technical and Health care)", 
+    "Workforce (Technical and Health care)",
     "DH Infrastructure",
   ];
 
@@ -45,36 +44,63 @@ function DigitalAvailability(props) {
   function myData() {
     //console.log("####################");
 
-    let data = {
-      countries: `${country_id}`,
-      governanceId: "2",
-    };
+    if (!country_id === "") {
+      let data = {
+        countries: `${country_id}`,
+        governanceId: "2",
+      };
 
-    let config = {
-      method: "post",
-      url: "http://103.127.29.85:4000/ndhs-master/overview",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
 
-    axios(config)
-      .then((response) => {
-        console.log("data1@@@@@@@@@@@", response);
-        mapping(response.data);
-        data1 = response.data;
-        //setmydata(response.data);
-      })
-      .catch(function (error) {
-        //console.log(error);
-      });
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    } else {
+      let data = {
+        countries: "103",
+        governanceId: "2",
+      };
+
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    }
   }
 
   function mapping(data) {
     console.log("*************", data);
     for (const [key, val] of Object.entries(data)) {
-      console.log(val)
+      console.log(val);
       //development_name.push(key);
       development_name1.push(key);
       for (const [key1, val1] of Object.entries(val)) {
@@ -122,16 +148,21 @@ function DigitalAvailability(props) {
         {looprun.map((item, key) => {
           return (
             <>
-              <HStack key={key} ml={5} display={"flex"} justifyContent={"space-between"}>
-                <Heading>{item}</Heading>
-                <Flex  style={{marginRight:"20px"}}>
+              <HStack
+                key={key}
+                ml={5}
+                display={"flex"}
+                justifyContent={"space-between"}
+              >
+                <Heading style={{ textAlign: "start" }}>{item}</Heading>
+                <Flex style={{ marginRight: "20px" }}>
                   <Text>Yes</Text>
                   <Text ml={5}>No</Text>
                   <Text ml={5}>Data Not Available</Text>
                 </Flex>
               </HStack>
               <Text ml={5}>Availability</Text>
-              <table style={{marginLeft:"20px"}}>
+              <table style={{ marginLeft: "20px" }}>
                 <tr
                   style={
                     {
@@ -143,6 +174,7 @@ function DigitalAvailability(props) {
                     style={{
                       border: "1px solid white",
                       width: "400px",
+                      textAlign: "center",
                     }}
                   >
                     Indicators Name
@@ -151,6 +183,7 @@ function DigitalAvailability(props) {
                     style={{
                       border: "1px solid white",
                       width: "600px",
+                      textAlign: "center",
                     }}
                   >
                     Questions
@@ -158,7 +191,8 @@ function DigitalAvailability(props) {
                   <th
                     style={{
                       border: "1px solid white",
-                      width: "200px",
+                      width: "170px",
+                      textAlign: "center",
                     }}
                   >
                     {country_name}
@@ -170,7 +204,12 @@ function DigitalAvailability(props) {
                     return (
                       <>
                         <tr key={key} style={{ border: "1px solid white" }}>
-                          <td style={{ border: "1px solid white" }}>
+                          <td
+                            style={{
+                              border: "1px solid white",
+                              textAlign: "start",
+                            }}
+                          >
                             {item1.indecatorName}
                           </td>
                           {item1.indecatorValue.slice(0, 1).map((data, key) => {
@@ -178,12 +217,27 @@ function DigitalAvailability(props) {
                             return (
                               // <tr>
                               <>
-                                <tr key={key} style={{ border: "1px solid white" }}>
-                                  <td style={{ border: "1px solid white" }}>
+                                <tr
+                                  key={key}
+                                  style={{ border: "1px solid white" }}
+                                >
+                                  <td
+                                    style={{
+                                      border: "1px solid white",
+                                      textAlign: "start",
+                                      display: "flex",
+                                      marginLeft: "14px",
+                                    }}
+                                  >
                                     {data.question}
                                   </td>
                                 </tr>
-                                <td style={{ border: "1px solid white" }}>
+                                <td
+                                  style={{
+                                    border: "1px solid white",
+                                    textAlign: "center",
+                                  }}
+                                >
                                   {data.status}
                                 </td>
                               </>

@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
   Flex,
   HStack,
   Progress,
@@ -22,6 +23,7 @@ import ProspectiveDev from "../SIdeBar/Questions/PresentDevelopment/HealthAvaila
 import * as mdb from "mdb-ui-kit"; // lib
 import { Input } from "mdb-ui-kit";
 import "./active.css";
+import { Link } from "react-router-dom";
 
 const ResultDetail = () => {
   const [availableData, setAvailableData] = useState();
@@ -30,6 +32,10 @@ const ResultDetail = () => {
   const [developData, setdevelopData] = useState();
   const [finaldata, setfinaldata] = useState();
   const [data, setmyData] = useState([]);
+  let country_id1 = localStorage.getItem("countries");
+  let d = JSON.parse(country_id1);
+
+  console.log(d)
   useEffect(() => {
     dataa();
     myData();
@@ -53,20 +59,22 @@ const ResultDetail = () => {
   let indicator_score = [];
   let valop = [];
 
+  // console.log(d[0].cat)
   function dataa() {
     let localStoreData = []
     var axios = require("axios");
-    if(localStoreData =='') {
+    if(d) {
       var data = {
-        countries: "108,110",
+        countries: d[0].cat + "," + d[1].cat,
+         governanceId: 1,
+      }
+    } 
+    else {
+      var data = {
+        countries: "74,228",
         governanceId: 1,
       };
-    } else {
-      var data = {
-        countries: "108,110",
-        governanceId: 1,
-      };
-    }
+     }
     var config = {
       method: "post",
       url: "http://103.127.29.85:4000/ndhs-master/overview",
@@ -210,7 +218,9 @@ const ResultDetail = () => {
       scoreFinal = indicator_score;
     }
     setdevelopData(taxonomy1[1]);
-    console.log(developData);
+    // console.log(development_name);
+    // console.log(ulitimate2[0]);
+    // console.log(development_name);
 
     //   informationReport()
     myData({
@@ -225,7 +235,7 @@ const ResultDetail = () => {
     console.log("datatatattattaa",data)
     var axios = require("axios");
     var data = {
-      countries: "106,108",
+      countries: "74,228",
       developmentId: 1,
       governanceId: 2,
       // taxonomyId: 10,
@@ -406,6 +416,9 @@ const ResultDetail = () => {
 
   return (
     <>
+     <Link to={"./map"}>
+      <Button>Back</Button>
+    </Link>
       <Box
         style={{
           display: "flex",

@@ -8,11 +8,14 @@ import { data } from "jquery";
 import * as echarts from "echarts";
 import BarChart from "./BarChart";
 import Bubble from "./BubbleChart";
-import { Box, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import Multiselect from "multiselect-react-dropdown";
+import { Link } from "react-router-dom";
 var axios = require("axios");
 
 const Tree = () => {
+  let country_id1 = localStorage.getItem("countries");
+  let b = JSON.parse(country_id1);
   const [totalCountry, settotalCountry] = useState();
   const [myCountries, setmyCountries] = useState();
   var data2 = [];
@@ -1594,8 +1597,8 @@ const Tree = () => {
       // })
       country2.push(item);
     });
-    console.log("country1111", country1);
-    console.log("country2222", country2[1]);
+    console.log("country1111", country1[0].country_name);
+    console.log("country2222", country2[0].country_name);
 
     var dom = document.getElementById("chart-container1");
     var myChart = echarts.init(dom, null, {
@@ -1665,7 +1668,7 @@ const Tree = () => {
                 country1[3].actual_score,
                 // 40, 50, 60, 30,
               ],
-              name: "India",
+              name: country1[0].country_name,
               areaStyle: {
                 color: "#6610f2",
               },
@@ -1681,7 +1684,7 @@ const Tree = () => {
                 // country2[3],
                 // 80, 50, 45, 20,
               ],
-              name: "Canada",
+              name: country2[0].country_name,
               areaStyle: {
                 color: "rgba(51, 138, 20, 0.6)",
               },
@@ -1700,6 +1703,9 @@ const Tree = () => {
 
   return (
     <>
+    <Link to={"./map"}>
+      <Button>Back</Button>
+    </Link>
       <Box style={{ display: "flex", float: "right" }}>
         <Box style={{ width: "500px", height: "550px" }}>
           <div

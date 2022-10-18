@@ -45,7 +45,7 @@ function HealthCapacity(props) {
     if (!country_id === "") {
       let data = {
         countries: `${country_id}`,
-        governanceId: "2",
+        governanceId: "1",
       };
 
       let config = {
@@ -70,7 +70,7 @@ function HealthCapacity(props) {
     } else {
       let data = {
         countries: "103",
-        governanceId: "2",
+        governanceId: "1",
       };
 
       let config = {
@@ -147,7 +147,7 @@ function HealthCapacity(props) {
           return (
             <>
               <HStack key={key} ml={5} display={"flex"} justifyContent={"space-between"}>
-                <Heading>{item}</Heading>
+                <Heading style={{textAlign:"start"}}>{item}</Heading>
                 <Flex  style={{marginRight:"20px"}}>
                   <Text>Yes</Text>
                   <Text ml={5}>No</Text>
@@ -167,6 +167,7 @@ function HealthCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "400px",
+                      textAlign:"center"
                     }}
                   >
                     Indicators Name
@@ -175,6 +176,7 @@ function HealthCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "600px",
+                      textAlign:"center"
                     }}
                   >
                     Questions
@@ -183,6 +185,7 @@ function HealthCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "200px",
+                      textAlign:"center"
                     }}
                   >
                     {country_name}
@@ -194,7 +197,7 @@ function HealthCapacity(props) {
                     return (
                       <>
                         <tr key={key} style={{ border: "1px solid white" }}>
-                          <td style={{ border: "1px solid white" }}>
+                          <td style={{ border: "1px solid white",textAlign:"start" }}>
                             {item1.indecatorName}
                           </td>
                           {item1.indecatorValue.slice(0, 1).map((data, key) => {
@@ -203,11 +206,11 @@ function HealthCapacity(props) {
                               // <tr>
                               <>
                                 <tr key={key} style={{ border: "1px solid white" }}>
-                                  <td style={{ border: "1px solid white" }}>
+                                  <td style={{ border: "1px solid white",textAlign:"start" }}>
                                     {data.question}
                                   </td>
                                 </tr>
-                                <td style={{ border: "1px solid white" }}>
+                                <td style={{ border: "1px solid white",textAlign:"center" }}>
                                   {data.status}
                                 </td>
                               </>

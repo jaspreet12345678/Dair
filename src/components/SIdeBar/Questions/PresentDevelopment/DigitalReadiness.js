@@ -29,8 +29,8 @@ function DigitalReadiness(props) {
     "Legal rules",
     "Literacy (patient+ workforce)",
     "Research Program and funding",
-    "DH Infrastructure",
     "Workforce (Technical and Health care)",
+    "DH Infrastructure",
   ];
 
   const [mydata, setmydata] = useState([]);
@@ -44,30 +44,57 @@ function DigitalReadiness(props) {
   function myData() {
     //console.log("####################");
 
-    let data = {
-      countries: `${country_id}`,
-      governanceId: "2",
-    };
+    if (!country_id === "") {
+      let data = {
+        countries: `${country_id}`,
+        governanceId: "2",
+      };
 
-    let config = {
-      method: "post",
-      url: "http://103.127.29.85:4000/ndhs-master/overview",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
 
-    axios(config)
-      .then((response) => {
-        console.log("data1@@@@@@@@@@@", response);
-        mapping(response.data);
-        data1 = response.data;
-        //setmydata(response.data);
-      })
-      .catch(function (error) {
-        //console.log(error);
-      });
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    } else {
+      let data = {
+        countries: "103",
+        governanceId: "2",
+      };
+
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    }
   }
 
   function mapping(data) {
@@ -136,7 +163,7 @@ function DigitalReadiness(props) {
                 display={"flex"}
                 justifyContent={"space-between"}
               >
-                <Heading>{item}</Heading>
+                <Heading style={{textAlign:"start"}}>{item}</Heading>
                 <Flex style={{ marginRight: "20px" }}>
                   <Text>Yes</Text>
                   <Text ml={5}>No</Text>
@@ -156,6 +183,7 @@ function DigitalReadiness(props) {
                     style={{
                       border: "1px solid white",
                       width: "400px",
+                      textAlign:"center"
                     }}
                   >
                     Indicators Name
@@ -164,6 +192,7 @@ function DigitalReadiness(props) {
                     style={{
                       border: "1px solid white",
                       width: "600px",
+                      textAlign:"center"
                     }}
                   >
                     Questions
@@ -172,6 +201,7 @@ function DigitalReadiness(props) {
                     style={{
                       border: "1px solid white",
                       width: "200px",
+                      textAlign:"center"
                     }}
                   >
                     {country_name}
@@ -183,7 +213,7 @@ function DigitalReadiness(props) {
                     return (
                       <>
                         <tr key={key} style={{ border: "1px solid white" }}>
-                          <td style={{ border: "1px solid white" }}>
+                          <td style={{ border: "1px solid white",textAlign:"start" }}>
                             {item1.indecatorName}
                           </td>
                           {item1.indecatorValue.slice(0, 1).map((data, key) => {
@@ -195,11 +225,11 @@ function DigitalReadiness(props) {
                                   key={key}
                                   style={{ border: "1px solid white" }}
                                 >
-                                  <td style={{ border: "1px solid white" }}>
+                                  <td style={{ border: "1px solid white",textAlign:"start" }}>
                                     {data.question}
                                   </td>
                                 </tr>
-                                <td style={{ border: "1px solid white" }}>
+                                <td style={{ border: "1px solid white",textAlign:"center" }}>
                                   {data.status}
                                 </td>
                               </>

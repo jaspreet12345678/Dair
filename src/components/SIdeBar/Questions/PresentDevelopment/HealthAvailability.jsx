@@ -42,30 +42,57 @@ function HealthAvailabilty(props) {
   function myData() {
     //console.log("####################");
 
-    let data = {
-      countries: `${country_id}`,
-      governanceId: "1",
-    };
+    if (!country_id === "") {
+      let data = {
+        countries: `${country_id}`,
+        governanceId: "1",
+      };
 
-    let config = {
-      method: "post",
-      url: "http://103.127.29.85:4000/ndhs-master/overview",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
 
-    axios(config)
-      .then((response) => {
-        console.log("data1@@@@@@@@@@@", response);
-        mapping(response.data);
-        data1 = response.data;
-        //setmydata(response.data);
-      })
-      .catch(function (error) {
-        //console.log(error);
-      });
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    } else {
+      let data = {
+        countries: "103",
+        governanceId: "1",
+      };
+
+      let config = {
+        method: "post",
+        url: "http://103.127.29.85:4000/ndhs-master/overview",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then((response) => {
+          console.log("data1@@@@@@@@@@@", response);
+          mapping(response.data);
+          data1 = response.data;
+          //setmydata(response.data);
+        })
+        .catch(function (error) {
+          //console.log(error);
+        });
+    }
   }
 
   function mapping(data) {
@@ -120,7 +147,7 @@ function HealthAvailabilty(props) {
           return (
             <>
               <HStack key={key} ml={5} display={"flex"} justifyContent={"space-between"}>
-                <Heading>{item}</Heading>
+                <Heading style={{textAlign:"start"}}>{item}</Heading>
                 <Flex  style={{marginRight:"20px"}}>
                   <Text>Yes</Text>
                   <Text ml={5}>No</Text>
@@ -140,6 +167,7 @@ function HealthAvailabilty(props) {
                     style={{
                       border: "1px solid white",
                       width: "400px",
+                      textAlign:"center"
                     }}
                   >
                     Indicators Name
@@ -148,6 +176,7 @@ function HealthAvailabilty(props) {
                     style={{
                       border: "1px solid white",
                       width: "600px",
+                      textAlign:"center"
                     }}
                   >
                     Questions
@@ -156,6 +185,7 @@ function HealthAvailabilty(props) {
                     style={{
                       border: "1px solid white",
                       width: "200px",
+                      textAlign:"center"
                     }}
                   >
                     {country_name}
@@ -167,7 +197,7 @@ function HealthAvailabilty(props) {
                     return (
                       <>
                         <tr key={key} style={{ border: "1px solid white" }}>
-                          <td style={{ border: "1px solid white" }}>
+                          <td style={{ border: "1px solid white",textAlign:"start" }}>
                             {item1.indecatorName}
                           </td>
                           {item1.indecatorValue.slice(0, 1).map((data, key) => {
@@ -176,11 +206,11 @@ function HealthAvailabilty(props) {
                               // <tr>
                               <>
                                 <tr key={key} style={{ border: "1px solid white" }}>
-                                  <td style={{ border: "1px solid white" }}>
+                                  <td style={{ border: "1px solid white",textAlign:"start" }}>
                                     {data.question}
                                   </td>
                                 </tr>
-                                <td style={{ border: "1px solid white" }}>
+                                <td style={{ border: "1px solid white",textAlign:"center" }}>
                                   {data.status}
                                 </td>
                               </>

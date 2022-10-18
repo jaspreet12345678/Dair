@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 const ProspectivePie = (props) => {
   let [data, setData] = useState([]);
   let title = [];
+  let name = "USA";
   let axios = require("axios");
   let country_flag = localStorage.getItem("country_flag");
   let country_name = localStorage.getItem("country_name");
@@ -25,43 +26,41 @@ const ProspectivePie = (props) => {
   console.log("country_id", country_id);
   console.log("country_id", year);
 
-  if(!country_name === "" || !country_id === ""){
+  if (country_id || year) {
     let config = {
-        method: "get",
-        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/${country_id}/${year}`,
-        headers: {},
-      };
-    
-      axios(config)
-        .then(function (response) {
-          // console.log(JSON.stringify(response.data));
-          title = response.data;
-          console.log(response.data);
-          mappinng(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-  }
-  else {
+      method: "get",
+      url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/${country_id}/${year}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        title = response.data;
+        console.log(response.data);
+        mappinng(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
     let config = {
-        method: "get",
-        url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/103/2021`,
-        headers: {},
-      };
-    
-      axios(config)
-        .then(function (response) {
-          // console.log(JSON.stringify(response.data));
-          title = response.data;
-          console.log(response.data);
-          mappinng(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      method: "get",
+      url: `http://103.127.29.85:4000/ndhs-master/governance-stats/1/74/2021`,
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        title = response.data;
+        console.log(response.data);
+        mappinng(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  
 
   const looprun = [0, 1, 2, 3, 4];
   const present = [];
@@ -229,7 +228,7 @@ const ProspectivePie = (props) => {
                     }}
                     textAlign={"center"}
                   >
-                    {country_name}
+                    {country_name ? country_name : name}
                   </Box>
                   <div
                     id={`chartdivPros` + key}

@@ -35,7 +35,6 @@ function ComparativeMap(props) {
   var show = true;
   const [countryData, setcountryData] = useState();
   useEffect(() => {
-    localStorage.clear();
     data();
     mydata1();
   }, []);
@@ -43,6 +42,11 @@ function ComparativeMap(props) {
   let finalData = [];
 
   function mydata(dataId) {
+    localStorage.removeItem("country_id");
+    localStorage.removeItem("country_flag");
+    localStorage.removeItem("year");
+    localStorage.removeItem("country_iso_code");
+    localStorage.removeItem("country_name");
     console.log(dataId[0].country_id);
     var axios = require("axios");
     // if (dataId == "undefined") {
@@ -163,6 +167,11 @@ function ComparativeMap(props) {
   }
 
   function data() {
+    localStorage.removeItem("country_id");
+    localStorage.removeItem("country_flag");
+    localStorage.removeItem("year");
+    localStorage.removeItem("country_iso_code");
+    localStorage.removeItem("country_name");
     var axios = require("axios");
     var data = JSON.stringify({
       countries: "108,110",
@@ -224,9 +233,8 @@ function ComparativeMap(props) {
     setCountry2_iso_code(data[1].country_name);
     setCountry1_name(data[0].iso_code);
     setCountry2_name(data[1].iso_code);
-
-    console.log(country1_name);
-    console.log(country2_name);
+    console.log(country1_iso_code);
+    console.log(country2_iso_code);
 
     am5.array.each(am5.registry.rootElements, function (root) {
       if (root && root.dom && root.dom.id == "chartdiv2") {
@@ -1255,6 +1263,7 @@ function ComparativeMap(props) {
                   console.log(selectedValues);
                   if (selectedValues.length > 1) {
                     Commap(selectedValues);
+                    localStorage.setItem("countries",JSON.stringify(selectedValues));
                   }
                 }}
                 options={totalCountry}
@@ -1386,9 +1395,10 @@ function ComparativeMap(props) {
                                           country1_iso_code
                                         );
                                         const col =
-                                          score.country === country1_iso_code
+                                        score.country === country1_iso_code
                                             ? "green"
                                             : "red";
+                                            
                                         return (
                                           <p
                                             style={{
@@ -1415,7 +1425,7 @@ function ComparativeMap(props) {
                                         "Digital Health"
                                       ) {
                                         const col =
-                                          score.country === country1_iso_code
+                                        score.country === country1_iso_code
                                             ? "green"
                                             : "red";
                                         return (

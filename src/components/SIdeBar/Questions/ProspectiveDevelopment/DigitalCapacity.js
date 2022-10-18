@@ -154,7 +154,7 @@ function DigitalCapacity(props) {
                 display={"flex"}
                 justifyContent={"space-between"}
               >
-                <Heading>{item}</Heading>
+                <Heading style={{textAlign:"start"}}>{item}</Heading>
                 <Flex style={{ marginRight: "20px" }}>
                   <Text>Yes</Text>
                   <Text ml={5}>No</Text>
@@ -174,6 +174,7 @@ function DigitalCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "400px",
+                      textAlign:"center"
                     }}
                   >
                     Indicators Name
@@ -182,6 +183,7 @@ function DigitalCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "600px",
+                      textAlign:"center"
                     }}
                   >
                     Questions
@@ -190,6 +192,7 @@ function DigitalCapacity(props) {
                     style={{
                       border: "1px solid white",
                       width: "200px",
+                      textAlign:"center"
                     }}
                   >
                     {country_name}
@@ -201,7 +204,7 @@ function DigitalCapacity(props) {
                     return (
                       <>
                         <tr key={key} style={{ border: "1px solid white" }}>
-                          <td style={{ border: "1px solid white" }}>
+                          <td style={{ border: "1px solid white",textAlign:"start" }}>
                             {item1.indecatorName}
                           </td>
                           {item1.indecatorValue.slice(0, 1).map((data, key) => {
@@ -213,11 +216,11 @@ function DigitalCapacity(props) {
                                   key={key}
                                   style={{ border: "1px solid white" }}
                                 >
-                                  <td style={{ border: "1px solid white" }}>
+                                  <td style={{ border: "1px solid white",textAlign:"start" }}>
                                     {data.question}
                                   </td>
                                 </tr>
-                                <td style={{ border: "1px solid white" }}>
+                                <td style={{ border: "1px solid white",textAlign:"center" }}>
                                   {data.status}
                                 </td>
                               </>
