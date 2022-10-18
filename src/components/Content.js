@@ -45,10 +45,8 @@ function Content() {
   return (
     <Box maxW={1024} mx={"auto"}>
       <Flex display={"flex"} justifyContent={"center"}>
-        <Text display={"flex"} fontWeight="bold" fontSize={"4xl"}>
-          {/* <Blink color="blue" text="2022" fontSize="20">
-            2022
-          </Blink> */}
+      
+        {/* <Text display={"flex"} fontWeight="bold" fontSize={"4xl"}>
           <TextLoop
             style={{ "margin-right": "10px" }}
             springConfig={{ stiffness: 70, damping: 31 }}
@@ -58,7 +56,7 @@ function Content() {
             <span>2022 </span>
           </TextLoop>{" "}
           <Text marginLeft={3}>GLOBAL RESEARCH MAP OF DIGITAL HEALTH & AI</Text>
-        </Text>
+        </Text> */}
       </Flex>
       <Divider />
       <Center>
@@ -69,7 +67,7 @@ function Content() {
             fontSize={"2xl"}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            Connection dots between R&D landscape and the muturity of national
+            2022 Connection dots between R&D landscape and the muturity of national
             DH strategies
           </Text>
           <Text mt={3} style={{ display: "flex", justifyContent: "center" }}>
