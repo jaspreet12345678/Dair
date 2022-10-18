@@ -1,10 +1,7 @@
 import { Box, Divider, Heading, Text, Center, Button } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Flex } from "@chakra-ui/react";
-import Blink from "react-blink-text";
-import "../App.css";
-import TextLoop from "react-text-loop";
-import cxs from "cxs/component";
+// import "./App.css";
 
 function Content() {
   const [value, setValue] = useState("2021");
