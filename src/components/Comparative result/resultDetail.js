@@ -26,7 +26,6 @@ import "./active.css";
 import { Link } from "react-router-dom";
 
 const ResultDetail = () => {
- 
   let name1 = "UK";
   let name2 = "USA";
   const [availableData, setAvailableData] = useState();
@@ -37,6 +36,9 @@ const ResultDetail = () => {
   const [data, setmyData] = useState([]);
   let country_id1 = localStorage.getItem("countries");
   let d = JSON.parse(country_id1);
+  [d].map((item) => {
+    console.log(item);
+  });
 
   console.log(d);
   useEffect(() => {
@@ -1075,10 +1077,10 @@ const ResultDetail = () => {
                     justifyContent: "end",
                   }}
                 >
-                  <Text>{d[0].key ? d[0].key : name1}</Text>
+                  {/* <Text>{name0 ? name0 : name1}</Text>
                   <Text style={{ marginLeft: "10px" }}>
-                    {d[1].key ? d[1].key : name2}
-                  </Text>
+                    {name00 ? name00 : name2}
+                  </Text> */}
                 </Flex>
                 {array?.map((e, key) => {
                   return (
