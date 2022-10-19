@@ -225,8 +225,7 @@ const ResultDetail = () => {
     setdevelopData(taxonomy1[1]);
     // console.log(development_name);
     // console.log(ulitimate2[0]);
-    // console.log(development_name);
-    adata();
+    console.log(development_name);
     //   informationReport()
     // })
     // console.log(taxonomy);
@@ -235,13 +234,14 @@ const ResultDetail = () => {
   async function myData(data) {
     console.log("datatatattattaa", data);
     var axios = require("axios");
+    // if (d) {
     if (d) {
       var data = {
         countries: d[0].cat + "," + d[1].cat,
         developmentId: 1,
-        governanceId: 2,
+        governanceId: 1,
         // taxonomyId: 10,
-        ultimateId: 1,
+        ultimateId: 2,
       };
       var config = {
         method: "post",
@@ -251,11 +251,12 @@ const ResultDetail = () => {
         },
         data: data,
       };
+      // }
     } else {
       var data = {
         countries: "74,228",
         developmentId: 1,
-        governanceId: 2,
+        governanceId: 1,
         // taxonomyId: 10,
         ultimateId: 1,
       };
@@ -283,6 +284,7 @@ const ResultDetail = () => {
   let uni = [];
   for (var i = 0; i <= data.length - 1; i++) {
     if (!uni.includes(data[i].taxonomy)) {
+      console.log(data[i].taxonomy)
       uni.push(data[i].taxonomy);
     }
   }
@@ -301,21 +303,16 @@ const ResultDetail = () => {
   console.log("aa", array);
 
   function adata(data1) {
+    console.log(data1);
     var axios = require("axios");
     if (data1) {
-      var data = {
-        developmentId: 1,
-        governanceId: 1,
-        ultimateId: data1,
-        taxonomyId: "1",
-        year: "2021,2022",
-      };
+      var data = data1;
     } else {
       var data = {
         developmentId: 1,
         governanceId: 1,
         ultimateId: "2",
-        taxonomyId: "1",
+        taxonomyId: 4,
         year: "2021,2022",
       };
     }
@@ -370,7 +367,7 @@ const ResultDetail = () => {
     //     //     console.log("@@@@@@@@@@@",item)
     //     // })
     // }
-    var dom = document.getElementById("chart-container111");
+    var dom = document.getElementById("chart-container1112");
     var myChart = echarts.init(dom, null, {
       renderer: "canvas",
       top: 50,
@@ -442,6 +439,154 @@ const ResultDetail = () => {
 
     window.addEventListener("resize", myChart.resize);
   }
+  function onSelectTexnomy(id) {
+    if (id == 2) {
+      let val = Object.values(availableData);
+      let val1 = Object.values(val);
+      let val2 = Object.values(val1);
+      let val3 = Object.values(val2[0]);
+      let val4 = Object.values(val3[0]);
+      let val5 = Object.values(val4[0]);
+      let val6 = val5[0].developement_id;
+      let val7 = val5[0].taxonomy_id;
+      let val8 = val5[0].ultimate_field_id;
+      console.log(val3);
+      console.log(val5[0].developement_id);
+      console.log(val5[0].taxonomy_id);
+      console.log(val5[0].ultimate_field_id);
+      adata({
+        developmentId: val6,
+        governanceId: 1,
+        ultimateId: val8,
+        taxonomyId: val7,
+        year: "2021,2022",
+      });
+      // if (d) {
+      //   myData({
+      //     countries: d[0].cat + "," + d[1].cat,
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // } else {
+      //   myData({
+      //     countries: "103,36",
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // }
+    } else if (id == 1) {
+      // console.log(redinessData);
+      let val = Object.values(redinessData);
+      let val1 = Object.values(val);
+      let val2 = Object.values(val1);
+      let val3 = Object.values(val2[0]);
+      let val4 = Object.values(val3[0]);
+      let val5 = Object.values(val4[0]);
+      let val6 = val5[0].developement_id;
+      let val7 = val5[0].taxonomy_id;
+      let val8 = val5[0].ultimate_field_id;
+      console.log(val3);
+      adata({
+        developmentId: val6,
+        governanceId: 1,
+        ultimateId: val8,
+        taxonomyId: val7,
+        year: "2021,2022",
+      });
+      // if (d) {
+      //   myData({
+      //     countries: d[0].cat + "," + d[1].cat,
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // } else {
+      //   myData({
+      //     countries: "103,36",
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // }
+    } else if (id == 3) {
+      let val = Object.values(capacityData);
+      let val1 = Object.values(val);
+      let val2 = Object.values(val1);
+      let val3 = Object.values(val2[0]);
+      let val4 = Object.values(val3[0]);
+      let val5 = Object.values(val4[0]);
+      let val6 = val5[0].developement_id;
+      let val7 = val5[0].taxonomy_id;
+      let val8 = val5[0].ultimate_field_id;
+      console.log(val3);
+      adata({
+        developmentId: val6,
+        governanceId: 1,
+        ultimateId: val8,
+        taxonomyId: val7,
+        year: "2021,2022",
+      });
+      //   if (d) {
+      //   myData({
+      //     countries: d[0].cat + "," + d[1].cat,
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // } else {
+      //   myData({
+      //     countries: "103,36",
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // }
+    } else if (id == 4) {
+      let val = Object.values(developData);
+      let val1 = Object.values(val);
+      let val2 = Object.values(val1);
+      let val3 = Object.values(val2[0]);
+      let val4 = Object.values(val3[0]);
+      let val5 = Object.values(val4[0]);
+      let val6 = val5[0].developement_id;
+      let val7 = val5[0].taxonomy_id;
+      let val8 = val5[0].ultimate_field_id;
+      console.log(val3);
+      adata({
+        developmentId: val6,
+        governanceId: 1,
+        ultimateId: val8,
+        taxonomyId: val7,
+        year: "2021,2022",
+      });
+      // if (d) {
+      //   myData({
+      //     countries: d[0].cat + "," + d[1].cat,
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // } else {
+      //   myData({
+      //     countries: "103,36",
+      //     developmentId: val6,
+      //     governanceId: 2,
+      //     // taxonomyId: 10,
+      //     ultimateId: val8,
+      //   });
+      // }
+    }
+    console.log("test select", id);
+  }
 
   return (
     <>
@@ -481,6 +626,7 @@ const ResultDetail = () => {
                       // background: "#a7f8a2",
                       borderRadius: "5px",
                     }}
+                    onClick={() => onSelectTexnomy(1)}
                   >
                     Present Developnent
                   </Tab>
@@ -489,6 +635,7 @@ const ResultDetail = () => {
                       //  background: "#f4faa0",
                       borderRadius: "5px",
                     }}
+                    onClick={() => onSelectTexnomy(3)}
                   >
                     Prospective Development
                   </Tab>
@@ -502,6 +649,7 @@ const ResultDetail = () => {
                           //  background: "#f5e5f8",
                           borderRadius: "5px",
                         }}
+                        onClick={() => onSelectTexnomy(2)}
                       >
                         Readiness
                       </Tab>
@@ -511,6 +659,7 @@ const ResultDetail = () => {
                           // background: "#f2f9a0",
                           borderRadius: "5px",
                         }}
+                        onClick={() => onSelectTexnomy(1)}
                       >
                         Availability
                       </Tab>
@@ -773,6 +922,7 @@ const ResultDetail = () => {
                           // background: "#f5e5f8",
                           borderRadius: "5px",
                         }}
+                        onClick={() => onSelectTexnomy(3)}
                       >
                         Capacity Building
                       </Tab>
@@ -781,6 +931,7 @@ const ResultDetail = () => {
                           //  background: "#f2f9a0",
                           borderRadius: "5px",
                         }}
+                        onClick={() => onSelectTexnomy(4)}
                       >
                         Development Strategy
                       </Tab>
@@ -1123,7 +1274,7 @@ const ResultDetail = () => {
                 Top Countries
               </h1>
               <div
-                id="chart-container111"
+                id="chart-container1112"
                 style={{ width: "100%", height: "100%", marginTop: "20px" }}
               ></div>
             </div>

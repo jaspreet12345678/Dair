@@ -34,6 +34,7 @@ import Question from "./components/SIdeBar/Questions/Question";
 import PieMain from "./components/SIdeBar/PieChart/PieMain";
 import Main from "./components/Main";
 import Question2 from './components/SIdeBar/Questions/Question2';
+import ResultMain from './components/Comparative result/resultMain';
 
 export default function App(props) {
   return (
@@ -59,7 +60,7 @@ export default function App(props) {
           <Route path="/present" component={Question} />
           <Route path="/prospective" component={Question2} />
           <Route path="/comparative-map" exact component={ComparativeMap} />
-          <Route path="/result-details" exact component={ResultDetail} />
+          <Route path="/result-details" exact component={ResultMain} />
           <Route path="/network" exact component={Tree} />
         </Switch>
       </BrowserRouter>
