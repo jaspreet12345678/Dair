@@ -590,9 +590,6 @@ const ResultDetail = () => {
 
   return (
     <>
-      <Link to={"./map"}>
-        <Button>Back</Button>
-      </Link>
       <Box
         style={{
           display: "flex",
