@@ -56,14 +56,14 @@ export default function App(props) {
       </BrowserRouter> */}
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={Index} />
+          <Route path="/" exact component={Index} />
           <Route path="/map" component={Main} />
           <Route path="/graph/:country_id" component={PieMain} />
           <Route path="/present" component={Question} />
-          <Route path="/prospective" component={Question2} /> */}
-          {/* <Route path="/comparative-map" exact component={ComparativeMap} /> */}
-          <Route path="/result-details" exact component={ResultDetail2} />
-          {/* <Route path="/network" exact component={Tree} /> */}
+          <Route path="/prospective" component={Question2} />
+          <Route path="/comparative-map" exact component={ComparativeMap} />
+          <Route path="/result-details" exact component={ResultMain} />
+          <Route path="/network" exact component={Tree} />
         </Switch>
       </BrowserRouter>
     </>
