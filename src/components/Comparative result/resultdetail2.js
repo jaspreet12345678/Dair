@@ -310,9 +310,9 @@ import {
       } else {
         var data = {
           developmentId: 1,
-          governanceId: 2,
-          ultimateId: "2",
-          taxonomyId: 4,
+          governanceId: 1,
+          ultimateId: 1,
+          taxonomyId: 1,
           year: "2021,2022",
         };
       }
@@ -439,6 +439,8 @@ import {
   
       window.addEventListener("resize", myChart.resize);
     }
+
+    
     function onSelectTexnomy(id) {
       if (id == 2) {
         let val = Object.values(availableData);
