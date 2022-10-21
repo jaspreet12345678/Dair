@@ -393,51 +393,57 @@ function Graph(props) {
             >
               Countries List
             </h2>
-            <div
-              style={{
-                "margin-left": "10px",
-                "margin-top": "10px",
-                padding: "18px",
-              }}
-            >
-              <input
-                type="checkbox"
-                name="2021"
-                value={year21}
-                checked={checked21}
-                onClick={handleOnChange21}
-                // onChange={(e) => setChecked21(e.target.checked)}
-              />
-              <label style={{ marginLeft: "5px" }}>2021</label>
-              <input
-                style={{ marginLeft: "5px" }}
-                type="checkbox"
-                name="2022"
-                value={year22}
-                checked={checked22}
-                onClick={handleOnChange22}
-              />
-              <label style={{ marginLeft: "5px" }}>2022</label>
-              <input
-                style={{ marginLeft: "5px" }}
-                type="checkbox"
-                name="2022"
-                //value={year22}
-                checked={checked}
-                onClick={handleOnChange}
-              />
-              <label style={{ marginLeft: "5px" }}>All Data</label>
+            <div style={{display:"flex"}}>
+              <div
+                style={{
+                  "margin-left": "10px",
+                  // "margin-top": "10px",
+                  // padding: "18px",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  name="2021"
+                  value={year21}
+                  checked={checked21}
+                  onClick={handleOnChange21}
+                  // onChange={(e) => setChecked21(e.target.checked)}
+                />
+                <label style={{ marginLeft: "5px" }}>2021</label>
+              </div>
+              <div>
+                <input
+                  style={{ marginLeft: "5px" }}
+                  type="checkbox"
+                  name="2022"
+                  value={year22}
+                  checked={checked22}
+                  onClick={handleOnChange22}
+                />
+                <label style={{ marginLeft: "5px" }}>2022</label>
+              </div>
+              <div>
+                <input
+                  style={{ marginLeft: "5px" }}
+                  type="checkbox"
+                  name="2022"
+                  //value={year22}
+                  checked={checked}
+                  onClick={handleOnChange}
+                />
+                <label style={{ marginLeft: "5px" }}>All Data</label>
+              </div>
             </div>
+            <hr />
+            <div
+              id="chartdiv"
+              style={{
+                width: "100%",
+                height: "400px",
+                marginTop: "20px",
+              }}
+            ></div>
           </div>
-          <hr />
-          <div
-            id="chartdiv"
-            style={{
-              width: "100%",
-              height: "400px",
-              marginTop: "20px",
-            }}
-          ></div>
         </div>
       </Flex>
     </>
