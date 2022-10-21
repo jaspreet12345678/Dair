@@ -26,7 +26,7 @@ const Contact = () => {
   }, []);
   return (
     <>
-      <div class="w-100" style={{marginBottom:"-15px"}}>
+      <div class="w-100">
         <section class="advance-digital">
           <div class="container">
             <h3 style={{ textAlign: "start" }}>
