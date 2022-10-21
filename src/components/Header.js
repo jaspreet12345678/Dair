@@ -91,10 +91,10 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/methodology">Methodology</MenuItem>
-        <MenuItem to="/map">Map </MenuItem>
+        <MenuItem to="/">Map </MenuItem>
         <MenuItem to="/atlas">Atlas </MenuItem>
         <MenuItem to="/report">Report </MenuItem>
-        <MenuItem to="/contact us">Contact Us </MenuItem>
+        <MenuItem to="/contact">Contact Us </MenuItem>
       </Stack>
     </Box>
   );

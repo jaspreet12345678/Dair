@@ -9,10 +9,10 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 function Index() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Content />
       <ImageCard />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -36,30 +36,26 @@ import Main from "./components/Main";
 import Question2 from './components/SIdeBar/Questions/Question2';
 import ResultMain from './components/Comparative result/resultMain';
 import ResultDetail2 from "./components/Comparative result/resultdetail2";
+import Methodology from "./components/Methodology";
+import Atlas from './components/Atlas';
+import Contact from "./components/Contact";
+import Pdf from "./components/Pdf";
 
 export default function App(props) {
   return (
     <>
-    {/* <ResultDetail2 /> */}
-      {/* <ResultDetail /> */}
-      {/* <Question2 /> */}
-      {/* <Tree/> */}
 
-      {/* <NetworkChart /> */}
-      {/* <ComparativeMap /> */}
-      {/* <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={ComparativeMap} />
-          <Route path="/result-details" exact component={ResultDetail} />
-          <Route path="/network" exact component={Tree} />
-        </Switch>
-      </BrowserRouter> */}
+
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Index} />
           <Route path="/map" component={Main} />
           <Route path="/graph/:country_id" component={PieMain} />
           <Route path="/present" component={Question} />
+          <Route path="/atlas" component={Atlas} />
+          <Route path="/report" component={Pdf} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/methodology" component={Methodology} />
           <Route path="/prospective" component={Question2} />
           <Route path="/comparative-map" exact component={ComparativeMap} />
           <Route path="/result-details" exact component={ResultMain} />

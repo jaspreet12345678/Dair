@@ -20,7 +20,6 @@ const Main = (props) => {
 
   return (
     <>
-      <Header />
       <div class="row w-100">
         <div class="col-3" style={{ maxWidth: "18%" }}>
           <div
@@ -136,7 +135,6 @@ const Main = (props) => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

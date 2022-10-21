@@ -1,6 +1,7 @@
 import { Box, Divider, Heading, Text, Center, Button } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 // import "./App.css";
 
 function Content() {
@@ -42,7 +43,6 @@ function Content() {
   return (
     <Box maxW={1024} mx={"auto"}>
       <Flex display={"flex"} justifyContent={"center"}>
-      
         {/* <Text display={"flex"} fontWeight="bold" fontSize={"4xl"}>
           <TextLoop
             style={{ "margin-right": "10px" }}
@@ -64,8 +64,8 @@ function Content() {
             fontSize={"2xl"}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            2022 Connection dots between R&D landscape and the muturity of national
-            DH strategies
+            2022 Connection dots between R&D landscape and the muturity of
+            national DH strategies
           </Text>
           <Text mt={3} style={{ display: "flex", justifyContent: "center" }}>
             The Global research map aspire to bridge the AI Digital Health
@@ -96,9 +96,11 @@ function Content() {
           >
             I-DAIR GRM 2021 release is available here
           </Text>
-          <Button mt={3} bg={"#64D3BB"}>
-            Read More
-          </Button>
+          <Link to={"/atlas"}>
+            <Button mt={3} bg={"#64D3BB"}>
+              Read More
+            </Button>
+          </Link>
         </Box>
       </Center>
     </Box>
